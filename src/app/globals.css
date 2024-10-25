@@ -2,20 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  @font-face {
+    font-family: 'Gilroy-Medium';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(./fonts/gilroy-medium.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Gilroy-Semibold';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(./fonts/gilroy-semibold.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Gilroy-Bold';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(./fonts/gilroy-bold.ttf) format('truetype');
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+:root {
+  --login-bg: #EBC0B4;
+  --primary-bg: #F9F8FD;
+  --login-btn: #0D242A;
+  --heading: #262626;
+  --sec: #636363;
+  --darkBtn: #F5F5F5;
+}
+
+/* Colors should be inverted in dark theme. Here colors are not changed as no dark theme is available */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --login-bg: #EBC0B4;
+    --primary-bg: #F9F8FD;
+    --loginBtn: #0D242A;
+    --heading: #262626;
+    --sec: #636363;
+    --darkBtn: #F5F5F5;
+  }
 }

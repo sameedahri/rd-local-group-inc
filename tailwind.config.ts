@@ -8,9 +8,18 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        gilroyMedium: ['Gilroy-Medium', 'sans-serif'],
+        gilroySemibold: ['Gilroy-Semibold', 'sans-serif'],
+        gilroyBold: ['Gilroy-Bold', 'sans-serif'],
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        loginBg: "var(--login-bg)",
+        primaryBg: "var(--primary-bg)",
+        loginBtn: "var(--login-btn)",
+        heading: "var(--heading)",
+        sec: "var(--sec)",
+        darkBtn: "var(--darkBtn)"
       },
     },
   },
