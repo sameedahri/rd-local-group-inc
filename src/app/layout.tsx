@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
+
 const gilroyMedium = localFont({
   src: "./fonts/gilroy-medium.ttf",
   variable: "--gilroy-medium",
