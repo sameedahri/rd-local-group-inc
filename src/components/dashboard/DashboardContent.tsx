@@ -1,12 +1,18 @@
 "use client";
 import DashboardCard from "./DashboardCard";
-import {useState, useEffect} from "react";
+import {useState, useLayoutEffect} from "react";
 
+
+interface CardData {
+    type: string,
+    submissionDate: string,
+    isAccepted: boolean
+}
 
 const DashboardContent = () => {
-    const [cardsArr, setCardsArr] = useState([{type: "", submissionDate: "", isAccepted: false}]);
+    const [cardsArr, setCardsArr] = useState<CardData[]>([]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         setCardsArr([
             {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
             {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: false},
@@ -35,7 +41,7 @@ const DashboardContent = () => {
             </button>
         </div>
         <div className="grid sm:gap-6 gap-4 sm:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 mt-8">
-            {cardsArr && cardsArr.map(({type, submissionDate, isAccepted}, index) => (
+            {Boolean(cardsArr.length > 0) && cardsArr.map(({type, submissionDate, isAccepted}, index) => (
                 <DashboardCard key={index} type={type} submissionDate={submissionDate} isAccepted={isAccepted} />
             ))}
         </div>

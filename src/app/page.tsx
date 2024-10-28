@@ -1,15 +1,15 @@
 "use client";
 import {useRouter} from "next/navigation";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 
 
 export default function Home() {
   const router = useRouter();
-  useEffect(() => {
+  useLayoutEffect(() => {
     router.push('/login')
   }, [])
 
   return (
-    <main>Home</main>
+    <main className="min-h-screen"></main>
   );
 }
