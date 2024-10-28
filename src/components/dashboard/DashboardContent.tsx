@@ -1,23 +1,27 @@
 "use client";
 import DashboardCard from "./DashboardCard";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 
 const DashboardContent = () => {
-    const [cardsArr, setCardsArr] = useState([
-        {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
-        {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: false},
-        {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
-        {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
-        {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
-        {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: false},
-        {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: false},
-        {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
-        {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
-        {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
-        {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: false},
-        {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
-    ]);
+    const [cardsArr, setCardsArr] = useState([{type: "", submissionDate: "", isAccepted: false}]);
+
+    useEffect(() => {
+        setCardsArr([
+            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
+            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: false},
+            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
+            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
+            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
+            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: false},
+            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: false},
+            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
+            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
+            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
+            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: false},
+            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
+        ]);
+    }, [])
 
   return (
     <div>
