@@ -10,11 +10,12 @@ const LogoutButton = () => {
     return (
         <button 
             type="button" 
-            className="w-[136px] h-[46px] gap-1 flex justify-center items-center bg-[#F3DCD6] rounded-[23px]"
+            className="w-[136px] h-[46px] gap-1 flex justify-center items-center bg-[#F3DCD6] rounded-[23px]
+                font-gilroyMedium text-[16px]"
             onClick={() => router.push('/login')}
         >
             <Image src={logoutIcon} alt="Logout" width={16} height={16} />
-            <span className="flex justify-center items-center  font-gilroyMedium text-[16px]">Logout</span>
+            <span className="">Logout</span>
         </button>
     )
 }

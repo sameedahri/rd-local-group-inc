@@ -23,8 +23,11 @@ const DashboardContent = () => {
     <div>
         <div className="flex justify-between items-center">
             <h1 className="text-heading font-gilroySemibold text-[24px] md:text-[28px]">Dashboard</h1>
-            <button type="button" className="w-[115px] md:w-[178px] h-[38px] md:h-[59px] bg-[#3E3D3D] rounded-[10px] border-2 border-[#3E3D3D]">
-                <span className="text-darkBtn font-gilroySemibold text-[13px] md:text-[20px]">Add Extra Staff</span>
+            <button 
+                type="button" 
+                className="w-[115px] md:w-[178px] h-[38px] md:h-[59px] bg-[#3E3D3D] hover:bg-white rounded-[10px] border-2 border-[#3E3D3D]
+                    text-darkBtn hover:text-black font-gilroySemibold text-[13px] md:text-[20px] transition"
+            >Add Extra Staff
             </button>
         </div>
         <div className="grid sm:gap-6 gap-4 sm:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 mt-8">

@@ -19,7 +19,8 @@ const LoginCard = () => {
                 <input type="tel" placeholder="+1 1234 5678 90" className="w-[100%] sm:h-[52px] h-[43px] border border-[#DFDFDF] rounded-[5px] p-3 sm:placeholder:text-[14px] placeholder:text-[12px]" />
             </div>
             <button 
-                className="w-[100%] sm:h-[52px] h-[43px] bg-loginBg rounded-[5px] text-loginBtn font-gilroySemibold text-center sm:text-[20px] text-[16px] leading-8 mt-3"
+                className="w-[100%] sm:h-[52px] h-[43px] bg-loginBg rounded-[5px] 
+                    text-loginBtn font-gilroySemibold text-center sm:text-[20px] text-[16px] leading-8 mt-3"
                 type="button"
                 onClick={() => router.push("/dashboard")}
             >Login</button>
