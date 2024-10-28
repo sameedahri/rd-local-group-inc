@@ -21,7 +21,7 @@ const LoginCard = () => {
             <button 
                 className="w-[100%] sm:h-[52px] h-[43px] bg-loginBg rounded-[5px] text-loginBtn font-gilroySemibold text-center sm:text-[20px] text-[16px] leading-8 mt-3"
                 type="button"
-                onClick={() => router.push("/")}
+                onClick={() => router.push("/dashboard")}
             >Login</button>
         </div>
     )
