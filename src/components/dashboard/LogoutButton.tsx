@@ -15,7 +15,7 @@ const LogoutButton = () => {
             onClick={() => router.push('/login')}
         >
             <Image src={logoutIcon} alt="Logout" width={16} height={16} />
-            <span className="">Logout</span>
+            <span>Logout</span>
         </button>
     )
 }

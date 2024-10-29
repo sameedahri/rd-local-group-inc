@@ -33,6 +33,8 @@
   --heading: #262626;
   --sec: #636363;
   --darkBtn: #F5F5F5;
+  --label: #262626;
+  --input-outline: #EBC0B4;
 }
 
 /* Colors should be inverted in dark theme. Here colors are not changed as no dark theme is available */
@@ -44,5 +46,7 @@
     --heading: #262626;
     --sec: #636363;
     --darkBtn: #F5F5F5;
+    --label: #262626;
+    --input-outline: #EBC0B4;
   }
 }

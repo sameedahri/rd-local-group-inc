@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import logo from "/public/assets/images/login/logo.png";
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "../dashboard/LogoutButton";
 
 
 const Header = () => {

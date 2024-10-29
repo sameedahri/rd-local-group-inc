@@ -19,7 +19,9 @@ const config: Config = {
         loginBtn: "var(--login-btn)",
         heading: "var(--heading)",
         sec: "var(--sec)",
-        darkBtn: "var(--darkBtn)"
+        darkBtn: "var(--darkBtn)",
+        label: "var(--label)",
+        inputOutline: "var(--input-outline)"
       },
       boxShadow: {
         dashboardCard: "0px 1px 5px 0px rgba(0, 0, 0, 0.08)"

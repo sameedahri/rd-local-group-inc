@@ -3,7 +3,7 @@ import Header from "@/components/common/Header";
 
 
 export const metadata:Metadata = {
-    title: "Dashboard"
+    title: "Add Extra Staff"
 }
 
 const layout = ({children}: {children: React.ReactNode}) => {
