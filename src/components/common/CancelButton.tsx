@@ -3,7 +3,7 @@
 
 interface CancelButtonProps {
     text: string,
-    onClick?: Function
+    onClick?: () => void
 }
 
 const CancelButton: React.FC<CancelButtonProps> = ({text, onClick=() => {}}) => {

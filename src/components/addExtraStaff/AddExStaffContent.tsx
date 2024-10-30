@@ -5,41 +5,89 @@ import CancelButton from "../common/CancelButton";
 import AddButton from "../common/AddButton";
 import PageHeading from "../common/PageHeading";
 import {useRouter} from "next/navigation";
+import Dialogue from "../common/Dialogue";
+import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
+import {RefObject, FormEvent, useState} from "react";
 
+
+interface phoneNumberProps {
+    countryCode: string,
+    phoneNumber: string
+}
 
 const AddExStaffContent = () => {
     const router = useRouter();
 
-    const redirectToDashboard = () => {
-        router.push('/dashboard')
+    const [firstName, setFirstName] = useState<string>("");
+    const [lastName, setLastName] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [phoneNumber, setPhoneNumber] = useState<phoneNumberProps>({countryCode: "+92", phoneNumber: ""});
+
+    let dialogueRef: HTMLDialogElement | null;
+    const setDialogueRef = (ref: RefObject<HTMLDialogElement>) => {
+        dialogueRef = ref.current;
+    };
+    const showModal = () => {
+        dialogueRef?.showModal();
+    };
+    const closeModal = () => {
+        resetForm();
+        dialogueRef?.close();
     };
 
-    const submitForm = (e: any) => {
+    const redirectToDashboard = () => {
+        router.push('/dashboard');
+    };
+
+    const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const data = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            phoneNumber: phoneNumber.countryCode + phoneNumber.phoneNumber
+        };
+        console.log(data)
+        showModal();
+    };
+
+    const resetForm = () => {
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setPhoneNumber({countryCode: "+92", phoneNumber: ""});
     };
 
     return (
-        <div>
+        <>
             <PageHeading heading="Add Extra Staff" />
             <form 
                 className="bg-white rounded-[16px] md:p-10 px-7 py-10"
                 onSubmit={(e) => submitForm(e)}
             >
                 <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4">
-                    <LabelInput label="First name*" inputType="text" />
-                    <LabelInput label="Last name*" inputType="text" />
+                    <LabelInput label="First name*" inputType="text" inputId="firstName" stateValue={firstName} setState={setFirstName} />
+                    <LabelInput label="Last name*" inputType="text" inputId="lastName" stateValue={lastName} setState={setLastName} />
                 </div>
                 <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
-                    <LabelInput label="Email*" inputType="email" />
-                    <PhoneInput label="Phone number" />
-
+                    <LabelInput label="Email*" inputType="email" inputId="email" stateValue={email} setState={setEmail} />
+                    <PhoneInput label="Phone number" inputId="phoneNumber" stateValue={phoneNumber} setState={setPhoneNumber} />
                 </div>
                 <div className="flex md:gap-x-4 gap-x-2 mt-8">
                     <AddButton text="Add" />
                     <CancelButton text="Back" onClick={redirectToDashboard} />
                 </div>
             </form>
-        </div>
+            <Dialogue 
+                setDialogueRef={setDialogueRef} 
+                closeDialogue={closeModal} 
+                icon={verifyIcon}
+                iconAlt="Verify"
+                title="Thank you!"
+                message="New staff added successfully"
+                buttonText="Close"
+            />
+        </>
     )
 }
 
