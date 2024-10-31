@@ -13,11 +13,11 @@ interface LabelInputProps {
 const LabelInput: React.FC<LabelInputProps> = ({label, inputType, inputId, stateValue, setState, required=true}) => {
   return (
     <div className="grid gap-y-1">
-        <label htmlFor="" className="text-label font-gilroySemibold text-[16px]">{label}</label>
+        <label htmlFor={inputId} className="text-label font-gilroySemibold text-[16px]">{label}</label>
         <input 
             type={inputType} 
             id={inputId}
-            className="w-[100%] md:h-[52px] border border-[#DADADA] focus:outline-inputOutline rounded-[7px] p-3 md:placeholder:text-[14px] placeholder:text-[12px]"
+            className="w-[100%] h-[52px] border border-[#DADADA] focus:outline-inputOutline rounded-[7px] p-3 md:placeholder:text-[14px] placeholder:text-[12px]"
             autoComplete="off"
             required={required}
             value={stateValue}
