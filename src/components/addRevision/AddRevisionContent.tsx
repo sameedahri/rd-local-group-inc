@@ -27,11 +27,11 @@ const AddRevisionContent = () => {
     const closeModal = () => {
         resetForm();
         dialogueRef?.close();
-        redirectToCardDetails();
+        router.push('/dashboard');
     };
 
     const redirectToCardDetails = () => {
-        router.push('/')
+        router.back();
     };
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {

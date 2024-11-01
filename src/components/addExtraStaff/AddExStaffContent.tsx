@@ -33,6 +33,7 @@ const AddExStaffContent = () => {
     const closeModal = () => {
         resetForm();
         dialogueRef?.close();
+        redirectToDashboard();
     };
 
     const redirectToDashboard = () => {

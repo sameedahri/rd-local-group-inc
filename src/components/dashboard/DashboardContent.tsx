@@ -6,6 +6,7 @@ import PageHeading from "../common/PageHeading";
 
 
 interface CardData {
+    id: number,
     type: string,
     submissionDate: string,
     isAccepted: boolean
@@ -17,23 +18,23 @@ const DashboardContent = () => {
 
     useLayoutEffect(() => {
         setCardsArr([
-            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
-            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: false},
-            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
-            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
-            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
-            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: false},
-            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: false},
-            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
-            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
-            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
-            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: false},
-            {type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
+            {id: 1, type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
+            {id: 2, type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: false},
+            {id: 3, type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
+            {id: 4, type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
+            {id: 5, type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
+            {id: 6, type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: false},
+            {id: 7, type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: false},
+            {id: 8, type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
+            {id: 9, type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
+            {id: 10, type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
+            {id: 11, type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: false},
+            {id: 12, type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
         ]);
     }, [])
 
   return (
-    <div>
+    <>
         <div className="flex justify-between items-center">
             <PageHeading heading="Dashboard" mb="mb-0" />
             <button 
@@ -45,11 +46,11 @@ const DashboardContent = () => {
             </button>
         </div>
         <div className="grid sm:gap-6 gap-4 sm:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 mt-8">
-            {Boolean(cardsArr.length > 0) && cardsArr.map(({type, submissionDate, isAccepted}, index) => (
-                <DashboardCard key={index} type={type} submissionDate={submissionDate} isAccepted={isAccepted} />
+            {Boolean(cardsArr.length > 0) && cardsArr.map(({id, type, submissionDate, isAccepted}) => (
+                <DashboardCard key={id} cardId={id} type={type} submissionDate={submissionDate} isAccepted={isAccepted} />
             ))}
         </div>
-    </div>
+    </>
   )
 }
 

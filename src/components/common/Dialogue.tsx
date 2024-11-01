@@ -10,10 +10,11 @@ interface DialogueProps {
     iconAlt: string,
     title: string,
     message: string,
-    buttonText: string
+    buttonText: string,
+    isSubmitRevision?: boolean
 }
 
-const Dialogue: React.FC<DialogueProps> = ({setDialogueRef, closeDialogue, icon, iconAlt, title, message, buttonText}) => {
+const Dialogue: React.FC<DialogueProps> = ({setDialogueRef, closeDialogue, icon, iconAlt, title, message, buttonText, isSubmitRevision=false}) => {
     const dialogueRef = useRef<HTMLDialogElement>(null);
 
     useEffect(() => {
@@ -34,7 +35,7 @@ const Dialogue: React.FC<DialogueProps> = ({setDialogueRef, closeDialogue, icon,
                     </div>
                     <button 
                         type="button" 
-                        className={`w-[113px] h-[53px] rounded-[26px] border border-inputOutline bg-[rgba(250,250,250,0.24)]
+                        className={`${isSubmitRevision ? 'w-[205px]' : 'w-[113px]'} h-[53px] rounded-[26px] border border-inputOutline bg-[rgba(250,250,250,0.24)]
                             text-[#D59483] font-gilroyBold text-[16px] mt-5 hover:bg-inputOutline hover:text-white transition`}
                         onClick={() => closeDialogue()}
                     >{buttonText}</button>

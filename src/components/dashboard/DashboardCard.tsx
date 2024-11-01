@@ -3,15 +3,23 @@ import Image from "next/image";
 import calendarIcon from "/public/assets/images/dashboard/calender-icon.svg";
 import AcceptedButton from "./AcceptedButton";
 import ViewButton from "./ViewButton";
+import {useRouter} from "next/navigation";
 
 
 interface DashboardCardProps {
+    cardId: number,
     type: string,
     submissionDate: string,
     isAccepted: boolean
 }
 
-const DashboardCard: React.FC<DashboardCardProps> = ({type, submissionDate, isAccepted}) => {
+const DashboardCard: React.FC<DashboardCardProps> = ({cardId, type, submissionDate, isAccepted}) => {
+    const router = useRouter();
+
+    const redirectToCardDetails = () => {
+        router.push('/cardDetails/'+cardId);
+    };
+
   return (
     <div className=" bg-white md:p-6 p-5 rounded-t-[2px] rounded-b-[10px] shadow-dashboardCard border-t-[6px] border-t-loginBg">
         <div className="flex justify-between items-center">
@@ -29,7 +37,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({type, submissionDate, isAc
         </div>
         <div className="flex justify-between md:mt-10 mt-7">
             <AcceptedButton isAccepted={isAccepted} />
-            <ViewButton />
+            <ViewButton onClickFunction={redirectToCardDetails} />
         </div>
     </div>
   )
