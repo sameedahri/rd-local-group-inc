@@ -3,7 +3,7 @@ import AddRevisionContent from "@/components/addRevision/AddRevisionContent";
 
 const page = () => {
     return (
-        <main className="bg-primaryBg min-h-screen 2xl:px-32 lg:px-24 md:px-8 px-5 md:py-16 py-12">
+        <main className="page">
             <AddRevisionContent />
         </main>
     )

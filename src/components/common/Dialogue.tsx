@@ -29,7 +29,7 @@ const Dialogue: React.FC<DialogueProps> = ({setDialogueRef, closeDialogue, icon,
             >
                 <div className="flex flex-col items-center">
                     <Image src={icon} alt={iconAlt} width={55} height={55} />
-                    <div className="text-center text-heading md:text-[22px] text-[20px] mt-4">
+                    <div className="text-center text-heading md:text-[22px] text-[19px] mt-4">
                         <h1 className="font-gilroySemibold">{title}</h1>
                         <p className="font-gilroyRegular">{message}</p>
                     </div>

@@ -7,7 +7,7 @@ interface CheckboxProps {
 
 const Checkbox:React.FC<CheckboxProps> = ({checkboxId}) => {
   return (
-    <input type="checkbox" id={checkboxId} className="w-[22px] h-[20px]" />
+    <input type="checkbox" id={checkboxId} className="md:w-[22px] w-[13px] md:h-[20px] h-[11px] md:mt-0 mt-[5px]" />
   )
 }
 

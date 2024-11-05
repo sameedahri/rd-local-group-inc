@@ -8,6 +8,7 @@ import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
 import exclamationMarkIcon from "/public/assets/images/cardDetails/exclamation-mark-icon.svg";
 import Dialogue from "../common/Dialogue";
 import {useRouter} from "next/navigation";
+import RequiredMessage from "./RequiredMessage";
 
 
 const ProofVerificationCard = () => {
@@ -39,21 +40,22 @@ const ProofVerificationCard = () => {
     };
 
     // tailwind classes
-    const liSpan1 = "text-[#3C3C3C] font-gilroySemibold text-[18px]"; 
-    const liSpan2 = "text-[#636363] font-gilroyMedium text-[16px]";  
+    const liSpan1 = "text-[#3C3C3C] font-gilroySemibold md:text-[18px] text-[11px]"; 
+    const liSpan2 = "text-[#636363] font-gilroyMedium md:text-[16px] text-[10px]";
   return (
     <>
-        <div className="bg-[rgba(220,255,246,0.41)] rounded-[5px] p-9">
-            <h2 className="text-black font-gilroySemibold text-[36px] capitalize mb-1">Proof Verification Checklist</h2>
-            <p className="h-[60px] text-[#5F5F5F] font-gilroyRegular text-[20px] ml-1 mb-16">Review all aspects of your proof and ensure that everything is correct</p>
+        <div className="bg-[rgba(220,255,246,0.41)] rounded-[5px] md:p-9 p-5 sm:mr-[10px]">
+            <h2 className="text-black font-gilroySemibold md:text-[35px] text-[20px] capitalize md:mb-1 mb-0">Proof Verification Checklist</h2>
+            <p className="md:h-[60px] text-[#5F5F5F] font-gilroyRegular md:text-[20px] text-[11px] ml-1 md:mb-16 mb-6">Review all aspects of your proof and ensure that everything is correct</p>
             {/* List */}
-            <ul className="[&>li]:flex [&>li]:items-center [&>li]:gap-x-3 [&>li:not(:last-child)]:mb-4 [&>li]:relative mb-11">
+            <ul className="[&>li]:flex [&>li]:items-center [&>li]:md:gap-x-3 [&>li]:gap-x-2 [&>li:not(:last-child)]:md:mb-4 [&>li:not(:last-child)]:mb-2 [&>li]:relative md:mb-11 mb-7">
                     <li>
                         <Checkbox checkboxId="proofSize" />
                         <label htmlFor="proofSize" className="select-none">
                             <span className={liSpan1}>Proof Size:</span>
                             <span className={liSpan2}> 4x4H  6x6W</span>
                         </label>
+                        <RequiredMessage />
                     </li>
                     <li>
                         <Checkbox checkboxId="proofColor" />
@@ -61,7 +63,7 @@ const ProofVerificationCard = () => {
                             <span className={liSpan1}>Proof Color:</span>
                             <span className={liSpan2}> Black/Green/Blue</span>
                         </label>
-                        <span className="absolute left-[35px] bottom-[-57px] text-[#F44336] font-gilroyRegular text-[12px]">This field is required*</span>
+                        <RequiredMessage />
                     </li>
                     <li>
                         <Checkbox checkboxId="proofDesign" />
@@ -69,6 +71,7 @@ const ProofVerificationCard = () => {
                             <span className={liSpan1}>Proof Design:</span>
                             <span className={liSpan2}> Dark & Asthetic</span>
                         </label>
+                        <RequiredMessage />
                     </li>
                     <li>
                         <Checkbox checkboxId="proofPhotos" />
@@ -76,6 +79,7 @@ const ProofVerificationCard = () => {
                             <span className={liSpan1}>Photos to use in proof:</span>
                             <span className={liSpan2}> Fresh foods/Nature</span>
                         </label>
+                        <RequiredMessage />
                     </li>
                     <li>
                         <Checkbox checkboxId="businessAddress" />
@@ -83,6 +87,7 @@ const ProofVerificationCard = () => {
                             <span className={liSpan1}>Business Address:</span>
                             <span className={liSpan2}> Bottom Right Corner</span>
                         </label>
+                        <RequiredMessage />
                     </li>
                     <li>
                         <Checkbox checkboxId="businessContact" />
@@ -90,6 +95,7 @@ const ProofVerificationCard = () => {
                             <span className={liSpan1}>Business Contact:</span>
                             <span className={liSpan2}> Bottom Left Corner</span>
                         </label>
+                        <RequiredMessage />
                     </li>
                     <li>
                         <Checkbox checkboxId="proofQR" />
@@ -97,10 +103,11 @@ const ProofVerificationCard = () => {
                             <span className={liSpan1}>Proof QR:</span>
                             <span className={liSpan2}> Center of Proof</span>
                         </label>
+                        <RequiredMessage />
                     </li>
                 </ul>
                 {/* Buttons */}
-                <div className="flex gap-x-2">
+                <div className="flex md:gap-x-2 gap-x-1">
                     <AcceptProofButton onClickFunction={showAgreeModal} />
                     <DeclineProofButton onClickFunction={showSubmitModal} />
                 </div>  

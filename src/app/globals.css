@@ -57,3 +57,58 @@
     --input-outline: #EBC0B4;
   }
 }
+
+
+/* Global Styles */
+
+.page {
+  @apply bg-primaryBg min-h-screen 2xl:px-32 lg:px-24 md:px-8 px-5 md:py-16 py-10;
+}
+
+
+.react-multi-carousel-list > button {
+  border-radius: 10px;
+}
+
+.react-multiple-carousel__arrow {
+  min-width: 25px !important;
+  min-height: 25px !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+}
+.react-multiple-carousel__arrow::before {
+  font-size: 10px !important;
+}
+
+.react-multi-carousel-list .react-multiple-carousel__arrow--left  {
+  left: calc(2% - 10px);
+  z-index: 5;
+}
+.react-multiple-carousel__arrow--left::before {
+  margin-left: -2px;
+}
+
+.react-multi-carousel-list .react-multiple-carousel__arrow--right {
+  right: 2%;
+  z-index: 5;
+}
+.react-multiple-carousel__arrow--right::before {
+  margin-right: -2px;
+}
+
+@media (max-width: 768px) {
+  .react-multi-carousel-list .react-multiple-carousel__arrow--left  {
+    left: calc(3% - 10px);
+  }
+  .react-multi-carousel-list .react-multiple-carousel__arrow--right {
+    right: 3%;
+  }
+}
+
+@media (max-width: 640px) {
+  .react-multi-carousel-list .react-multiple-carousel__arrow--left  {
+    left: 2%;
+  }
+  .react-multi-carousel-list .react-multiple-carousel__arrow--right {
+    right: 2%;
+  }
+}
