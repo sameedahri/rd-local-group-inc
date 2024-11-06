@@ -2,7 +2,7 @@
 import Checkbox from "../common/Checkbox";
 import AcceptProofButton from "./AcceptProofButton";
 import DeclineProofButton from "./DeclineProofButton";
-import {RefObject} from "react";
+import {RefObject, FormEvent} from "react";
 import AgreeDialogue from "./AgreeDialogue";
 import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
 import exclamationMarkIcon from "/public/assets/images/cardDetails/exclamation-mark-icon.svg";
@@ -20,7 +20,35 @@ const ProofVerificationCard = () => {
         agreeDialogueRef = ref.current;
     };
     const showAgreeModal = () => {
+        // toggle field required message
+        const checkboxes = document.querySelectorAll('input[type="checkbox"], input[required="true"]');
+        let isValid = true;
+        for(let i = 0; i < checkboxes.length; i++) {
+            const checkbox = checkboxes[i] as HTMLInputElement;
+            const requiredMessageSpan = checkbox.nextElementSibling?.nextElementSibling;
+            if(!checkbox.checked) {
+                requiredMessageSpan?.classList.remove('opacity-0');
+                requiredMessageSpan?.classList.add('opacity-100');
+                isValid = false;
+            } else {
+                requiredMessageSpan?.classList.remove('opacity-100');
+                requiredMessageSpan?.classList.add('opacity-0');
+            }
+        }
+        if(!isValid) return;
         agreeDialogueRef?.showModal();
+    };
+    const checkboxOnchange = (e: FormEvent<HTMLInputElement>) => {
+        // toggle field required message
+        const checkbox = e.target as HTMLInputElement;
+        const requiredMessageSpan = checkbox.nextElementSibling?.nextElementSibling;
+        if(!checkbox.checked) {
+            requiredMessageSpan?.classList.remove('opacity-0');
+            requiredMessageSpan?.classList.add('opacity-100');
+        } else {
+            requiredMessageSpan?.classList.remove('opacity-100');
+            requiredMessageSpan?.classList.add('opacity-0');
+        }
     };
     const closeAgreeModal = () => {
         agreeDialogueRef?.close();
@@ -50,7 +78,7 @@ const ProofVerificationCard = () => {
             {/* List */}
             <ul className="[&>li]:flex [&>li]:items-center [&>li]:md:gap-x-3 [&>li]:gap-x-2 [&>li:not(:last-child)]:md:mb-4 [&>li:not(:last-child)]:mb-2 [&>li]:relative md:mb-11 mb-7">
                     <li>
-                        <Checkbox checkboxId="proofSize" />
+                        <Checkbox checkboxId="proofSize" onChange={checkboxOnchange} />
                         <label htmlFor="proofSize" className="select-none">
                             <span className={liSpan1}>Proof Size:</span>
                             <span className={liSpan2}> 4x4H  6x6W</span>
@@ -58,7 +86,7 @@ const ProofVerificationCard = () => {
                         <RequiredMessage />
                     </li>
                     <li>
-                        <Checkbox checkboxId="proofColor" />
+                        <Checkbox checkboxId="proofColor" onChange={checkboxOnchange} />
                         <label htmlFor="proofColor" className="select-none">
                             <span className={liSpan1}>Proof Color:</span>
                             <span className={liSpan2}> Black/Green/Blue</span>
@@ -66,7 +94,7 @@ const ProofVerificationCard = () => {
                         <RequiredMessage />
                     </li>
                     <li>
-                        <Checkbox checkboxId="proofDesign" />
+                        <Checkbox checkboxId="proofDesign" onChange={checkboxOnchange} />
                         <label htmlFor="proofDesign" className="select-none">
                             <span className={liSpan1}>Proof Design:</span>
                             <span className={liSpan2}> Dark & Asthetic</span>
@@ -74,7 +102,7 @@ const ProofVerificationCard = () => {
                         <RequiredMessage />
                     </li>
                     <li>
-                        <Checkbox checkboxId="proofPhotos" />
+                        <Checkbox checkboxId="proofPhotos" onChange={checkboxOnchange} />
                         <label htmlFor="proofPhotos" className="select-none">
                             <span className={liSpan1}>Photos to use in proof:</span>
                             <span className={liSpan2}> Fresh foods/Nature</span>
@@ -82,7 +110,7 @@ const ProofVerificationCard = () => {
                         <RequiredMessage />
                     </li>
                     <li>
-                        <Checkbox checkboxId="businessAddress" />
+                        <Checkbox checkboxId="businessAddress" onChange={checkboxOnchange} />
                         <label htmlFor="businessAddress" className="select-none">
                             <span className={liSpan1}>Business Address:</span>
                             <span className={liSpan2}> Bottom Right Corner</span>
@@ -90,7 +118,7 @@ const ProofVerificationCard = () => {
                         <RequiredMessage />
                     </li>
                     <li>
-                        <Checkbox checkboxId="businessContact" />
+                        <Checkbox checkboxId="businessContact" onChange={checkboxOnchange} />
                         <label htmlFor="businessContact" className="select-none">
                             <span className={liSpan1}>Business Contact:</span>
                             <span className={liSpan2}> Bottom Left Corner</span>
@@ -98,7 +126,7 @@ const ProofVerificationCard = () => {
                         <RequiredMessage />
                     </li>
                     <li>
-                        <Checkbox checkboxId="proofQR" />
+                        <Checkbox checkboxId="proofQR" onChange={checkboxOnchange} />
                         <label htmlFor="proofQR" className="select-none">
                             <span className={liSpan1}>Proof QR:</span>
                             <span className={liSpan2}> Center of Proof</span>
