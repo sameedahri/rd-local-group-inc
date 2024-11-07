@@ -16,23 +16,30 @@ export function useFetch<T>(url: string): UseFetchResult<T> {
     useEffect(() => {
         setLoading(true);
         setError(null);
+        const abortController = new AbortController();
 
         const fetchData = async () => {
             try{
-                const response = await fetch(API_URL + url, {method: "GET"});
+                const response = await fetch(API_URL + url, {signal: abortController.signal, method: "GET"});
                 if(!response.ok) {
                     throw new Error(`Error ${response.status} - ${response.statusText}`);
                 }
                 const json = await response.json();
                 setData(json);
             } catch(error) {
-                setError((error as Error).message);
+                if(error instanceof Error && error.name !== "AbortError") {
+                    setError((error as Error).message);
+                }
             } finally {
                 setLoading(false);
             }
         };
         
         fetchData();
+
+        return () => {
+            abortController.abort();
+        };
     }, [url])
 
     return {data, loading, error}
