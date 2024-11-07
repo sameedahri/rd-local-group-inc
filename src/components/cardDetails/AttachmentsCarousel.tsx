@@ -22,10 +22,14 @@ const responsive = {
 };
 
 const AttachmentsCarousel = () => {
+    // lessThan5 will be replaced by attachments data length
+    const lessThan5 = false;
+
   return (
     <div className="w-[100%] xl:h-[215px] md:h-[130px] h-[194px]">
         <Carousel 
             responsive={responsive}
+            containerClass={lessThan5 ? "custom-container" : ""}
         >
             <ProofAttachemnt />
             <ProofAttachemnt />

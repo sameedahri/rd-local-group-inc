@@ -65,9 +65,14 @@
   @apply bg-primaryBg min-h-screen 2xl:px-32 lg:px-24 md:px-8 px-5 md:py-16 py-10;
 }
 
-
+/* Carousel Styles */
 .react-multi-carousel-list > button {
   border-radius: 10px;
+}
+
+/* when carousel items are less than 5, they will be centered */
+.custom-container {
+  justify-content: center;
 }
 
 .react-multiple-carousel__arrow {
@@ -95,7 +100,7 @@
   margin-right: -2px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .react-multi-carousel-list .react-multiple-carousel__arrow--left  {
     left: calc(3% - 10px);
   }
@@ -104,11 +109,16 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 639px) {
   .react-multi-carousel-list .react-multiple-carousel__arrow--left  {
     left: 2%;
   }
   .react-multi-carousel-list .react-multiple-carousel__arrow--right {
     right: 2%;
   }
+  /* when carousel items are less than 5, they will be not be centered on small screens */
+  .custom-container {
+    justify-content: unset;
+  }
 }
+
