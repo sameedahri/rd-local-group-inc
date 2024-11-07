@@ -8,6 +8,7 @@ import {useRouter} from "next/navigation";
 import Dialogue from "../common/Dialogue";
 import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
 import {RefObject, FormEvent, useState} from "react";
+import { usePost } from "@/utils/usePost";
 
 
 interface phoneNumberProps {
@@ -17,11 +18,12 @@ interface phoneNumberProps {
 
 const AddExStaffContent = () => {
     const router = useRouter();
+    const {postData, data} = usePost("/posts");
 
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
-    const [phoneNumber, setPhoneNumber] = useState<phoneNumberProps>({countryCode: "+92", phoneNumber: ""});
+    const [phoneNumber, setPhoneNumber] = useState<phoneNumberProps>({countryCode: "+1", phoneNumber: ""});
 
     let dialogueRef: HTMLDialogElement | null;
     const setDialogueRef = (ref: RefObject<HTMLDialogElement>) => {
@@ -42,21 +44,22 @@ const AddExStaffContent = () => {
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const data = {
+        const staffData = {
             firstName: firstName,
             lastName: lastName,
             email: email,
-            phoneNumber: phoneNumber.countryCode + phoneNumber.phoneNumber
+            phoneNumber: phoneNumber.countryCode + " " + phoneNumber.phoneNumber
         };
-        console.log(data)
+        postData(staffData);
         showModal();
     };
+    console.log(data);
 
     const resetForm = () => {
         setFirstName("");
         setLastName("");
         setEmail("");
-        setPhoneNumber({countryCode: "+92", phoneNumber: ""});
+        setPhoneNumber({countryCode: "+1", phoneNumber: ""});
     };
 
     return (
@@ -64,7 +67,7 @@ const AddExStaffContent = () => {
             <PageHeading heading="Add Extra Staff" />
             <form 
                 className="bg-white rounded-[16px] md:p-10 px-7 py-10"
-                onSubmit={(e) => submitForm(e)}
+                onSubmit={submitForm}
             >
                 <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4">
                     <LabelInput label="First name*" inputType="text" inputId="firstName" stateValue={firstName} setState={setFirstName} />

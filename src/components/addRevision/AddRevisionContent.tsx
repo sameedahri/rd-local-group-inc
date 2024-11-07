@@ -8,10 +8,12 @@ import {useState, RefObject, FormEvent} from "react";
 import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
 import Dialogue from "../common/Dialogue";
 import {useRouter} from "next/navigation";
+import { usePost } from "@/utils/usePost";
 
 
 const AddRevisionContent = () => {
     const router = useRouter();
+    const {postData, data} = usePost("/posts");
 
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
@@ -36,14 +38,15 @@ const AddRevisionContent = () => {
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const data = {
+        const revisionData = {
             firstName: firstName,
             lastName: lastName,
             changes: changes
         };
-        console.log(data)
+        postData(revisionData);
         showModal();
     };
+    console.log(data);
 
     const resetForm = () => {
         setFirstName("");
@@ -56,7 +59,7 @@ const AddRevisionContent = () => {
         <PageHeading heading="Add Revisions" />
         <form 
             className="bg-white rounded-[16px] md:p-10 px-7 py-10"
-            onSubmit={(e) => submitForm(e)}
+            onSubmit={submitForm}
         >
             <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4">
                 <LabelInput label="First name*" inputType="text" inputId="firstName" stateValue={firstName} setState={setFirstName} />

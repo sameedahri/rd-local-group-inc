@@ -9,10 +9,17 @@ import exclamationMarkIcon from "/public/assets/images/cardDetails/exclamation-m
 import Dialogue from "../common/Dialogue";
 import {useRouter} from "next/navigation";
 import RequiredMessage from "./RequiredMessage";
+import { useFetch } from "@/utils/useFetch";
 
 
 const ProofVerificationCard = () => {
     const router = useRouter();
+
+    const {data: attachmentsData} = useFetch("/users");
+    console.log(attachmentsData);
+
+    const {data: proofData} = useFetch("/posts");
+    console.log(proofData);
 
     // Agree Dialogue
     let agreeDialogueRef: HTMLDialogElement | null;

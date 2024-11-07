@@ -3,6 +3,7 @@ import {useRouter} from "next/navigation";
 import DashboardCard from "./DashboardCard";
 import {useState, useLayoutEffect} from "react";
 import PageHeading from "../common/PageHeading";
+import {useFetch} from "@/utils/useFetch";
 
 
 interface CardData {
@@ -14,8 +15,12 @@ interface CardData {
 
 const DashboardContent = () => {
     const router = useRouter();
-    const [cardsArr, setCardsArr] = useState<CardData[]>([]);
 
+    const {data} = useFetch("/posts");
+    console.log(data);
+
+    // dummy data
+    const [cardsArr, setCardsArr] = useState<CardData[] | null>(null);
     useLayoutEffect(() => {
         setCardsArr([
             {id: 1, type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
@@ -46,7 +51,7 @@ const DashboardContent = () => {
             </button>
         </div>
         <div className="grid sm:gap-6 gap-4 sm:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 mt-8">
-            {Boolean(cardsArr.length > 0) && cardsArr.map(({id, type, submissionDate, isAccepted}) => (
+            {cardsArr && cardsArr.map(({id, type, submissionDate, isAccepted}) => (
                 <DashboardCard key={id} cardId={id} type={type} submissionDate={submissionDate} isAccepted={isAccepted} />
             ))}
         </div>

@@ -3,7 +3,7 @@ import LoginCard from "@/components/login/LoginCard";
 
 const Login = () => {
     return (
-        <main className="bg-loginBg flex justify-center items-start min-h-screen">
+        <main className="bg-loginBg flex justify-center items-center min-h-screen">
            <LoginCard />
         </main>
     )

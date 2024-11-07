@@ -29,9 +29,9 @@ const PhoneInput: React.FC<PhoneInputProps> = ({label, inputId, stateValue, setS
                     }
                 }}
             >
-                <option value="+92">+92</option>
-                <option value="+93">+93</option>
-                <option value="+94">+94</option>
+                <option value="+1">+1</option>
+                <option value="+2">+2</option>
+                <option value="+3">+3</option>
             </select>
             <input 
                 type="tel" 
@@ -46,6 +46,8 @@ const PhoneInput: React.FC<PhoneInputProps> = ({label, inputId, stateValue, setS
                         setState(prevValue => ({...prevValue, phoneNumber: target.value}));
                     }
                 }}
+                placeholder="1234 5678 90"
+                pattern="[0-9]{4} [0-9]{4} [0-9]{2}"
             />
         </div>
     </div>
