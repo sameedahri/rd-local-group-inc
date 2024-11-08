@@ -18,6 +18,11 @@ const gilroyBold = localFont({
   variable: "--gilroy-bold",
   weight: "400"
 });
+const inikaRegular = localFont({
+  src: "./fonts/inika/Inika-Regular.ttf",
+  variable: "--inika-regular",
+  weight: "400"
+});
 
 export const metadata: Metadata = {
   title: "Restaurant Owners",
@@ -32,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${gilroySemibold.variable} ${gilroyMedium.variable} ${gilroyBold.variable} antialiased`}
+        className={`${gilroySemibold.variable} ${gilroyMedium.variable} ${gilroyBold.variable} ${inikaRegular.variable} antialiased`}
       >
         {children}
       </body>

@@ -12,7 +12,8 @@ const config: Config = {
         gilroyMedium: ['Gilroy-Medium', 'sans-serif'],
         gilroySemibold: ['Gilroy-Semibold', 'sans-serif'],
         gilroyBold: ['Gilroy-Bold', 'sans-serif'],
-        gilroyRegular: ['Gilroy-Regular', 'sans-serif']
+        gilroyRegular: ['Gilroy-Regular', 'sans-serif'],
+        inikaRegular: ['Inika-Regular', 'sans-serif']
       },
       colors: {
         loginBg: "var(--login-bg)",

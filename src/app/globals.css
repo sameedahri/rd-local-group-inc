@@ -31,6 +31,13 @@
     font-display: swap;
     src: url(./fonts/gilroy-regular.ttf) format('truetype');
   }
+  @font-face {
+    font-family: 'Inika-Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(./fonts/inika/Inika-Regular.ttf) format('truetype');
+  }
 }
 
 :root {

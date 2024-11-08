@@ -10,6 +10,6 @@ export default function Home() {
   }, [router])
 
   return (
-    <main className="min-h-screen"></main>
+    <main></main>
   );
 }

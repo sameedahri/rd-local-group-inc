@@ -3,14 +3,21 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import logo from "/public/assets/images/login/logo.png";
 import {useState, FormEvent} from "react";
+import { usePost } from "@/utils/usePost";
 
 
 const LoginCard = () => {
     const [phoneNumber, setPhoneNumber] = useState<string>("");
 
+    const {postData, data} = usePost("/posts");
+    console.log(data);
+
     const router = useRouter();
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        postData({
+            phoneNumber: phoneNumber
+        });
         router.push("/dashboard");
     };
 
@@ -20,7 +27,7 @@ const LoginCard = () => {
                 <Image src={logo} alt="Logo" width={100} height={95} />
             </div>
             <p className="text-black text-center font-gilroySemibold md:text-[32px] text-[26px] leading-9">Welcome! Just enter your Business phone number</p>
-            <p className="mt-3 text-[#3F3F3F0] font-gilroyMedium text-center md:text-[16px] text-[14px]">Glad to see you, Login to your account below</p>
+            <p className="mt-3 text-[#3F3F3F] font-gilroyMedium text-center md:text-[16px] text-[14px]">Glad to see you, Login to your account below</p>
             <div className="mt-12 flex flex-col gap-2">
                 <label htmlFor="phoneNumber" className="text-[#3F3F3F] font-gilroyMedium md:text-[14px] text-[12px]">Enter your Phone number*</label>
                 <input 
@@ -34,7 +41,8 @@ const LoginCard = () => {
                         setPhoneNumber(target.value);
                     }}
                     placeholder="+1 1234 5678 90"
-                    pattern="[+]{1}[0-9]{1} [0-9]{4} [0-9]{4} [0-9]{2}"
+                    pattern="[+]{1}[0-9]{1,2} [0-9]{4} [0-9]{4} [0-9]{2}"
+                    autoComplete="off"
                 />
             </div>
             <button 

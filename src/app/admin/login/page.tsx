@@ -1,10 +1,10 @@
-import LoginCard from "@/components/login/LoginCard";
+import AdminLoginCard from "@/components/admin/login/AdminLoginCard";
 
 
 const page = () => {
     return (
         <main className="bg-loginBg flex justify-center items-center min-h-screen">
-           <LoginCard />
+            <AdminLoginCard />
         </main>
     )
 }

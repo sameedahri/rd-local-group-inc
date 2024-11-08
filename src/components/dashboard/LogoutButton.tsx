@@ -3,8 +3,11 @@ import Image from "next/image";
 import logoutIcon from "/public/assets/images/dashboard/logout-icon.svg";
 import {useRouter} from "next/navigation";
 
+interface LogoutButtonProps {
+    isAdmin?: boolean
+}
 
-const LogoutButton = () => {
+const LogoutButton: React.FC<LogoutButtonProps> = ({isAdmin}) => {
     const router = useRouter();
 
     return (
@@ -12,7 +15,7 @@ const LogoutButton = () => {
             type="button" 
             className="w-[136px] h-[46px] gap-1 flex justify-center items-center bg-[#F3DCD6] rounded-[23px]
                 font-gilroyMedium text-[16px]"
-            onClick={() => router.push('/login')}
+            onClick={isAdmin ? () => router.push('/admin/login') : () => router.push('/login')}
         >
             <Image src={logoutIcon} alt="Logout" width={16} height={16} />
             <span>Logout</span>
