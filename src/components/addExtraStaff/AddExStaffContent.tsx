@@ -63,7 +63,7 @@ const AddExStaffContent = () => {
     };
 
     return (
-        <>
+        <div className="content-wrapper">
             <PageHeading heading="Add Extra Staff" />
             <form 
                 className="bg-white rounded-[16px] md:p-10 px-7 py-10"
@@ -79,7 +79,7 @@ const AddExStaffContent = () => {
                 </div>
                 <div className="flex md:gap-x-4 gap-x-2 mt-8">
                     <AddButton text="Add" />
-                    <CancelButton text="Back" onClick={redirectToDashboard} />
+                    <CancelButton text="Back" onClickFunction={redirectToDashboard} />
                 </div>
             </form>
             <Dialogue 
@@ -91,7 +91,7 @@ const AddExStaffContent = () => {
                 message="New staff added successfully"
                 buttonText="Close"
             />
-        </>
+        </div>
     )
 }
 

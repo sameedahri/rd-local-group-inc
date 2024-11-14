@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import logo from "/public/assets/images/login/logo.png";
+import logo from "/public/assets/images/common/logo.png";
 import {useState, FormEvent} from "react";
 import { usePost } from "@/utils/usePost";
 

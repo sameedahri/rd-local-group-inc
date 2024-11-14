@@ -69,7 +69,33 @@
 /* Global Styles */
 
 .page {
-  @apply bg-primaryBg min-h-screen 2xl:px-32 lg:px-24 md:px-8 px-5 md:py-16 py-10;
+  @apply flex flex-col items-center bg-primaryBg w-[100%] min-h-[calc(100vh-95px)] 2xl:px-32 lg:px-24 md:px-8 px-5 md:py-16 py-10 mt-[95px];
+}
+
+.sidemenu-page {
+  @apply flex flex-col items-center bg-primaryBg w-[100%] min-h-[calc(100vh-95px)] lg:px-12 md:px-8 px-5 md:py-16 py-10 mt-[95px] lg:ml-[310px];
+}
+
+.content-wrapper {
+  @apply w-[100%] max-w-[1600px];
+}
+
+/* Srollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px; /* Width of the scrollbar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: #f0f0f0; /* Track color */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #EBC0B4; /* Thumb color */
+  border-radius: 4px; /* Rounded edges */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #EBC0B4; /* Thumb color on hover */
 }
 
 /* Carousel Styles */
@@ -127,5 +153,69 @@
   .custom-container {
     justify-content: unset;
   }
+}
+
+/* admin dashboard */
+
+/* datatable */
+
+/* admin list datatable */
+table.dataTable > thead > tr,
+table.dataTable > thead > tr > th
+{
+  height: 70px;
+  border-bottom: none;
+}
+
+table.dataTable thead th {
+  color: #262626;
+  font-size: 18px;
+}
+
+@media (max-width: 767px) {
+  table.dataTable thead th {
+    font-size: 16px;
+  }
+}
+
+.admin-list-columns {
+  @apply bg-[#fff] md:h-[80px] h-[60px] border-b border-b-[#D4D4D4];
+}
+
+.checkbox-column {
+  @apply md:w-[25px] w-[20px] md:h-[25px] h-[20px] bg-[#fff] md:ms-[20px] ms-[10px];
+}
+
+.name-column {
+  @apply text-[#262626] font-gilroyMedium md:text-[18px] text-[16px];
+}
+
+.email-number-columns {
+  @apply text-[#717171] font-gilroyMedium md:text-[16px] text-[14px];
+}
+
+.number-column {
+  @apply me-[20px]
+}	
+	
+/* Hide sorting icons for columns with the 'no-sort-icon' class */
+th.no-sort-icon .dt-column-order {
+  display: none;
+}
+
+/* bottom section showing entries, pagination etc */
+.dt-layout-row {
+  margin: 20px 0;
+}
+
+/* showing entries */
+.dt-info {
+  color: #7F7F7F !important;
+  @apply font-gilroyMedium md:text-[22px] text-[16px] ms-[30px] mt-[20px];
+}
+
+/* pagination */
+.dt-paging {
+  @apply me-[30px] mt-[20px];
 }
 

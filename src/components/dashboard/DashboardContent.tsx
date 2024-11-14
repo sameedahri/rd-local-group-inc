@@ -39,7 +39,7 @@ const DashboardContent = () => {
     }, [])
 
   return (
-    <>
+    <div className="content-wrapper">
         <div className="flex justify-between items-center">
             <PageHeading heading="Dashboard" mb="mb-0" />
             <button 
@@ -55,7 +55,7 @@ const DashboardContent = () => {
                 <DashboardCard key={id} cardId={id} type={type} submissionDate={submissionDate} isAccepted={isAccepted} />
             ))}
         </div>
-    </>
+    </div>
   )
 }
 

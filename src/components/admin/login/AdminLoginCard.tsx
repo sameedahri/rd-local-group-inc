@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import logo from "/public/assets/images/login/logo.png";
+import logo from "/public/assets/images/common/logo.png";
 import {useState, FormEvent} from "react";
 import {usePost} from "@/utils/usePost";
 
@@ -21,7 +21,7 @@ const AdminLoginCard = () => {
             username: username,
             password: password
         });
-        router.push("/admin/user");
+        router.push("/admin/user/admin-list");
     };
 
     const toggleType = (e: FormEvent<HTMLInputElement>) => {

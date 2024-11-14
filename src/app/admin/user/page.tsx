@@ -1,12 +1,9 @@
-import UserContent from "@/components/admin/user/UserContent"
 
 
 const page = () => {
-    return (
-        <main className="page">
-            <UserContent />
-        </main>
-    )
+  return (
+    <main></main>
+  )
 }
 
 export default page

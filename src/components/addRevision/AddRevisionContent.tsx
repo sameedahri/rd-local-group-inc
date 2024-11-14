@@ -55,7 +55,7 @@ const AddRevisionContent = () => {
     };
 
   return (
-    <>
+    <div className="content-wrapper">
         <PageHeading heading="Add Revisions" />
         <form 
             className="bg-white rounded-[16px] md:p-10 px-7 py-10"
@@ -70,7 +70,7 @@ const AddRevisionContent = () => {
             </div>
             <div className="flex md:gap-x-4 gap-x-2 mt-8">
                 <AddButton text="Submit" />
-                <CancelButton text="Cancel" onClick={redirectToCardDetails} />
+                <CancelButton text="Cancel" onClickFunction={redirectToCardDetails} />
             </div>
         </form>
         <Dialogue
@@ -82,7 +82,7 @@ const AddRevisionContent = () => {
             message="Proof revision submitted successfully"
             buttonText="Close"
         />
-    </>
+    </div>
   )
 }
 
