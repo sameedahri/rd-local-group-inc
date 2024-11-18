@@ -4,7 +4,7 @@ import PageSubHeading from "@/components/common/PageSubHeading";
 import AddButton from "@/components/common/AddButton";
 import SearchBar from "../SearchBar";
 import dynamic from "next/dynamic";
-const AdminListTable = dynamic(() => import('./AdminListTable'),{ssr: false});
+const AdminListTable = dynamic(() => import("./AdminListTable"), {ssr: false});
 import useShowMenuIcon from "@/utils/useShowMenuIcon";
 
 
@@ -12,7 +12,7 @@ const AdminListContent = () => {
    useShowMenuIcon();
    
     const data = [
-        {id: 1, name: 'John Doe', email: 'John@gmail.com', mobileNumber: '+1 2222 3333 44' },
+        {id: 1, name: 'John Doe Doe Doe Doe', email: 'JohnJohnJohn@gmail.com', mobileNumber: '+1 2222 3333 44' },
         {id: 2, name: 'John Doe', email: 'John@gmail.com', mobileNumber: '+1 2222 3333 44' },
         {id: 3,  name: 'Jane Smith', email: 'Smith@hotmail.com', mobileNumber: '+2 2222 3333 44' },
         {id: 4,  name: 'Jane Smith', email: 'Smith@hotmail.com', mobileNumber: '+2 2222 3333 44' },

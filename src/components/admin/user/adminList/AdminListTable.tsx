@@ -22,35 +22,20 @@ const AdminListTable:React.FC<AdminListTableProps> = ({data, columns}) => {
                 data: data,
                 columns: [
                     {
-                        title: '<input type="checkbox" id="select-all" class="checkbox-column" />',
+                        title: '<input type="checkbox" id="select-all" class="checkbox-column first-column" />',
                         data: null,
                         orderable: false,
                         className: "select-checkbox no-sort-icon",
-                        defaultContent: '<input type="checkbox" class="checkbox-column" />'
+                        defaultContent: '<input type="checkbox" class="checkbox-column first-column" />'
                     },
                     ...columns
                 ],
                 columnDefs: [
-                    {
-                        targets: "_all",
-                        className: "admin-list-columns"
-                    },
-                    {
-                        targets: 1,
-                        visible: false
-                    },
-                    {
-                        targets: 2,
-                        className: "name-column"
-                    },
-                    {
-                        targets: [3, 4],
-                        className: "email-number-columns"
-                    },
-                    {
-                        targets: [4],
-                        className: "number-column"
-                    }
+                    {targets: "_all", className: "all-columns"},
+                    {targets: 1, visible: false},
+                    {targets: 2, className: "prominent-column"},
+                    {targets: [3, 4], className: "sec-column"},
+                    {targets: [4], className: "last-column"}
                 ],
                 scrollX: true,
                 // scrollY: "400px",
@@ -80,8 +65,8 @@ const AdminListTable:React.FC<AdminListTableProps> = ({data, columns}) => {
     }, [data, columns])
 
     return (
-        <div className="bg-white mt-[20px] pb-[20px] rounded-[16px]">
-            <table ref={tableRef} className="w[100%] px-[50px] min-w-[600px]"></table>
+        <div className="datatable-wrapper">
+            <table ref={tableRef} className="datatable-classes" style={{minWidth: '600px'}}></table>
         </div>
     )
 }

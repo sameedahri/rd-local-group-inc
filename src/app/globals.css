@@ -155,15 +155,24 @@
   }
 }
 
+
 /* admin dashboard */
 
-/* datatable */
 
-/* admin list datatable */
+/* datatable */
+.dataTable-wrapper {
+  @apply bg-white mt-[20px] pb-[20px] rounded-[16px] overflow-auto;
+}
+
+.dataTable-classes {
+  @apply w-[100%];
+}
+
 table.dataTable > thead > tr,
 table.dataTable > thead > tr > th
 {
-  height: 70px;
+  /* height: 70px; */
+  background-color: #fff;
   border-bottom: none;
 }
 
@@ -175,29 +184,35 @@ table.dataTable thead th {
 @media (max-width: 767px) {
   table.dataTable thead th {
     font-size: 16px;
+  } 
+}
+
+/* left padding to table */
+table.dataTable > thead > tr > th:first-child,
+table.dataTable > tbody > tr > td:first-child
+{
+  padding-left: 30px;
+}
+table.dataTable > thead > tr > th:last-child .dt-column-order,
+table.dataTable > tbody > tr > td:last-child
+{
+  padding-right: 30px;
+}
+
+@media (max-width: 767px) {
+  table.dataTable > thead > tr > th:first-child,
+  table.dataTable > tbody > tr > td:first-child
+  {
+    padding-left: 15px;
+  }
+  table.dataTable > thead > tr > th:last-child .dt-column-order,
+  table.dataTable > tbody > tr > td:last-child
+  {
+    padding-right: 15px;
   }
 }
 
-.admin-list-columns {
-  @apply bg-[#fff] md:h-[80px] h-[60px] border-b border-b-[#D4D4D4];
-}
 
-.checkbox-column {
-  @apply md:w-[25px] w-[20px] md:h-[25px] h-[20px] bg-[#fff] md:ms-[20px] ms-[10px];
-}
-
-.name-column {
-  @apply text-[#262626] font-gilroyMedium md:text-[18px] text-[16px];
-}
-
-.email-number-columns {
-  @apply text-[#717171] font-gilroyMedium md:text-[16px] text-[14px];
-}
-
-.number-column {
-  @apply me-[20px]
-}	
-	
 /* Hide sorting icons for columns with the 'no-sort-icon' class */
 th.no-sort-icon .dt-column-order {
   display: none;
@@ -219,3 +234,25 @@ th.no-sort-icon .dt-column-order {
   @apply me-[30px] mt-[20px];
 }
 
+/* columns */
+.all-columns {
+  @apply bg-[#fff] md:h-[80px] h-[60px] border-b border-b-[#D4D4D4];
+}
+
+.prominent-column {
+  @apply text-[#262626] font-gilroyMedium md:text-[18px] text-[16px];
+}
+
+.sec-column {
+  @apply text-[#717171] font-gilroyMedium md:text-[16px] text-[14px];
+}
+
+/* admin list datatable */
+.checkbox-column {
+  @apply md:w-[25px] w-[20px] md:h-[25px] h-[20px] bg-[#fff];
+}
+
+/* restaurant owners datatable */
+.dt-column-order {
+  display: none;
+}

@@ -3,7 +3,7 @@ import RestaurantOwnersContent from "@/components/admin/user/restaurantOwners/Re
 
 const page = () => {
   return (
-    <div className="flex">
+    <div className="flex overflow-x-hidden">
         <main className="sidemenu-page">
             <RestaurantOwnersContent />
         </main>
