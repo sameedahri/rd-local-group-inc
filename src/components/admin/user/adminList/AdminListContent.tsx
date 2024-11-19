@@ -6,9 +6,11 @@ import SearchBar from "../SearchBar";
 import dynamic from "next/dynamic";
 const AdminListTable = dynamic(() => import("./AdminListTable"), {ssr: false});
 import useShowMenuIcon from "@/utils/useShowMenuIcon";
+import { useRouter } from "next/navigation";
 
 
 const AdminListContent = () => {
+   const router = useRouter();
    useShowMenuIcon();
    
     const data = [
@@ -55,7 +57,7 @@ const AdminListContent = () => {
                 <AddButton 
                     text="Add" 
                     isSubmit={false} 
-                    onClickFunction={() => {}}
+                    onClickFunction={() => router.push('/admin/add-user')}
                 />
             </div>
             <SearchBar />

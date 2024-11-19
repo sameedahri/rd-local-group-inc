@@ -1,4 +1,4 @@
-import AdminListContent from "@/components/admin/user/adminList/AdminListContent"
+import AdminListContent from "@/components/admin/user/adminList/AdminListContent";
 
 
 const page = () => {
