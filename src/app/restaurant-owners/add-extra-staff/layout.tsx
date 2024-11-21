@@ -1,12 +1,15 @@
+import type {Metadata} from "next";
 import Header from "@/components/common/Header";
-import Sidemenu from "@/components/admin/adminCommon/Sidemenu";
 
+
+export const metadata:Metadata = {
+    title: "Add Extra Staff"
+}
 
 const layout = ({children}: {children: React.ReactNode}) => {
     return (
         <>
-            <Header isAdmin={true} urlToLogin="" />
-            <Sidemenu />
+            <Header urlToLogin="/restaurant-owners/login" />
             {children}
         </>
     )

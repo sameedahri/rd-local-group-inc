@@ -6,10 +6,11 @@ import LogoutButton from "../dashboard/LogoutButton";
 
 
 interface HeaderProps {
+    urlToLogin: string,
     isAdmin?: boolean
 }
 
-const Header: React.FC<HeaderProps> = ({isAdmin=false}) => {
+const Header: React.FC<HeaderProps> = ({urlToLogin, isAdmin=false}) => {
     const toggleSideMenu = () => {
         document.querySelector('#sidemenu')?.classList.toggle('translate-x-[-100vw]');
     };
@@ -21,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({isAdmin=false}) => {
                 <Image src={logo} alt="Logo" width={55} height={52} />
             </div>
            <div className="flex justify-center gap-3">
-                <LogoutButton isAdmin={isAdmin} />
+                <LogoutButton urlToLogin={urlToLogin} isAdmin={isAdmin} />
                 <button 
                     type="button"
                     className="w-[46px] h-[46px] bg-[#AB877E] rounded-full text-darkBtn font-gilroySemibold text-[20px]"

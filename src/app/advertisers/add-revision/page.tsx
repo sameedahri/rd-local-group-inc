@@ -4,7 +4,7 @@ import AddRevisionContent from "@/components/addRevision/AddRevisionContent";
 const page = () => {
     return (
         <main className="page">
-            <AddRevisionContent />
+            <AddRevisionContent urlToDashboard="/advertisers/dashboard" />
         </main>
     )
 }

@@ -3,13 +3,14 @@ import Header from "@/components/common/Header";
 
 
 export const metadata:Metadata = {
-    title: "Dashboard"
-}
+    title: "Card Details"
+};
+
 
 const layout = ({children}: {children: React.ReactNode}) => {
     return (
         <>
-            <Header />
+            <Header urlToLogin="/advertisers/login" />
             {children}
         </>
     )

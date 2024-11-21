@@ -6,7 +6,7 @@ import { useLayoutEffect } from "react";
 export default function Home() {
   const router = useRouter();
   useLayoutEffect(() => {
-    router.push('/login');
+    router.push('/restaurant-owners/login');
   }, [router])
 
   return (

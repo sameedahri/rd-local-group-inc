@@ -10,13 +10,15 @@ import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
 import {RefObject, FormEvent, useState} from "react";
 import { usePost } from "@/utils/usePost";
 
-
+interface AddExStaffContentProps {
+    urlToDashboard: string
+}
 interface phoneNumberProps {
     countryCode: string,
     phoneNumber: string
 }
 
-const AddExStaffContent = () => {
+const AddExStaffContent:React.FC<AddExStaffContentProps> = ({urlToDashboard}) => {
     const router = useRouter();
     const {postData, data} = usePost("/posts");
 
@@ -39,7 +41,7 @@ const AddExStaffContent = () => {
     };
 
     const redirectToDashboard = () => {
-        router.push('/dashboard');
+        router.push(urlToDashboard);
     };
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {

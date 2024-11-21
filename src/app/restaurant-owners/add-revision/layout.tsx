@@ -3,13 +3,13 @@ import Header from "@/components/common/Header";
 
 
 export const metadata:Metadata = {
-    title: "Add Extra Staff"
+    title: "Add Revision"
 }
 
 const layout = ({children}: {children: React.ReactNode}) => {
     return (
-        <>
-            <Header />
+        <>  
+            <Header urlToLogin="/restaurant-owners/login" />
             {children}
         </>
     )

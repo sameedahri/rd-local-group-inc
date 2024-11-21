@@ -4,7 +4,7 @@ import AddExStaffContent from "@/components/addExtraStaff/AddExStaffContent"
 const page = () => {
     return (
         <main className="page">
-            <AddExStaffContent />
+            <AddExStaffContent urlToDashboard="/advertisers/dashboard" />
         </main>
     )
 }

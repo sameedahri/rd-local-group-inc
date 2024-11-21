@@ -12,7 +12,12 @@ import RequiredMessage from "./RequiredMessage";
 import { useFetch } from "@/utils/useFetch";
 
 
-const ProofVerificationCard = () => {
+interface ProofVerificationCardProps {
+    urlToAddRevision: string,
+    urlToDashboard: string
+}
+
+const ProofVerificationCard:React.FC<ProofVerificationCardProps> = ({urlToAddRevision, urlToDashboard}) => {
     const router = useRouter();
 
     const {data: attachmentsData} = useFetch("/users");
@@ -71,7 +76,7 @@ const ProofVerificationCard = () => {
     };
     const closeSubmitModal = () => {
         submitDialogueRef?.close();
-        router.push('/addRevision');
+        router.push(urlToAddRevision);
     };
 
     // tailwind classes
@@ -148,6 +153,7 @@ const ProofVerificationCard = () => {
                 </div>  
         </div>
         <AgreeDialogue 
+            urlToDashboard={urlToDashboard}
             setDialogueRef={setAgreeDialogueRef}
             closeDialogue={closeAgreeModal}
             agreeDialogue={() => {}}

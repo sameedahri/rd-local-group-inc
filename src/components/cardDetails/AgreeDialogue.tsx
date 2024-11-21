@@ -7,6 +7,7 @@ import {useRouter} from "next/navigation";
 
 
 interface AgreeDialogueProps {
+    urlToDashboard: string,
     setDialogueRef: (ref: RefObject<HTMLDialogElement>) => void,
     closeDialogue: () => void,
     agreeDialogue: () => void,
@@ -18,7 +19,7 @@ interface AgreeDialogueProps {
     agreeButtonText: string,
 }
 
-const AgreeDialogue: React.FC<AgreeDialogueProps> = ({setDialogueRef, closeDialogue, icon, iconAlt, title, message, cancelButtonText, agreeButtonText}) => {
+const AgreeDialogue: React.FC<AgreeDialogueProps> = ({urlToDashboard, setDialogueRef, closeDialogue, icon, iconAlt, title, message, cancelButtonText, agreeButtonText}) => {
     const router = useRouter();
     const dialogueRef = useRef<HTMLDialogElement>(null);
 
@@ -36,7 +37,7 @@ const AgreeDialogue: React.FC<AgreeDialogueProps> = ({setDialogueRef, closeDialo
         thanksDialogueRef?.showModal();
     };
     const closeThanksModal = () => {
-        router.push('/dashboard');
+        router.push(urlToDashboard);
         thanksDialogueRef?.close();
     }
 

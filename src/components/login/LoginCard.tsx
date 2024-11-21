@@ -6,7 +6,11 @@ import {useState, FormEvent} from "react";
 import { usePost } from "@/utils/usePost";
 
 
-const LoginCard = () => {
+interface LoginCardProps {
+    urlToDashboard: string
+}
+
+const LoginCard:React.FC<LoginCardProps> = ({urlToDashboard}) => {
     const [phoneNumber, setPhoneNumber] = useState<string>("");
 
     const {postData, data} = usePost("/posts");
@@ -18,7 +22,7 @@ const LoginCard = () => {
         postData({
             phoneNumber: phoneNumber
         });
-        router.push("/dashboard");
+        router.push(urlToDashboard);
     };
 
     return(

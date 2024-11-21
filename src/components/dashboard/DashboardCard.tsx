@@ -7,17 +7,18 @@ import {useRouter} from "next/navigation";
 
 
 interface DashboardCardProps {
+    urlToCardDetails: string,
     cardId: number,
     type: string,
     submissionDate: string,
     isAccepted: boolean
 }
 
-const DashboardCard: React.FC<DashboardCardProps> = ({cardId, type, submissionDate, isAccepted}) => {
+const DashboardCard: React.FC<DashboardCardProps> = ({urlToCardDetails, cardId, type, submissionDate, isAccepted}) => {
     const router = useRouter();
 
     const redirectToCardDetails = () => {
-        router.push('/cardDetails/'+cardId);
+        router.push(urlToCardDetails + "/" + cardId);
     };
 
   return (

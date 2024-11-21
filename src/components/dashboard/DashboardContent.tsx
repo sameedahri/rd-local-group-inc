@@ -6,6 +6,10 @@ import PageHeading from "../common/PageHeading";
 import {useFetch} from "@/utils/useFetch";
 
 
+interface DashboardContentProps {
+    urlToAddExtraStaff: string,
+    urlToCardDetails: string
+}
 interface CardData {
     id: number,
     type: string,
@@ -13,7 +17,7 @@ interface CardData {
     isAccepted: boolean
 }
 
-const DashboardContent = () => {
+const DashboardContent: React.FC<DashboardContentProps> = ({urlToAddExtraStaff, urlToCardDetails}) => {
     const router = useRouter();
 
     const {data} = useFetch("/posts");
@@ -46,13 +50,13 @@ const DashboardContent = () => {
                 type="button" 
                 className="w-[115px] md:w-[178px] h-[38px] md:h-[59px] bg-[#3E3D3D] hover:bg-white rounded-[10px] border-2 border-[#3E3D3D]
                     text-darkBtn hover:text-black font-gilroySemibold text-[13px] md:text-[20px] transition"
-                onClick={() => router.push("/addExtraStaff")}
+                onClick={() => router.push(urlToAddExtraStaff)}
             >Add Extra Staff
             </button>
         </div>
         <div className="grid sm:gap-6 gap-4 sm:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 mt-8">
             {cardsArr && cardsArr.map(({id, type, submissionDate, isAccepted}) => (
-                <DashboardCard key={id} cardId={id} type={type} submissionDate={submissionDate} isAccepted={isAccepted} />
+                <DashboardCard key={id} urlToCardDetails={urlToCardDetails} cardId={id} type={type} submissionDate={submissionDate} isAccepted={isAccepted} />
             ))}
         </div>
     </div>

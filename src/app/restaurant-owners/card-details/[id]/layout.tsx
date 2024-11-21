@@ -3,13 +3,14 @@ import Header from "@/components/common/Header";
 
 
 export const metadata:Metadata = {
-    title: "Add Revision"
-}
+    title: "Card Details"
+};
+
 
 const layout = ({children}: {children: React.ReactNode}) => {
     return (
-        <>  
-            <Header />
+        <>
+            <Header urlToLogin="/restaurant-owners/login" />
             {children}
         </>
     )

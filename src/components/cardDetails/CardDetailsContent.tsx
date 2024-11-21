@@ -6,7 +6,12 @@ import ProofSection from "./ProofSection";
 import PageSubHeading from "../common/PageSubHeading";
 
 
-const CardDetailsContent = () => {
+interface CardDetailsContentProps {
+  urlToAddRevision: string,
+  urlToDashboard: string
+}
+
+const CardDetailsContent:React.FC<CardDetailsContentProps> = ({urlToAddRevision, urlToDashboard}) => {
     // const {id} = useParams();
 
   return (
@@ -15,7 +20,7 @@ const CardDetailsContent = () => {
         <PageSubHeading subheading="View and select your option" />
         <div className="flex flex-col items-center">
             <DisclaimerSection />
-            <ProofSection />
+            <ProofSection urlToAddRevision={urlToAddRevision} urlToDashboard={urlToDashboard} />
         </div>
     </div>
   )

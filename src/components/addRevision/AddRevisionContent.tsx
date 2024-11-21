@@ -11,7 +11,11 @@ import {useRouter} from "next/navigation";
 import { usePost } from "@/utils/usePost";
 
 
-const AddRevisionContent = () => {
+interface AddRevisionContentProps {
+    urlToDashboard: string
+}
+
+const AddRevisionContent:React.FC<AddRevisionContentProps> = ({urlToDashboard}) => {
     const router = useRouter();
     const {postData, data} = usePost("/posts");
 
@@ -29,7 +33,7 @@ const AddRevisionContent = () => {
     const closeModal = () => {
         resetForm();
         dialogueRef?.close();
-        router.push('/dashboard');
+        router.push(urlToDashboard);
     };
 
     const redirectToCardDetails = () => {
