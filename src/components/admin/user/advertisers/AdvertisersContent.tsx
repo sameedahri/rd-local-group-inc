@@ -6,9 +6,12 @@ import useShowMenuIcon from "@/utils/useShowMenuIcon";
 import dynamic from "next/dynamic";
 const RestaurantOwnersTable = dynamic(() => import("../restaurantOwners/RestaurantOwnersTable"), {ssr: false});
 import eyeIcon from "/public/assets/images/admin/user/eye-icon.svg";
+import { useRouter } from "next/navigation";
 
 
 const AdvertisersContent = () => {
+    const router = useRouter();
+
     useShowMenuIcon();
 
     const data = [
@@ -58,7 +61,7 @@ const AdvertisersContent = () => {
                     buttonWidth="md:w-[178px] w-[140px]" 
                     buttonHeight="md:h-[59px] h-[38px]"
                     fontSize="md:text-[20px] text-[13px]"
-                    onClickFunction={() => {}}
+                    onClickFunction={() => router.push("/admin/add-advertiser")}
                 />
             </div>
             <SearchBar />

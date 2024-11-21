@@ -8,11 +8,12 @@ interface LabelInputProps {
     stateValue: string,
     setState: Dispatch<SetStateAction<string>>
     required?: boolean,
+    bottomMessage?: string | null
 }
 
-const LabelInput: React.FC<LabelInputProps> = ({label, inputType, inputId, stateValue, setState, required=true}) => {
+const LabelInput: React.FC<LabelInputProps> = ({label, inputType, inputId, stateValue, setState, required=true, bottomMessage=null}) => {
   return (
-    <div className="grid gap-y-1">
+    <div className="grid gap-y-1 relative">
         <label htmlFor={inputId} className="text-label font-gilroySemibold text-[16px]">{label}</label>
         <input 
             type={inputType} 
@@ -28,6 +29,7 @@ const LabelInput: React.FC<LabelInputProps> = ({label, inputType, inputId, state
                 }
             }}
         />
+        {bottomMessage !== null && <p className="absolute bottom-[-25px] left-0 text-[#262626] font-gilroyMedium text-[14px]">{bottomMessage}</p>}
     </div>
   )
 }

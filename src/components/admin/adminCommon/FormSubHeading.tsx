@@ -7,7 +7,7 @@ interface FormSubHeadingProps {
 
 const FormSubHeading:React.FC<FormSubHeadingProps> = ({heading}) => {
   return (
-    <legend className="text-black font-gilroySemibold text-[20px] capitalize mb-5">{heading}</legend>
+    <legend className="text-black font-gilroySemibold text-[20px] capitalize md:mb-5 mb-4">{heading}</legend>
   )
 }
 

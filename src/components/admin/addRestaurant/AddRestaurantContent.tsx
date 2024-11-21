@@ -32,7 +32,6 @@ const AddRestaurantContent = () => {
     const [email, setEmail] = useState<string>("");
     const [ownerContactNumber, setOwnerContactNumber] = useState<phoneNumberProps>({countryCode: "+1", phoneNumber: ""});
 
-
     let dialogueRef: HTMLDialogElement | null;
     const setDialogueRef = (ref: RefObject<HTMLDialogElement>) => {
         dialogueRef = ref.current;
