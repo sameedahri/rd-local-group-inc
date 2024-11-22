@@ -4,6 +4,7 @@ import DashboardCard from "./DashboardCard";
 import {useState, useLayoutEffect} from "react";
 import PageHeading from "../common/PageHeading";
 import {useFetch} from "@/utils/useFetch";
+import AddButton from "../common/AddButton";
 
 
 interface DashboardContentProps {
@@ -46,13 +47,14 @@ const DashboardContent: React.FC<DashboardContentProps> = ({urlToAddExtraStaff, 
     <div className="content-wrapper">
         <div className="flex justify-between items-center">
             <PageHeading heading="Dashboard" mb="mb-0" />
-            <button 
-                type="button" 
-                className="w-[115px] md:w-[178px] h-[38px] md:h-[59px] bg-[#3E3D3D] hover:bg-white rounded-[10px] border-2 border-[#3E3D3D]
-                    text-darkBtn hover:text-black font-gilroySemibold text-[13px] md:text-[20px] transition"
-                onClick={() => router.push(urlToAddExtraStaff)}
-            >Add Extra Staff
-            </button>
+            <AddButton 
+                text="Add Extra Staff" 
+                isSubmit={false} 
+                buttonWidth="w-[115px] md:w-[178px]" 
+                buttonHeight="h-[38px] md:h-[59px]" 
+                fontSize="md:text-[20px] text-[13px]"
+                onClickFunction={() => router.push(urlToAddExtraStaff)}
+            />
         </div>
         <div className="grid sm:gap-6 gap-4 sm:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 mt-8">
             {cardsArr && cardsArr.map(({id, type, submissionDate, isAccepted}) => (

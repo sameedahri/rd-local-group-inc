@@ -3,7 +3,8 @@
 import PageHeading from "../common/PageHeading";
 import DisclaimerSection from "./DisclaimerSection";
 import ProofSection from "./ProofSection";
-import PageSubHeading from "../common/PageSubHeading";
+import AddButton from "../common/AddButton";
+import {useRouter} from "next/navigation";
 
 
 interface CardDetailsContentProps {
@@ -12,13 +13,23 @@ interface CardDetailsContentProps {
 }
 
 const CardDetailsContent:React.FC<CardDetailsContentProps> = ({urlToAddRevision, urlToDashboard}) => {
+    const router = useRouter();
     // const {id} = useParams();
 
   return (
     <div className="content-wrapper">
-        <PageHeading heading="Card Details" mb="mb-0" />
-        <PageSubHeading subheading="View and select your option" />
-        <div className="flex flex-col items-center">
+        <div className="flex justify-between items-center">
+            <PageHeading heading="Proof Details" mb="mb-0" />
+            <AddButton 
+                text="Dashboard" 
+                isSubmit={false} 
+                buttonWidth="w-[115px] md:w-[178px]" 
+                buttonHeight="h-[38px] md:h-[59px]" 
+                fontSize="md:text-[20px] text-[13px]"
+                onClickFunction={() => router.push(urlToDashboard)}
+            />
+        </div>
+        <div className="flex flex-col items-center mt-8">
             <DisclaimerSection />
             <ProofSection urlToAddRevision={urlToAddRevision} urlToDashboard={urlToDashboard} />
         </div>
