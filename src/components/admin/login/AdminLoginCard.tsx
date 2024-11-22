@@ -28,7 +28,8 @@ const AdminLoginCard = () => {
         const target = e.target as HTMLInputElement;
         if (target.value.length === 1 && (target.value === '+' || !isNaN(Number(target.value)))) {
             setType('text');
-            target.pattern = '[+]{1}[0-9]{1,2} [0-9]{4} [0-9]{4} [0-9]{2}';
+            // target.pattern = '[+]{1}[0-9]{1,2} [0-9]{4} [0-9]{4} [0-9]{2}';
+            target.pattern = '[+]{1}[0-9]{1,2} [0-9]{10}';
             const temp = target.value;
             target.value = '';
             setUsername(temp);
@@ -60,7 +61,8 @@ const AdminLoginCard = () => {
                     onChange={(e) => {
                         toggleType(e);
                     }}
-                    placeholder="Enter email/Phone number (+1 1234 5678 90)"
+                    // placeholder="Enter email/Phone number (+1 1234 5678 90)"
+                    placeholder="Enter email/Phone number (+1 1234567890)"
                     autoComplete="off"
                 />
             </div>

@@ -44,8 +44,10 @@ const LoginCard:React.FC<LoginCardProps> = ({urlToDashboard}) => {
                         const target = e.target as HTMLInputElement;
                         setPhoneNumber(target.value);
                     }}
-                    placeholder="+1 1234 5678 90"
-                    pattern="[+]{1}[0-9]{1,2} [0-9]{4} [0-9]{4} [0-9]{2}"
+                    // placeholder="+1 1234 5678 90"
+                    placeholder="+1 1234567890"
+                    // pattern="[+]{1}[0-9]{1,2} [0-9]{4} [0-9]{4} [0-9]{2}"
+                    pattern='[+]{1}[0-9]{1,2} [0-9]{10}'
                     autoComplete="off"
                 />
             </div>
