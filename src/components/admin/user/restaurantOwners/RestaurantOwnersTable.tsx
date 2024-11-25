@@ -5,6 +5,7 @@ import 'datatables.net-responsive-dt/css/responsive.dataTables.css';
 import "datatables.net";
 import 'datatables.net-responsive';
 import {useRef, useEffect} from "react";
+import {useRouter} from "next/navigation";
 
 
 interface RestaurantOwnersTableProps {
@@ -14,6 +15,8 @@ interface RestaurantOwnersTableProps {
 }
 
 const RestaurantOwnersTable: React.FC<RestaurantOwnersTableProps> = ({data, columns}) => {
+    const router = useRouter();
+
     const tableRef = useRef<HTMLTableElement>(null);
 
     useEffect(() => {
@@ -32,7 +35,7 @@ const RestaurantOwnersTable: React.FC<RestaurantOwnersTableProps> = ({data, colu
                         orderable: false,
                         searchable: false,
                         render: () => {
-                            return '<button class="w-[100px] h-[45px] rounded-[22px] border border-[#EBC0B4] bg-[rgba(235,192,180,0.21)] text-[#AB877E] font-gilroyRegular text-[12px]">Upload Proof</button>'
+                            return `<button class="proof-btn w-[100px] h-[45px] rounded-[22px] border border-[#EBC0B4] bg-[rgba(235,192,180,0.21)] text-[#AB877E] font-gilroyRegular text-[12px]">Upload Proof</button>`
                         }
                     },
                 ],
@@ -48,6 +51,14 @@ const RestaurantOwnersTable: React.FC<RestaurantOwnersTableProps> = ({data, colu
             }
         }
     }, [data, columns])
+
+    useEffect(() => {
+        document.querySelectorAll('.proof-btn')?.forEach(btn => {
+            btn.addEventListener('click', function() {
+                router.push('/admin/submit-proof');
+            })
+        });
+    }, [router])
 
     return ( 
         <div className="dataTable-wrapper">
