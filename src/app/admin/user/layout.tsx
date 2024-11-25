@@ -5,7 +5,7 @@ import Sidemenu from "@/components/admin/adminCommon/Sidemenu";
 const layout = ({children}: {children: React.ReactNode}) => {
     return (
         <>
-            <Header isAdmin={true} urlToLogin="" />
+            <Header urlToLogin="" isAdmin={true} />
             <Sidemenu />
             {children}
         </>
