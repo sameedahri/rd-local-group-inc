@@ -65,7 +65,7 @@ const RestaurantInfo = () => {
             <h3 className="text-[#262626] font-gilroySemibold md:text-[22px] text-[20px] mb-[28px]">Associated Users</h3>
             <ul className="flex flex-col md:gap-y-[28px] gap-y-[20px]">
                 {usersData && usersData.map((user) => (
-                    <User initial={user.name[0]} userId={user.id} name={user.name} email={user.email} key={user.id} />
+                    <User initial={user.name[0]} name={user.name} email={user.email} key={user.id} />
                 ))}
             </ul>
         </div>

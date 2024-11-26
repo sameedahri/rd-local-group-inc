@@ -2,14 +2,13 @@
 
 
 interface UserProps {
-    userId: number,
     initial: string,
     name: string,
     email: string
 }
 
-const User:React.FC<UserProps> = ({userId, initial, name, email}) => {
-  console.log(userId)
+const User:React.FC<UserProps> = ({initial, name, email}) => {
+ 
   return (
     <li className="flex items-center gap-x-[15px]">
         <div className="flex justify-center items-center w-[65px] h-[65px] rounded-full bg-[#F3DCD6]">
