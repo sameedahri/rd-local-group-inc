@@ -9,18 +9,17 @@ import {useRouter} from "next/navigation";
 
 interface ProofCardProps {
     urlToProofDetails: string,
-    cardId: number,
     title: string,
     description: string,
     submissionDate: string,
     isAccepted: boolean
 }
 
-const ProofCard:React.FC<ProofCardProps> = ({urlToProofDetails, cardId, title, description, submissionDate, isAccepted}) => {
+const ProofCard:React.FC<ProofCardProps> = ({urlToProofDetails, title, description, submissionDate, isAccepted}) => {
     const router = useRouter();
 
     const redirectToProofDetails = () => {
-        router.push(urlToProofDetails + "/" + cardId);
+        router.push(urlToProofDetails);
     };
 
   return (

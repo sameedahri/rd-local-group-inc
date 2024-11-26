@@ -29,8 +29,7 @@ const SubmittedProofs = () => {
         <div className="grid xl:gap-5 gap-3 xl:grid-cols-2 grid-cols-1 md:mt-8 mt-4">
             {restaurantsData && restaurantsData.map((restaurant) => (
                 <ProofCard 
-                    urlToProofDetails=""
-                    cardId={restaurant.id}
+                    urlToProofDetails={`/admin/proof-detail/${restaurant.id}`}
                     title={restaurant.title}
                     description={restaurant.description}
                     submissionDate={restaurant.submissionDate}
