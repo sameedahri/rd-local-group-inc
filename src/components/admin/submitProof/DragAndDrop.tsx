@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import Image from 'next/image';
 import cloudIcon from "/public/assets/images/admin/submitProof/cloud-icon.svg";
+import ValidationMessage from '@/components/common/ValidationMessage';
 
 interface DragAndDropProps {
     onDrop: (files: File[]) => void,
@@ -23,7 +24,7 @@ const DragAndDrop:React.FC<DragAndDropProps> = ({onDrop, label, inputId}) => {
     });
 
     return (
-        <div  className="grid gap-y-2">
+        <div  className="grid gap-y-2 relative">
             <label htmlFor={inputId} className="text-label font-gilroySemibold text-[16px]">{label}</label>
             {/* Drag and Drop */}
             <div
@@ -50,6 +51,8 @@ const DragAndDrop:React.FC<DragAndDropProps> = ({onDrop, label, inputId}) => {
                     </div>
                 )}
             </div>
+           <ValidationMessage id={"maxSize"} message="File size must be not be greater than 1 mb*" />
+           <ValidationMessage id={"maxLimit"} message="Maximum limit to upload files is 20*" />
         </div>
     )
 }

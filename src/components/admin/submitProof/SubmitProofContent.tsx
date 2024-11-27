@@ -4,7 +4,7 @@ import PageSubHeading from "@/components/common/PageSubHeading";
 import LabelInput from "@/components/common/LabelInput";
 import AddButton from "@/components/common/AddButton";
 import CancelButton from "@/components/common/CancelButton";
-import {RefObject, FormEvent, useState, MouseEvent} from "react";
+import {RefObject, FormEvent, useState, MouseEvent, useRef} from "react";
 import {useRouter} from "next/navigation";
 import { usePost } from "@/utils/usePost";
 import Dialogue from "@/components/common/Dialogue";
@@ -12,6 +12,7 @@ import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
 import DragAndDrop from "./DragAndDrop";
 import deleteIcon from "/public/assets/images/admin/submitProof/delete-icon.svg";
 import Image from 'next/image';
+import {validationMessage} from "@/utils/utilFunctions";
 
 
 const SubmitProofContent = () => {
@@ -67,12 +68,13 @@ const SubmitProofContent = () => {
     };
 
     const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
+    const maxSizeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const maxLimitTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const handleImageDrop = (files: File[]) => {
-        // const newImages = files.map((file) => URL.createObjectURL(file)); // Preview URLs
-        // setUploadedImages((prev) => [...prev, ...newImages]);
-
-        if(uploadedFiles.length >= 20) {
-            alert("Maximum limit to upload files reached");
+        // hide previous message if file is valid
+        validationMessage('#maxLimit', maxLimitTimeoutRef, true);
+        if(uploadedFiles.length >= 20 || files.length >= 21) {
+            validationMessage('#maxLimit', maxLimitTimeoutRef, false);
             return;
         }
 
@@ -82,9 +84,8 @@ const SubmitProofContent = () => {
         setUploadedFiles((prev) => [...prev, ...newFiles]);
 
         const invalidFiles = files.filter(file => file.size > MAX_FILE_SIZE);
-        if(invalidFiles.length > 0) {
-            alert("File size must be not be greater than 1 mb");
-        }
+        validationMessage('#maxSize', maxSizeTimeoutRef, true);
+        if(invalidFiles.length > 0) validationMessage('#maxSize', maxSizeTimeoutRef, false);
     };
     const removeImage = (e: MouseEvent<HTMLImageElement>) => {
         const target = e.target as HTMLImageElement;

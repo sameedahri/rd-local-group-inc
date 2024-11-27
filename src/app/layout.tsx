@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const gilroyMedium = localFont({
@@ -39,6 +41,7 @@ export default function RootLayout({
       <body
         className={`${gilroySemibold.variable} ${gilroyMedium.variable} ${gilroyBold.variable} ${inikaRegular.variable} antialiased`}
       >
+        <ToastContainer hideProgressBar={true} />
         {children}
       </body>
     </html>
