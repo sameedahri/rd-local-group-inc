@@ -6,13 +6,14 @@ import AttachmentsCarousel from "./AttachmentsCarousel";
 
 interface ProofSectionProps {
     urlToAddRevision: string,
-    urlToDashboard: string
+    urlToDashboard: string,
+    getAttachmentsDataUrl: string
 }
 
-const ProofSection:React.FC<ProofSectionProps> = ({urlToAddRevision, urlToDashboard}) => {
+const ProofSection:React.FC<ProofSectionProps> = ({urlToAddRevision, urlToDashboard, getAttachmentsDataUrl}) => {
     return (
         <section className="w-[100%] bg-white rounded-t-[2px] rounded-b-[10px] shadow-dashboardCard -mt-12 sm:p-[25px] sm:pr-[13px] p-[16px]">
-            <AttachmentsCarousel />
+            <AttachmentsCarousel getAttachmentsDataUrl={getAttachmentsDataUrl} />
             <div className="grid xl:grid-cols-2 gap-3 mt-4">
                 <ProofTitleCard />
                 <ProofVerificationCard urlToAddRevision={urlToAddRevision} urlToDashboard={urlToDashboard} />

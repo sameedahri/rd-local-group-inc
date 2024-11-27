@@ -21,7 +21,12 @@ const responsive = {
     }
 };
 
-const AttachmentsCarousel = () => {
+interface AttachmentsCarouselProps {
+    getAttachmentsDataUrl: string
+}
+
+const AttachmentsCarousel:React.FC<AttachmentsCarouselProps> = ({getAttachmentsDataUrl}) => {
+    console.log(getAttachmentsDataUrl)
     // lessThan5 will be replaced by attachments data length
     const lessThan5 = false;
 

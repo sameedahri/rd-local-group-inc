@@ -4,7 +4,11 @@ import DashboardContent from "@/components/dashboard/DashboardContent";
 const page = () => {
   return (
     <main className="page">
-        <DashboardContent urlToAddExtraStaff="/advertisers/add-extra-staff" urlToCardDetails="/advertisers/card-details" />
+        <DashboardContent 
+          urlToAddExtraStaff="/advertisers/add-extra-staff" 
+          urlToCardDetails="/advertisers/card-details"
+          getProofsDataUrl="/posts"
+        />
     </main>
   )
 }

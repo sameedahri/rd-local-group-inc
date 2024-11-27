@@ -7,13 +7,14 @@ import { usePost } from "@/utils/usePost";
 
 
 interface LoginCardProps {
-    urlToDashboard: string
+    urlToDashboard: string,
+    postLoginDataUrl: string
 }
 
-const LoginCard:React.FC<LoginCardProps> = ({urlToDashboard}) => {
+const LoginCard:React.FC<LoginCardProps> = ({urlToDashboard, postLoginDataUrl}) => {
     const [phoneNumber, setPhoneNumber] = useState<string>("");
 
-    const {postData, data} = usePost("/posts");
+    const {postData, data} = usePost(postLoginDataUrl);
     console.log(data);
 
     const router = useRouter();

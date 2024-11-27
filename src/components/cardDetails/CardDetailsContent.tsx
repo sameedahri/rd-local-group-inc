@@ -9,10 +9,11 @@ import {useRouter} from "next/navigation";
 
 interface CardDetailsContentProps {
   urlToAddRevision: string,
-  urlToDashboard: string
+  urlToDashboard: string,
+  getAttachmentsDataUrl: string
 }
 
-const CardDetailsContent:React.FC<CardDetailsContentProps> = ({urlToAddRevision, urlToDashboard}) => {
+const CardDetailsContent:React.FC<CardDetailsContentProps> = ({urlToAddRevision, urlToDashboard, getAttachmentsDataUrl}) => {
     const router = useRouter();
     // const {id} = useParams();
 
@@ -31,7 +32,11 @@ const CardDetailsContent:React.FC<CardDetailsContentProps> = ({urlToAddRevision,
         </div>
         <div className="flex flex-col items-center mt-8">
             <DisclaimerSection />
-            <ProofSection urlToAddRevision={urlToAddRevision} urlToDashboard={urlToDashboard} />
+            <ProofSection 
+              urlToAddRevision={urlToAddRevision} 
+              urlToDashboard={urlToDashboard} 
+              getAttachmentsDataUrl={getAttachmentsDataUrl}
+            />
         </div>
     </div>
   )

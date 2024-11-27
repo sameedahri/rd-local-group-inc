@@ -9,7 +9,8 @@ import AddButton from "../common/AddButton";
 
 interface DashboardContentProps {
     urlToAddExtraStaff: string,
-    urlToCardDetails: string
+    urlToCardDetails: string,
+    getProofsDataUrl: string
 }
 interface CardData {
     id: number,
@@ -18,10 +19,10 @@ interface CardData {
     isAccepted: boolean
 }
 
-const DashboardContent: React.FC<DashboardContentProps> = ({urlToAddExtraStaff, urlToCardDetails}) => {
+const DashboardContent: React.FC<DashboardContentProps> = ({urlToAddExtraStaff, urlToCardDetails, getProofsDataUrl}) => {
     const router = useRouter();
 
-    const {data} = useFetch("/posts");
+    const {data} = useFetch(getProofsDataUrl);
     console.log(data);
 
     // dummy data
