@@ -93,6 +93,13 @@ const SubmitProofContent = () => {
         setUploadedFiles(prevValue => prevValue.filter((_, i) => String(i) !== id));
     };
 
+    const imageNotShown = (e: MouseEvent<HTMLImageElement>) => {
+        const target = e.target as HTMLImageElement;
+        const embedElement = target?.nextSibling as HTMLEmbedElement;
+        target.classList.add('hidden');
+        embedElement.classList.remove('hidden');
+    };
+
   return (
     <div className="content-wrapper">
         <div>
@@ -134,7 +141,15 @@ const SubmitProofContent = () => {
                                 width={100}
                                 height={100}
                                 className="md:w-[100px] w-[58px] md:h-[100px] h-[58px] object-cover rounded-[10px] border border-[#F3EEED]"
+                                onError={imageNotShown}
                             />
+                            <embed 
+                                src={src} 
+                                type="application/pdf" 
+                                width={100} 
+                                height={100} 
+                                className="hidden"
+                            ></embed>
                         </div>
                     ))}
                 </div>
