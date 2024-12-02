@@ -14,7 +14,7 @@ interface PhoneInputProps {
     required?: boolean
 }
 
-const PhoneInput: React.FC<PhoneInputProps> = ({label, inputId, stateValue, setState, required=false, }) => {
+const PhoneInput: React.FC<PhoneInputProps> = ({label, inputId, stateValue, setState, required=false }) => {
   return (
     <div className="grid gap-y-1">
         <label htmlFor={inputId} className="text-label font-gilroySemibold text-[16px]">{label}</label>

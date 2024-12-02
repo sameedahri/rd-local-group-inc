@@ -3,19 +3,14 @@ import PageHeading from "@/components/common/PageHeading";
 import PageSubHeading from "@/components/common/PageSubHeading";
 import {RefObject, FormEvent, useState} from "react";
 import LabelInput from "@/components/common/LabelInput";
-import PhoneInput from "@/components/addExtraStaff/PhoneInput";
 import AddButton from "@/components/common/AddButton";
 import CancelButton from "@/components/common/CancelButton";
 import {useRouter} from "next/navigation";
 import { usePost } from "@/utils/usePost";
 import Dialogue from "@/components/common/Dialogue";
 import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
+import PhoneMask from "@/components/common/PhoneMask";
 
-
-interface phoneNumberProps {
-    countryCode: string,
-    phoneNumber: string
-}
 
 const AddUserContent = () => {
     const router = useRouter();
@@ -24,7 +19,8 @@ const AddUserContent = () => {
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
-    const [phoneNumber, setPhoneNumber] = useState<phoneNumberProps>({countryCode: "+1", phoneNumber: ""});
+    const [countryCode, setCountryCode] = useState<string>("+1");
+    const [phoneNumber, setPhoneNumber] = useState<string>("");
 
     let dialogueRef: HTMLDialogElement | null;
     const setDialogueRef = (ref: RefObject<HTMLDialogElement>) => {
@@ -49,7 +45,7 @@ const AddUserContent = () => {
             firstName: firstName,
             lastName: lastName,
             email: email,
-            phoneNumber: phoneNumber.countryCode + " " + phoneNumber.phoneNumber
+            phoneNumber: countryCode + " " + phoneNumber
         };
         postData(userData);
         showModal();
@@ -60,7 +56,8 @@ const AddUserContent = () => {
         setFirstName("");
         setLastName("");
         setEmail("");
-        setPhoneNumber({countryCode: "+1", phoneNumber: ""});
+        setCountryCode("+1");
+        setPhoneNumber("");
     };
 
     return (
@@ -79,7 +76,13 @@ const AddUserContent = () => {
                 </div>
                 <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
                     <LabelInput label="Email*" inputType="email" inputId="email" stateValue={email} setState={setEmail} />
-                    <PhoneInput label="Phone number" inputId="phoneNumber" stateValue={phoneNumber} setState={setPhoneNumber} />
+                    <PhoneMask 
+                        label="Phone number" 
+                        inputId="phoneNumber" 
+                        setPhoneNumber={setPhoneNumber} 
+                        setCountryCode={setCountryCode} 
+                        countryCode={countryCode} 
+                    />
                 </div>
                 <div className="flex md:gap-x-4 gap-x-2 mt-8">
                     <AddButton text="Add" />
