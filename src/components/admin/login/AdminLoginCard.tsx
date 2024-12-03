@@ -4,6 +4,7 @@ import Image from "next/image";
 import logo from "/public/assets/images/common/logo.png";
 import {useState, FormEvent} from "react";
 import {usePost} from "@/utils/usePost";
+import {ADMIN_USER_ADMINLIST} from "@/utils/pages-routes";
 
 
 const AdminLoginCard = () => {
@@ -20,7 +21,7 @@ const AdminLoginCard = () => {
             username: username,
             password: password
         });
-        router.push("/admin/user/admin-list");
+        router.push(ADMIN_USER_ADMINLIST);
     };
 
     return (

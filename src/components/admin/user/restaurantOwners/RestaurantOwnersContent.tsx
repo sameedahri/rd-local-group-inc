@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 const RestaurantOwnersTable = dynamic(() => import("./RestaurantOwnersTable"), {ssr: false});
 import eyeIcon from "/public/assets/images/admin/user/eye-icon.svg";
 import { useRouter } from "next/navigation";
+import {ADMIN_ADDRESTAURANT} from "@/utils/pages-routes";
 
 
 const RestaurantOwnersContent = () => {
@@ -60,7 +61,7 @@ const RestaurantOwnersContent = () => {
                     buttonWidth="md:w-[178px] w-[115px]" 
                     buttonHeight="md:h-[59px] h-[38px]"
                     fontSize="md:text-[20px] text-[13px]"
-                    onClickFunction={() => router.push('/admin/add-restaurant')}
+                    onClickFunction={() => router.push(ADMIN_ADDRESTAURANT)}
                 />
             </div>
             <SearchBar />

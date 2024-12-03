@@ -10,6 +10,7 @@ import { usePost } from "@/utils/usePost";
 import Dialogue from "@/components/common/Dialogue";
 import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
 import PhoneMask from "@/components/common/PhoneMask";
+import {ADMIN_USER_ADMINLIST} from "@/utils/pages-routes";
 
 
 const AddUserContent = () => {
@@ -36,7 +37,7 @@ const AddUserContent = () => {
     };
 
     const redirectToAdminUser = () => {
-        router.push('/admin/user/admin-list');
+        router.push(ADMIN_USER_ADMINLIST);
     };
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {

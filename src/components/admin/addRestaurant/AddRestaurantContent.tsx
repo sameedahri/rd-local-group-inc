@@ -10,7 +10,7 @@ import { usePost } from "@/utils/usePost";
 import Dialogue from "@/components/common/Dialogue";
 import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
 import FormSubHeading from "../adminCommon/FormSubHeading";
-
+import {ADMIN_USER_RESTAURANTOWNERS} from "@/utils/pages-routes";
 
 interface phoneNumberProps {
     countryCode: string,
@@ -46,7 +46,7 @@ const AddRestaurantContent = () => {
     };
 
     const redirectToRestaurantOwners = () => {
-        router.push('/admin/user/restaurant-owners');
+        router.push(ADMIN_USER_RESTAURANTOWNERS);
     };
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {

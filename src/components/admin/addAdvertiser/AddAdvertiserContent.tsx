@@ -11,7 +11,7 @@ import Dialogue from "@/components/common/Dialogue";
 import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
 import PhoneInput from "@/components/addExtraStaff/PhoneInput";
 import Checkbox from "@/components/common/Checkbox";
-
+import {ADMIN_USER_ADVERTISERS} from "@/utils/pages-routes";
 
 interface phoneNumberProps {
     countryCode: string,
@@ -62,7 +62,7 @@ const AddAdvertiserContent = () => {
     };
 
     const redirectToAdvertiser = () => {
-        router.push('/admin/user/advertisers');
+        router.push(ADMIN_USER_ADVERTISERS);
     };
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {

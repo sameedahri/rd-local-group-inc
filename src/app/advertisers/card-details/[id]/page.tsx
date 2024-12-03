@@ -1,12 +1,13 @@
 import CardDetailsContent from "@/components/cardDetails/CardDetailsContent";
+import {ADVERTISERS_ADDREVISION, ADVERTISERS_DASHBOARD} from "@/utils/pages-routes";
 
 
 const page = () => {
     return (
         <main className="page">
             <CardDetailsContent 
-                urlToAddRevision="/advertisers/add-revision" 
-                urlToDashboard="/advertisers/dashboard" 
+                urlToAddRevision={ADVERTISERS_ADDREVISION}
+                urlToDashboard={ADVERTISERS_DASHBOARD} 
                 getAttachmentsDataUrl="/posts"
             />
         </main>

@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 const AdminListTable = dynamic(() => import("./AdminListTable"), {ssr: false});
 import useShowMenuIcon from "@/utils/useShowMenuIcon";
 import { useRouter } from "next/navigation";
+import {ADMIN_ADDUSER} from "@/utils/pages-routes";
 
 
 const AdminListContent = () => {
@@ -57,7 +58,7 @@ const AdminListContent = () => {
                 <AddButton 
                     text="Add" 
                     isSubmit={false} 
-                    onClickFunction={() => router.push('/admin/add-user')}
+                    onClickFunction={() => router.push(ADMIN_ADDUSER)}
                 />
             </div>
             <SearchBar />
