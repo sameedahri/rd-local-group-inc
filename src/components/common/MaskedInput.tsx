@@ -22,7 +22,7 @@ const MaskedInput:React.FC<MaskedInputProps> = ({setState, placeholderText, mask
             required={required}
             placeholder={placeholderText}
             autoComplete="off"
-            className="w-[100%] md:h-[52px] h-[43px] border border-[#DFDFDF] focus:outline-inputOutline rounded-[5px] p-3 md:placeholder:text-[14px] placeholder:text-[12px] placeholder:text-[#D8D8D8]"
+            className="w-[100%] md:h-[52px] border border-[#DFDFDF] focus:outline-inputOutline rounded-[5px] p-3 md:placeholder:text-[14px] placeholder:text-[12px] placeholder:text-[#D8D8D8]"
             onChange={(event) => {
                 const value = event.target.value;
                 setState(value);

@@ -1,5 +1,4 @@
 import {useState} from "react";
-import {API_URL} from "./constants";
 
 
 interface UsePostResult<R> {
@@ -20,7 +19,7 @@ export function usePost<T, R>(url: string): UsePostResult<R> {
         setError(null);
 
         try {
-            const response = await fetch(API_URL + url, {
+            const response = await fetch(url, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

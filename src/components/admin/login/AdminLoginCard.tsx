@@ -2,26 +2,29 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import logo from "/public/assets/images/common/logo.png";
-import {useState, FormEvent} from "react";
-import {usePost} from "@/utils/usePost";
+import {useState, FormEvent, useEffect} from "react";
 import {ADMIN_USER_ADMINLIST} from "@/utils/pages-routes";
+import {ADMIN_LOGIN} from "@/utils/api-urls";
+import {postRequest} from "@/utils/utilFunctions";
 
 
 const AdminLoginCard = () => {
-    const [username, setUsername] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-
-    const {postData, data} = usePost("/posts");
-    console.log(data)
-
     const router = useRouter();
+
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [data, setData] = useState<{data: {accessToken: string}, message: string, success: boolean} | string | null>(null);
+
+    useEffect(() => {
+        if(typeof data === "object" && data !== null) {
+            console.log(data.data.accessToken);
+            router.push(ADMIN_USER_ADMINLIST);
+        }
+    }, [data, router])
+
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        postData({
-            username: username,
-            password: password
-        });
-        router.push(ADMIN_USER_ADMINLIST);
+        postRequest(ADMIN_LOGIN, {email: email, password: password}, setData);
     };
 
     return (
@@ -33,18 +36,18 @@ const AdminLoginCard = () => {
             <p className="mt-3 text-[#3F3F3F] font-gilroyMedium text-center md:text-[16px] text-[14px]">Glad to see you, Login to your account below</p>
             {/* user name */}
             <div className="flex flex-col gap-1 mt-12">
-                <label htmlFor="username" className="text-[#3F3F3F] font-gilroyMedium md:text-[16px] text-[12px]">User name</label>
+                <label htmlFor="email" className="text-[#3F3F3F] font-gilroyMedium md:text-[16px] text-[12px]">Email</label>
                 <input 
                     type="email"
-                    id="username"
-                    value={username}
+                    id="email"
+                    value={email}
                     className="w-[100%] md:h-[52px] h-[43px] border border-[#DFDFDF] focus:outline-inputOutline rounded-[5px] p-3 md:placeholder:text-[14px] placeholder:text-[12px] placeholder:text-[#D8D8D8]" 
                     required={true}
                     onChange={(e) => {
                         const target = e.target as HTMLInputElement;
-                        setUsername(target.value);
+                        setEmail(target.value);
                     }}
-                    placeholder="Enter email/Phone number (+1 1234 5678 90)"
+                    placeholder="Enter email"
                     autoComplete="off"
                 />
             </div>

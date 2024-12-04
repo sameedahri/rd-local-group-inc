@@ -28,14 +28,20 @@ const AdminListTable:React.FC<AdminListTableProps> = ({data, columns}) => {
                         className: "select-checkbox no-sort-icon",
                         defaultContent: '<input type="checkbox" class="checkbox-column first-column" />'
                     },
+                    {
+                        title: 'Name',
+                        className: "prominent-column",
+                        render: function(data, type, row) {
+                            return `${row.firstName} ${row.lastName}`;
+                        }
+                    },
                     ...columns
                 ],
                 columnDefs: [
                     {targets: "_all", className: "all-columns"},
-                    {targets: 1, visible: false},
-                    {targets: 2, className: "prominent-column"},
+                    {targets: 2, visible: false},
                     {targets: [3, 4], className: "sec-column"},
-                    {targets: [4], className: "last-column"}
+                    {targets: [5, 6], visible: false}
                 ],
                 scrollX: true,
                 // scrollY: "400px",
@@ -55,13 +61,6 @@ const AdminListTable:React.FC<AdminListTableProps> = ({data, columns}) => {
                 $('#select-all').off('click');
             };
         }
-        // cleanup
-        // return () => {
-        //     if(tableRef.current) {
-        //         $(tableRef.current).DataTable().destroy();
-        //         $('#select-all').off('click');
-        //     }
-        // };
     }, [data, columns])
 
     return (

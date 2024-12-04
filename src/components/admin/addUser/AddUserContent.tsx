@@ -1,29 +1,31 @@
 "use client";
 import PageHeading from "@/components/common/PageHeading";
 import PageSubHeading from "@/components/common/PageSubHeading";
-import {RefObject, FormEvent, useState} from "react";
+import {RefObject, FormEvent, useState, useEffect} from "react";
 import LabelInput from "@/components/common/LabelInput";
 import AddButton from "@/components/common/AddButton";
 import CancelButton from "@/components/common/CancelButton";
 import {useRouter} from "next/navigation";
-import { usePost } from "@/utils/usePost";
 import Dialogue from "@/components/common/Dialogue";
 import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
 import PhoneMask from "@/components/common/PhoneMask";
 import {ADMIN_USER_ADMINLIST} from "@/utils/pages-routes";
+import {ADMIN_CREATE} from "@/utils/api-urls";
+import {postRequest} from "@/utils/utilFunctions";
 
 
 const AddUserContent = () => {
     const router = useRouter();
-    const {postData, data} = usePost("/posts");
 
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [countryCode, setCountryCode] = useState<string>("+1");
     const [phoneNumber, setPhoneNumber] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [data, setData] = useState();
 
-    let dialogueRef: HTMLDialogElement | null;
+    let dialogueRef: HTMLDialogElement | null = null;
     const setDialogueRef = (ref: RefObject<HTMLDialogElement>) => {
         dialogueRef = ref.current;
     };
@@ -40,18 +42,23 @@ const AddUserContent = () => {
         router.push(ADMIN_USER_ADMINLIST);
     };
 
+    useEffect(() => {
+        if(typeof data === "object" && data !== null) {
+            showModal();
+        }
+    }, [data])
+
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const userData = {
             firstName: firstName,
             lastName: lastName,
             email: email,
-            phoneNumber: countryCode + " " + phoneNumber
+            phone: countryCode + " " + phoneNumber,
+            password: password
         };
-        postData(userData);
-        showModal();
+        postRequest(ADMIN_CREATE, userData, setData);
     };
-    console.log(data);
 
     const resetForm = () => {
         setFirstName("");
@@ -77,6 +84,17 @@ const AddUserContent = () => {
                 </div>
                 <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
                     <LabelInput label="Email*" inputType="email" inputId="email" stateValue={email} setState={setEmail} />
+                    <LabelInput 
+                        label="Password*" 
+                        inputType="password" 
+                        inputId="password" 
+                        stateValue={password} 
+                        setState={setPassword} 
+                        minLength={6} 
+                        maxLength={20} 
+                    />
+                </div>
+                <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
                     <PhoneMask 
                         label="Phone number" 
                         inputId="phoneNumber" 
@@ -84,8 +102,9 @@ const AddUserContent = () => {
                         setCountryCode={setCountryCode} 
                         countryCode={countryCode} 
                     />
+                    <div></div>
                 </div>
-                <div className="flex md:gap-x-4 gap-x-2 mt-8">
+                <div className="flex md:gap-x-4 gap-x-2 mt-12">
                     <AddButton text="Add" />
                     <CancelButton text="Back" onClickFunction={redirectToAdminUser} />
                 </div>
