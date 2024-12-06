@@ -2,39 +2,41 @@
 import PageHeading from "@/components/common/PageHeading";
 import FormSubHeading from "../adminCommon/FormSubHeading";
 import LabelInput from "@/components/common/LabelInput";
-import {RefObject, FormEvent, useState} from "react";
+import {RefObject, FormEvent, useState, useEffect} from "react";
 import AddButton from "@/components/common/AddButton";
 import CancelButton from "@/components/common/CancelButton";
 import {useRouter} from "next/navigation";
-import { usePost } from "@/utils/usePost";
 import Dialogue from "@/components/common/Dialogue";
 import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
-import PhoneInput from "@/components/addExtraStaff/PhoneInput";
 import Checkbox from "@/components/common/Checkbox";
 import {ADMIN_USER_ADVERTISERS} from "@/utils/pages-routes";
+import { ADVERTISER_ADD } from "@/utils/api-urls";
+import { postRequest } from "@/utils/utilFunctions";
+import PhoneMask from "@/components/common/PhoneMask";
+import SetupFeeInput from "./SetupFeeInput";
 
-interface phoneNumberProps {
-    countryCode: string,
-    phoneNumber: string
-}
 
 const AddAdvertiserContent = () => {
     const router = useRouter();
-    const {postData, data} = usePost("/posts");
 
     const [companyName, setCompanyName] = useState<string>("");
     const [address, setAddress] = useState<string>("");
     const [city, setCity] = useState<string>("");
     const [state, setState] = useState<string>("");
     const [zip, setZip] = useState<string>("");
+
     const [ownerName, setOwnerName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [officeNumber, setOfficeNumber] = useState<string>("");
-    const [ownerContactNumber, setOwnerContactNumber] = useState<phoneNumberProps>({countryCode: "+1", phoneNumber: ""});
-    const [contactNumber, setContactNumber] = useState<phoneNumberProps>({countryCode: "+1", phoneNumber: ""});
+    const [ownerCountryCode, setOwnerCountryCode] = useState<string>("+1");
+    const [ownerContactNumber, setOwnerContactNumber] = useState<string>("");
+    const [countryCode, setCountryCode] = useState<string>("+1");
+    const [contactNumber, setContactNumber] = useState<string>("");
     const [adveriserAgreement, setAdveriserAgreement] = useState<string>("");
+
     const [adPrice, setAdPrice] = useState<string>("");
-    const [adPricePayment, setAdPricePayment] = useState<string>("");
+    const [isOneTimePayment, setIsOneTimePayment] = useState<boolean>(true);
+    const [setupFee, setSetupFee] = useState<string>("");
     const [totalAmount, setTotalAmount] = useState<string>("");
     const [cardNumber, setCardNumber] = useState<string>("");
     const [nameOnCard, setNameOnCard] = useState<string>("");
@@ -42,10 +44,12 @@ const AddAdvertiserContent = () => {
     const [zipCode, setZipCode] = useState<string>("");
     const [expDate, setExpDate] = useState<string>("");
     const [cvc, setCvc] = useState<string>("");
+
     const [chequeNumber, setChequeNumber] = useState<string>("");
     const [phoneNumberOnCheque, setPhoneNumberOnCheque] = useState<string>("");
     const [routeNumber, setRouteNumber] = useState<string>("");
     const [accNumber, setAccNumber] = useState<string>("");
+    const [data, setData] = useState();
 
 
     let dialogueRef: HTMLDialogElement | null;
@@ -65,6 +69,12 @@ const AddAdvertiserContent = () => {
         router.push(ADMIN_USER_ADVERTISERS);
     };
 
+    useEffect(() => {
+        if(typeof data === "object" && data !== null) {
+            showModal();
+        }
+    }, [data])
+
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const advertiserData = {
@@ -73,29 +83,34 @@ const AddAdvertiserContent = () => {
             city: city,
             state: state,
             zip: zip,
+
             ownerName: ownerName,
             email: email,
             officeNumber: officeNumber,
             ownerContactNumber: ownerContactNumber,
             contactNumber: contactNumber,
-            adveriserAgreement: adveriserAgreement,
-            adPrice: adPrice,
-            totalAmount: totalAmount,
+            adAgreementDetails: adveriserAgreement,
+
+            adPrice: parseFloat(adPrice),
+            isOneTimePayment: isOneTimePayment,
+            setupFee: isOneTimePayment ? 0.00 : parseFloat(setupFee),
+            totalDueAmount: parseFloat(totalAmount),
+
             cardNumber: cardNumber,
             nameOnCard: nameOnCard,
-            street: street,
-            zipCode: zipCode,
-            expDate: expDate,
-            cvc: cvc,
-            chequeNumber: chequeNumber,
-            phoneNumberOnCheque: phoneNumberOnCheque,
-            routeNumber: routeNumber,
-            accNumber: accNumber
+            cardBillingStreet: street,
+            cardZipCode: zipCode,
+            cardExpDate: expDate,
+            cardCvc: cvc,
+
+            nameOnCheck: "",
+            checkNumber: chequeNumber,
+            phoneNumberOnCheck: phoneNumberOnCheque,
+            eCheckRouteNumber: routeNumber,
+            eCheckAccountNumber: accNumber
         };
-        postData(advertiserData);
-        showModal();
+        postRequest(ADVERTISER_ADD, advertiserData, setData);
     };
-    console.log(data);
 
     const resetForm = () => {
         setCompanyName("");
@@ -106,8 +121,10 @@ const AddAdvertiserContent = () => {
         setOwnerName("");
         setEmail("");
         setOfficeNumber("");
-        setOwnerContactNumber({countryCode: "+1", phoneNumber: ""});
-        setContactNumber({countryCode: "+1", phoneNumber: ""});
+        setOwnerCountryCode("+1");
+        setOwnerContactNumber("");
+        setCountryCode("+1");
+        setContactNumber("");
         setAdveriserAgreement("");
         setAdPrice("");
         setTotalAmount("");
@@ -133,9 +150,12 @@ const AddAdvertiserContent = () => {
                 item.checked = false;
             }
         });
-        setAdPricePayment(target.id);
+        if(target.id === "onePayment") {
+            setIsOneTimePayment(true)
+        } else {
+            setIsOneTimePayment(false)
+        }
     };
-    console.log(adPricePayment);
 
     return (
         <div className="content-wrapper">
@@ -166,17 +186,36 @@ const AddAdvertiserContent = () => {
                     </div>
                     <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
                         <LabelInput label="Office Number*" inputType="text" inputId="officeNumber" stateValue={officeNumber} setState={setOfficeNumber} />
-                        <PhoneInput label="Owner Contact Number*" inputId="ownerContactNumber" stateValue={ownerContactNumber} setState={setOwnerContactNumber} required={true} />
+                        <PhoneMask 
+                            label="Owner Contact Number" 
+                            inputId="ownerContactNumber" 
+                            setPhoneNumber={setOwnerContactNumber} 
+                            setCountryCode={setOwnerCountryCode} 
+                            countryCode={ownerCountryCode}
+                            required={true}
+                        />
                     </div>
                     <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
-                        <PhoneInput label="Contact Number" inputId="contactNumber" stateValue={contactNumber} setState={setContactNumber} />
+                        <PhoneMask 
+                            label="Contact Number" 
+                            inputId="contactNumber" 
+                            setPhoneNumber={setContactNumber} 
+                            setCountryCode={setCountryCode} 
+                            countryCode={countryCode}
+                        />
                         <LabelInput label="Advertiser Agrees to Place Color Ad on" inputType="text" inputId="adveriserAgreement" stateValue={adveriserAgreement} setState={setAdveriserAgreement} required={false} bottomMessage="Display/Special Boards" />
                     </div>
                 </fieldset>
                 <fieldset className="md:mt-12 mt-14">
                     <FormSubHeading heading="Pricing Details" />
                     <div className="grid md:grid-cols-1 md:gap-x-4 gap-y-4">
-                        <LabelInput label="Ad Price*" inputType="text" inputId="adPrice" stateValue={adPrice} setState={setAdPrice} />
+                        <LabelInput 
+                            label="Ad Price*" 
+                            inputType="number" 
+                            inputId="adPrice" 
+                            stateValue={adPrice} 
+                            setState={setAdPrice} 
+                        />
                     </div>
                     <div className="grid md:grid-cols-1 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
                         <div className="flex md:items-center gap-x-2">
@@ -184,16 +223,16 @@ const AddAdvertiserContent = () => {
                             <label htmlFor="onePayment" className="text-[#262626] font-gilroySemibold md:text-[16px] text-[14px]">A. One payment paid at signing of this agreement</label>
                         </div>
                         <div className="flex md:items-center gap-x-2">
-                            <Checkbox checkboxId="twoPayments" onChange={checkboxOnchange} width="w-[22px] min-w-[22px]" height="h-[20px] min-h-[20px]" />
+                            <Checkbox checkboxId="twoPayments" onChange={checkboxOnchange} width="w-[22px] min-w-[22px]" height="h-[20px] min-h-[20px]" required={false} />
                             <label htmlFor="twoPayments" className="text-[#262626] font-gilroySemibold md:text-[16px] text-[14px]">
                                 <span>B. 2 payments: deposit 50% at signing of this agreement and final payment 30 days later</span>
-                                <span className="inline-flex justify-center items-center lg:w-[94px] w-[80px] lg:h-[38px] h-[20px] border boder-[#DADADA] rounded-[7px] text-[#262626] font-gilroyBold lg:text-[19px] text-[16px] mx-2 lg:translate-y-0 translate-y-[2px]">40.00$</span>
+                                <SetupFeeInput stateValue={setupFee} setState={setSetupFee} isOneTimePayment={isOneTimePayment} />
                                 <span>Setup Fee.</span>
                             </label>
                         </div>
                     </div>
                     <div className="grid md:grid-cols-1 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
-                        <LabelInput label="Total Due Amount*" inputType="text" inputId="totalAmount" stateValue={totalAmount} setState={setTotalAmount} />
+                        <LabelInput label="Total Due Amount*" inputType="number" inputId="totalAmount" stateValue={totalAmount} setState={setTotalAmount} />
                     </div>
                 </fieldset>
                 <fieldset className="mt-12">

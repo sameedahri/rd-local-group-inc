@@ -5,38 +5,48 @@ import SearchBar from "../SearchBar";
 import useShowMenuIcon from "@/utils/useShowMenuIcon";
 import dynamic from "next/dynamic";
 const RestaurantOwnersTable = dynamic(() => import("./RestaurantOwnersTable"), {ssr: false});
-import eyeIcon from "/public/assets/images/admin/user/eye-icon.svg";
+// import eyeIcon from "/public/assets/images/admin/user/eye-icon.svg";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import {ADMIN_ADDRESTAURANT} from "@/utils/pages-routes";
+import {getRequest} from "@/utils/utilFunctions";
+import {OWNERS_GET} from "@/utils/api-urls";
+import Loader from "@/components/common/Loader";
 
 
 const RestaurantOwnersContent = () => {
-   const router = useRouter();
+    const router = useRouter();
     useShowMenuIcon();
+    const [data, setData] = useState<{data: [], limit: number, page: number, total: number} | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const data = [
-        {id: 1, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 2, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 3, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 4, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 5, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 6, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 7, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 8, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 9, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 10, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 11, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 12, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 13, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 14, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 15, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 16, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 17, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 18, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 19, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 20, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-        {id: 21, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
-    ];
+    useEffect(() => {
+        getRequest(OWNERS_GET, setData, setIsLoading);
+    }, [])
+
+    // const data = [
+    //     {id: 1, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 2, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 3, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 4, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 5, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 6, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 7, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 8, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 9, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 10, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 11, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 12, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 13, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 14, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 15, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 16, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 17, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 18, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 19, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 20, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    //     {id: 21, businessName: "The Restaurant", ownerName: "Jack Doe", email: "Jack@example.com", mobileNumber: "+1 234 5678 90", address: "121 Street, Ipsum road", proof: "", view: eyeIcon.src, details: "abc"},
+    // ];
 
     const columns = [
         {title: "Id", data: "id"},
@@ -65,7 +75,7 @@ const RestaurantOwnersContent = () => {
                 />
             </div>
             <SearchBar />
-            <RestaurantOwnersTable data={data} columns={columns} />
+            {isLoading ? <Loader /> : <RestaurantOwnersTable data={data?.data} columns={columns} />}
         </div>
     )
 }

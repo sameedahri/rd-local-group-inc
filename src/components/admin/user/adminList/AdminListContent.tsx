@@ -11,6 +11,7 @@ import {ADMIN_ADDUSER} from "@/utils/pages-routes";
 import {getRequest} from "@/utils/utilFunctions";
 import { ADMINS_GET } from "@/utils/api-urls";
 import { useState, useEffect } from "react";
+import Loader from "@/components/common/Loader";
 
 
 interface DataProps {
@@ -84,7 +85,7 @@ const AdminListContent = () => {
                 />
             </div>
             <SearchBar />
-            {isLoading ? <p className="mt-5">Loading...</p> : <AdminListTable data={data?.data} columns={columns} />}
+            {isLoading ? <Loader /> : <AdminListTable data={data?.data} columns={columns} />}
         </div>
     )
 }

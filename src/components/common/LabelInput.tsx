@@ -5,15 +5,16 @@ interface LabelInputProps {
     label: string,
     inputType: string,
     inputId: string,
-    stateValue: string,
-    setState: Dispatch<SetStateAction<string>>
+    stateValue?: string,
+    setState?: Dispatch<SetStateAction<string>>
     required?: boolean,
     minLength?: number,
     maxLength?: number,
-    bottomMessage?: string | null
+    bottomMessage?: string | null,
+    onChangeFunction?: (value: string) => void
 }
 
-const LabelInput: React.FC<LabelInputProps> = ({label, inputType, inputId, stateValue, setState, required=true, minLength, maxLength, bottomMessage=null}) => {
+const LabelInput: React.FC<LabelInputProps> = ({label, inputType, inputId, stateValue, setState, required=true, minLength, maxLength, bottomMessage=null, onChangeFunction}) => {
   return (
     <div className="grid gap-y-1 relative">
         <label htmlFor={inputId} className="text-label font-gilroySemibold text-[16px]">{label}</label>
@@ -29,7 +30,11 @@ const LabelInput: React.FC<LabelInputProps> = ({label, inputType, inputId, state
             onChange={(e: FormEvent<HTMLInputElement>) => {
                 if(e) {
                     const target = e.target as HTMLInputElement;
-                    setState(target.value);
+                    if(onChangeFunction) {
+                        onChangeFunction(target.value);
+                    } else {
+                        if(setState) setState(target.value);
+                    }
                 }
             }}
         />

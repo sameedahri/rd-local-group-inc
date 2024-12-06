@@ -1,36 +1,35 @@
 "use client";
 import PageHeading from "@/components/common/PageHeading";
 import LabelInput from "@/components/common/LabelInput";
-import PhoneInput from "@/components/addExtraStaff/PhoneInput";
+import PhoneMask from "@/components/common/PhoneMask";
 import AddButton from "@/components/common/AddButton";
 import CancelButton from "@/components/common/CancelButton";
-import {RefObject, FormEvent, useState} from "react";
+import {RefObject, FormEvent, useState, useEffect} from "react";
 import {useRouter} from "next/navigation";
-import { usePost } from "@/utils/usePost";
 import Dialogue from "@/components/common/Dialogue";
 import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
 import FormSubHeading from "../adminCommon/FormSubHeading";
 import {ADMIN_USER_RESTAURANTOWNERS} from "@/utils/pages-routes";
+import { postRequest } from "@/utils/utilFunctions";
+import { OWNER_ADD } from "@/utils/api-urls";
 
-interface phoneNumberProps {
-    countryCode: string,
-    phoneNumber: string
-}
 
 const AddRestaurantContent = () => {
     const router = useRouter();
-    const {postData, data} = usePost("/posts");
 
     const [restaurantName, setRestaurantName] = useState<string>("");
     const [agreementDate, setAgreementDate] = useState<string>("");
     const [restaurantAddress, setRestaurantAddress] = useState<string>("");
-    const [contactNumber, setContactNumber] = useState<phoneNumberProps>({countryCode: "+1", phoneNumber: ""});
+    const [countryCode, setCountryCode] = useState<string>("+1");
+    const [contactNumber, setContactNumber] = useState<string>("");
     const [tabletopsSpecs, setTabletopsSpecs] = useState<string>("");
     const [color, setColor] = useState<string>("");
     const [size, setSize] = useState<string>("");
     const [ownerName, setOwnerName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
-    const [ownerContactNumber, setOwnerContactNumber] = useState<phoneNumberProps>({countryCode: "+1", phoneNumber: ""});
+    const [ownerCountryCode, setOwnerCountryCode] = useState<string>("+1");
+    const [ownerContactNumber, setOwnerContactNumber] = useState<string>("");
+    const [data, setData] = useState();
 
     let dialogueRef: HTMLDialogElement | null;
     const setDialogueRef = (ref: RefObject<HTMLDialogElement>) => {
@@ -49,36 +48,43 @@ const AddRestaurantContent = () => {
         router.push(ADMIN_USER_RESTAURANTOWNERS);
     };
 
+    useEffect(() => {
+        if(typeof data === "object" && data !== null) {
+            showModal();
+        }
+    }, [data])
+
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const restaurantData = {
             restaurantName: restaurantName,
             agreementDate: agreementDate,
-            restaurantAddress: restaurantAddress,
-            contactNumber: contactNumber.countryCode + " " + contactNumber.phoneNumber,
-            tabletopsSpecs: tabletopsSpecs,
+            address: restaurantAddress,
+            contactNumber: countryCode + " " + contactNumber,
+            tabletopSpecs: tabletopsSpecs,
             color: color,
             size: size,
-            ownerName: ownerName,
+            name: ownerName,
             email: email,
-            ownerContactNumber: ownerContactNumber
+            ownerContactNumber: ownerCountryCode + " " + ownerContactNumber,
+            officeNumber: "+2 1234 1234 55"
         };
-        postData(restaurantData);
-        showModal();
+        postRequest(OWNER_ADD, restaurantData, setData);
     };
-    console.log(data);
 
     const resetForm = () => {
         setRestaurantName("");
         setAgreementDate("");
         setRestaurantAddress("");
-        setContactNumber({countryCode: "+1", phoneNumber: ""});
+        setCountryCode("+1");
+        setContactNumber("");
         setTabletopsSpecs("");
         setColor("");
         setSize("");
         setOwnerName("");
         setEmail("");
-        setOwnerContactNumber({countryCode: "+1", phoneNumber: ""});
+        setOwnerCountryCode("+1");
+        setOwnerContactNumber("");
     };
 
     return (
@@ -92,11 +98,18 @@ const AddRestaurantContent = () => {
                     <FormSubHeading heading="Contract Details" />
                     <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4">
                         <LabelInput label="Restaurant Name*" inputType="text" inputId="restaurantName" stateValue={restaurantName} setState={setRestaurantName} />
-                        <LabelInput label="Date Of Agreement*" inputType="text" inputId="agreementDate" stateValue={agreementDate} setState={setAgreementDate} />
+                        <LabelInput label="Date Of Agreement*" inputType="date" inputId="agreementDate" stateValue={agreementDate} setState={setAgreementDate} />
                     </div>
                     <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
                         <LabelInput label="Restaurant Address*" inputType="text" inputId="restaurantAddress" stateValue={restaurantAddress} setState={setRestaurantAddress} />
-                        <PhoneInput label="Contact Number*" inputId="contactNumber" stateValue={contactNumber} setState={setContactNumber} required={true} />
+                        <PhoneMask 
+                            label="Contact Number*" 
+                            inputId="contactNumber" 
+                            setPhoneNumber={setContactNumber} 
+                            setCountryCode={setCountryCode} 
+                            countryCode={countryCode}
+                            required={true}
+                        />
                     </div>
                     <div className="grid md:grid-cols-3 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
                         <LabelInput label="Tabletops Specs*" inputType="text" inputId="tabletopsSpecs" stateValue={tabletopsSpecs} setState={setTabletopsSpecs} />
@@ -111,7 +124,13 @@ const AddRestaurantContent = () => {
                     </div>
                     <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
                         <LabelInput label="Email Address*" inputType="email" inputId="email" stateValue={email} setState={setEmail} />
-                        <PhoneInput label="Owner Contact Number" inputId="ownerContactNumber" stateValue={ownerContactNumber} setState={setOwnerContactNumber} />
+                        <PhoneMask 
+                            label="Owner Contact Number" 
+                            inputId="ownerContactNumber" 
+                            setPhoneNumber={setOwnerContactNumber} 
+                            setCountryCode={setOwnerCountryCode} 
+                            countryCode={ownerCountryCode}
+                        />
                     </div>
                 </fieldset>
                 <div className="flex md:gap-x-4 gap-x-2 mt-12">

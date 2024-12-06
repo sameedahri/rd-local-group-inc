@@ -73,7 +73,7 @@
 }
 
 .sidemenu-page {
-  @apply flex flex-col items-center bg-primaryBg w-[100%] min-h-[calc(100vh-95px)] lg:px-12 md:px-8 px-5 md:py-16 py-10 mt-[95px] lg:ml-[310px];
+  @apply flex flex-col items-center bg-primaryBg w-[100%] min-h-[calc(100vh-95px)] lg:px-12 md:px-8 px-5 md:py-16 py-10 mt-[95px] lg:ml-[310px] overflow-x-hidden;
 }
 
 .content-wrapper {
