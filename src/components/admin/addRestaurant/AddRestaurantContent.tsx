@@ -4,7 +4,7 @@ import LabelInput from "@/components/common/LabelInput";
 import PhoneMask from "@/components/common/PhoneMask";
 import AddButton from "@/components/common/AddButton";
 import CancelButton from "@/components/common/CancelButton";
-import {RefObject, FormEvent, useState, useEffect} from "react";
+import {RefObject, FormEvent, useState} from "react";
 import {useRouter} from "next/navigation";
 import Dialogue from "@/components/common/Dialogue";
 import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
@@ -12,6 +12,7 @@ import FormSubHeading from "../adminCommon/FormSubHeading";
 import {ADMIN_USER_RESTAURANTOWNERS} from "@/utils/pages-routes";
 import { postRequest } from "@/utils/utilFunctions";
 import { OWNER_ADD } from "@/utils/api-urls";
+import useRedirect from "@/utils/useRedirect";
 
 
 const AddRestaurantContent = () => {
@@ -48,11 +49,7 @@ const AddRestaurantContent = () => {
         router.push(ADMIN_USER_RESTAURANTOWNERS);
     };
 
-    useEffect(() => {
-        if(typeof data === "object" && data !== null) {
-            showModal();
-        }
-    }, [data])
+    useRedirect(data, () => showModal())
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();

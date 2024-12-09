@@ -8,7 +8,7 @@ import {useState, RefObject, FormEvent} from "react";
 import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
 import Dialogue from "../common/Dialogue";
 import {useRouter} from "next/navigation";
-import { usePost } from "@/utils/usePost";
+// import { usePost } from "@/utils/usePost";
 
 
 interface AddRevisionContentProps {
@@ -17,7 +17,7 @@ interface AddRevisionContentProps {
 
 const AddRevisionContent:React.FC<AddRevisionContentProps> = ({urlToDashboard}) => {
     const router = useRouter();
-    const {postData, data} = usePost("/posts");
+    // const {postData, data} = usePost("/posts");
 
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
@@ -42,15 +42,15 @@ const AddRevisionContent:React.FC<AddRevisionContentProps> = ({urlToDashboard}) 
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const revisionData = {
-            firstName: firstName,
-            lastName: lastName,
-            changes: changes
-        };
-        postData(revisionData);
+        // const revisionData = {
+        //     firstName: firstName,
+        //     lastName: lastName,
+        //     changes: changes
+        // };
+        
+        // postData(revisionData);
         showModal();
     };
-    console.log(data);
 
     const resetForm = () => {
         setFirstName("");

@@ -1,5 +1,6 @@
 import { MutableRefObject, Dispatch, SetStateAction } from "react";
 
+
 // eslint-disable-next-line
 export const postRequest = (url: string, postData: any, setState?: Dispatch<SetStateAction<any>>) => {
     fetch(url, {
@@ -16,11 +17,9 @@ export const postRequest = (url: string, postData: any, setState?: Dispatch<SetS
             return res.json();
         })
         .then(data => {
-            console.log(data)
             if(setState) setState(data)
         })
         .catch(error => {
-            console.log(error);
             if(setState) setState(error.message)
         })
 }
@@ -38,16 +37,19 @@ export const getRequest = (url: any, setState?: Dispatch<SetStateAction<any>>, s
             return res.json();
         })
         .then(data => {
-            console.log(data)
             if(setState) setState(data);
             if(setLoading) setLoading(false);
         })
         .catch(error => {
-            console.log(error);
             if(setState) setState(error.message);
             if(setLoading) setLoading(false);
         })
 }
+
+// export const redirectToLogin  = () => {
+//     const authToken = localStorage.getItem('authToken');
+//     if(authToken === null) router.push('/admin/login');
+// };
 
 export const validationMessage = (id: string, timeoutRef: MutableRefObject<NodeJS.Timeout | null>, hideOnly:boolean) => {
     const validationDiv = document.querySelector(id);

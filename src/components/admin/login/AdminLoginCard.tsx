@@ -6,6 +6,7 @@ import {useState, FormEvent, useEffect} from "react";
 import {ADMIN_USER_ADMINLIST} from "@/utils/pages-routes";
 import {ADMIN_LOGIN} from "@/utils/api-urls";
 import {postRequest} from "@/utils/utilFunctions";
+import {jwtDecode} from "jwt-decode";
 
 
 const AdminLoginCard = () => {
@@ -17,7 +18,7 @@ const AdminLoginCard = () => {
 
     useEffect(() => {
         if(typeof data === "object" && data !== null) {
-            console.log(data.data.accessToken);
+            localStorage.setItem('adminAuthToken', JSON.stringify(jwtDecode(data.data.accessToken)));
             router.push(ADMIN_USER_ADMINLIST);
         }
     }, [data, router])

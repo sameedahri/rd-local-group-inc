@@ -1,7 +1,7 @@
 "use client";
 import PageHeading from "@/components/common/PageHeading";
 import PageSubHeading from "@/components/common/PageSubHeading";
-import {RefObject, FormEvent, useState, useEffect} from "react";
+import {RefObject, FormEvent, useState} from "react";
 import LabelInput from "@/components/common/LabelInput";
 import AddButton from "@/components/common/AddButton";
 import CancelButton from "@/components/common/CancelButton";
@@ -12,6 +12,7 @@ import PhoneMask from "@/components/common/PhoneMask";
 import {ADMIN_USER_ADMINLIST} from "@/utils/pages-routes";
 import {ADMIN_CREATE} from "@/utils/api-urls";
 import {postRequest} from "@/utils/utilFunctions";
+import useRedirect from "@/utils/useRedirect";
 
 
 const AddUserContent = () => {
@@ -42,11 +43,7 @@ const AddUserContent = () => {
         router.push(ADMIN_USER_ADMINLIST);
     };
 
-    useEffect(() => {
-        if(typeof data === "object" && data !== null) {
-            showModal();
-        }
-    }, [data])
+    useRedirect(data, () => showModal());
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();

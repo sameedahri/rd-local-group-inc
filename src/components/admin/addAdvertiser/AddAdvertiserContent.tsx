@@ -2,7 +2,7 @@
 import PageHeading from "@/components/common/PageHeading";
 import FormSubHeading from "../adminCommon/FormSubHeading";
 import LabelInput from "@/components/common/LabelInput";
-import {RefObject, FormEvent, useState, useEffect} from "react";
+import {RefObject, FormEvent, useState} from "react";
 import AddButton from "@/components/common/AddButton";
 import CancelButton from "@/components/common/CancelButton";
 import {useRouter} from "next/navigation";
@@ -14,6 +14,7 @@ import { ADVERTISER_ADD } from "@/utils/api-urls";
 import { postRequest } from "@/utils/utilFunctions";
 import PhoneMask from "@/components/common/PhoneMask";
 import SetupFeeInput from "./SetupFeeInput";
+import useRedirect from "@/utils/useRedirect";
 
 
 const AddAdvertiserContent = () => {
@@ -69,11 +70,7 @@ const AddAdvertiserContent = () => {
         router.push(ADMIN_USER_ADVERTISERS);
     };
 
-    useEffect(() => {
-        if(typeof data === "object" && data !== null) {
-            showModal();
-        }
-    }, [data])
+    useRedirect(data, () => showModal())
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();

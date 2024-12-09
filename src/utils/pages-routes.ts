@@ -11,6 +11,7 @@ export const ADVERTISERS_ADDREVISION = "/advertisers/add-revision";
 export const ADVERTISERS_CARDDETAILS = "/advertisers/card-details";
 
 // Admin Dashboard
+export const ADMIN_LOGIN = "/admin/login";
 export const ADMIN_USER_ADMINLIST = "/admin/user/admin-list";
 export const ADMIN_USER_RESTAURANTOWNERS = "/admin/user/restaurant-owners";
 export const ADMIN_USER_ADVERTISERS = "/admin/user/advertisers";

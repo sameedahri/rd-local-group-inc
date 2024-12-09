@@ -2,6 +2,7 @@
 import Image from "next/image";
 import logoutIcon from "/public/assets/images/dashboard/logout-icon.svg";
 import {useRouter} from "next/navigation";
+import {ADMIN_LOGIN} from "@/utils/pages-routes";
 
 interface LogoutButtonProps {
     urlToLogin: string,
@@ -10,13 +11,21 @@ interface LogoutButtonProps {
 
 const LogoutButton: React.FC<LogoutButtonProps> = ({urlToLogin, isAdmin}) => {
     const router = useRouter();
+    const logout = () => {
+        if(isAdmin) {
+            localStorage.removeItem('adminAuthToken');
+            router.push(ADMIN_LOGIN);
+        } else {
+            router.push(urlToLogin)
+        }
+    };
 
     return (
         <button 
             type="button" 
             className="w-[136px] h-[46px] gap-1 flex justify-center items-center bg-[#F3DCD6] rounded-[23px]
                 font-gilroyMedium text-[16px]"
-            onClick={isAdmin ? () => router.push('/admin/login') : () => router.push(urlToLogin)}
+            onClick={logout}
         >
             <Image src={logoutIcon} alt="Logout" width={16} height={16} />
             <span>Logout</span>

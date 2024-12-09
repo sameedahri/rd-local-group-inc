@@ -27,14 +27,13 @@ interface DataProps {
 const AdminListContent = () => {
    const router = useRouter();
    useShowMenuIcon();
+
    const [data, setData] = useState<{data: DataProps[], limit: number, page: number, total: number} | null>(null);
    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         getRequest(ADMINS_GET, setData, setIsLoading);
     }, [])
-
-    console.log(isLoading)
    
     // const data = [
     //     {id: 1, name: 'John Doe Doe Doe Doe', email: 'JohnJohnJohn@gmail.com', mobileNumber: '+1 2222 3333 44' },

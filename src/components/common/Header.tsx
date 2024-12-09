@@ -3,7 +3,8 @@ import Image from "next/image";
 import logo from "/public/assets/images/common/logo.png";
 import menuIcon from "/public/assets/images/common/menu-icon.svg";
 import LogoutButton from "../dashboard/LogoutButton";
-
+import useIsAuthenticated from "@/utils/useIsAuthenticated";
+import { useEffect, useState } from "react";
 
 interface HeaderProps {
     urlToLogin: string,
@@ -11,6 +12,14 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({urlToLogin, isAdmin=false}) => {
+    useIsAuthenticated(true);
+
+    const [userInitial, setUserInitial] = useState<string>("");
+    useEffect(() => {
+        const authToken = localStorage.getItem('adminAuthToken');
+        if(authToken) setUserInitial(JSON.parse(authToken).email[0].toUpperCase());
+    }, [])
+
     const toggleSideMenu = () => {
         document.querySelector('#sidemenu')?.classList.toggle('translate-x-[-100vw]');
     };
@@ -26,7 +35,7 @@ const Header: React.FC<HeaderProps> = ({urlToLogin, isAdmin=false}) => {
                 <button 
                     type="button"
                     className="w-[46px] h-[46px] bg-[#AB877E] rounded-full text-darkBtn font-gilroySemibold text-[20px]"
-                >A</button>
+                >{userInitial}</button>
            </div>
         </header>
     )
