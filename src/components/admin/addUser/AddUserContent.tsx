@@ -24,7 +24,7 @@ const AddUserContent = () => {
     const [countryCode, setCountryCode] = useState<string>("+1");
     const [phoneNumber, setPhoneNumber] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const [data, setData] = useState();
+    const [data, setData] = useState(null);
 
     let dialogueRef: HTMLDialogElement | null = null;
     const setDialogueRef = (ref: RefObject<HTMLDialogElement>) => {

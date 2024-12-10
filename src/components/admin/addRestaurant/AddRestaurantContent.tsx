@@ -30,7 +30,9 @@ const AddRestaurantContent = () => {
     const [email, setEmail] = useState<string>("");
     const [ownerCountryCode, setOwnerCountryCode] = useState<string>("+1");
     const [ownerContactNumber, setOwnerContactNumber] = useState<string>("");
-    const [data, setData] = useState();
+    const [officeNumberCode, setOfficeNumberCode] = useState<string>("+1");
+    const [officePhoneNumber, setOfficePhoneNumber] = useState<string>("");
+    const [data, setData] = useState(null);
 
     let dialogueRef: HTMLDialogElement | null;
     const setDialogueRef = (ref: RefObject<HTMLDialogElement>) => {
@@ -64,7 +66,7 @@ const AddRestaurantContent = () => {
             name: ownerName,
             email: email,
             ownerContactNumber: ownerCountryCode + " " + ownerContactNumber,
-            officeNumber: "+2 1234 1234 55"
+            officeNumber: officeNumberCode + " " + officePhoneNumber
         };
         postRequest(OWNER_ADD, restaurantData, setData);
     };
@@ -82,6 +84,8 @@ const AddRestaurantContent = () => {
         setEmail("");
         setOwnerCountryCode("+1");
         setOwnerContactNumber("");
+        setOwnerCountryCode("+1");
+        setOfficePhoneNumber("");
     };
 
     return (
@@ -122,12 +126,24 @@ const AddRestaurantContent = () => {
                     <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
                         <LabelInput label="Email Address*" inputType="email" inputId="email" stateValue={email} setState={setEmail} />
                         <PhoneMask 
-                            label="Owner Contact Number" 
+                            label="Owner Contact Number*" 
                             inputId="ownerContactNumber" 
                             setPhoneNumber={setOwnerContactNumber} 
                             setCountryCode={setOwnerCountryCode} 
                             countryCode={ownerCountryCode}
+                            required={true}
                         />
+                    </div>
+                    <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
+                        <PhoneMask 
+                            label="Office Phone Number*" 
+                            inputId="officePhoneNumber" 
+                            setPhoneNumber={setOfficePhoneNumber} 
+                            setCountryCode={setOfficeNumberCode} 
+                            countryCode={officeNumberCode}
+                            required={true}
+                        />
+                        <div></div>
                     </div>
                 </fieldset>
                 <div className="flex md:gap-x-4 gap-x-2 mt-12">

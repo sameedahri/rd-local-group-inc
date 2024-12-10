@@ -50,7 +50,7 @@ const AddAdvertiserContent = () => {
     const [phoneNumberOnCheque, setPhoneNumberOnCheque] = useState<string>("");
     const [routeNumber, setRouteNumber] = useState<string>("");
     const [accNumber, setAccNumber] = useState<string>("");
-    const [data, setData] = useState();
+    const [data, setData] = useState(null);
 
 
     let dialogueRef: HTMLDialogElement | null;
@@ -194,7 +194,7 @@ const AddAdvertiserContent = () => {
                     </div>
                     <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
                         <PhoneMask 
-                            label="Contact Number" 
+                            label="Contact Number*" 
                             inputId="contactNumber" 
                             setPhoneNumber={setContactNumber} 
                             setCountryCode={setCountryCode} 

@@ -28,7 +28,10 @@ export const postRequest = (url: string, postData: any, setState?: Dispatch<SetS
 export const getRequest = (url: any, setState?: Dispatch<SetStateAction<any>>, setLoading?: Dispatch<SetStateAction<boolean>>) => {
     if(setLoading) setLoading(true);
     fetch(url, {
-        method: 'GET'
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzM4MjI3MzEsImV4cCI6MTczMzkwOTEzMX0.06xUkLj_ri74QOZqf2ZPr_VJemnQM7w2-ypKnqha7DM'}`
+        }
     })
         .then(res => {
             if (!res.ok) {
@@ -45,11 +48,6 @@ export const getRequest = (url: any, setState?: Dispatch<SetStateAction<any>>, s
             if(setLoading) setLoading(false);
         })
 }
-
-// export const redirectToLogin  = () => {
-//     const authToken = localStorage.getItem('authToken');
-//     if(authToken === null) router.push('/admin/login');
-// };
 
 export const validationMessage = (id: string, timeoutRef: MutableRefObject<NodeJS.Timeout | null>, hideOnly:boolean) => {
     const validationDiv = document.querySelector(id);

@@ -18,6 +18,7 @@ const AdminLoginCard = () => {
 
     useEffect(() => {
         if(typeof data === "object" && data !== null) {
+            console.log(data.data.accessToken);
             localStorage.setItem('adminAuthToken', JSON.stringify(jwtDecode(data.data.accessToken)));
             router.push(ADMIN_USER_ADMINLIST);
         }
@@ -35,9 +36,9 @@ const AdminLoginCard = () => {
             </div>
             <p className="text-black text-center font-inikaRegular md:text-[42px] text-[26px] leading-9">Welcome</p>
             <p className="mt-3 text-[#3F3F3F] font-gilroyMedium text-center md:text-[16px] text-[14px]">Glad to see you, Login to your account below</p>
-            {/* user name */}
+            {/* email */}
             <div className="flex flex-col gap-1 mt-12">
-                <label htmlFor="email" className="text-[#3F3F3F] font-gilroyMedium md:text-[16px] text-[12px]">Email</label>
+                <label htmlFor="email" className="text-[#3F3F3F] font-gilroyMedium md:text-[16px] text-[12px]">Email*</label>
                 <input 
                     type="email"
                     id="email"
@@ -54,7 +55,7 @@ const AdminLoginCard = () => {
             </div>
             {/* password */}
             <div className="flex flex-col gap-1 mt-3.5 relative">
-                <label htmlFor="password" className="text-[#3F3F3F] font-gilroyMedium md:text-[16px] text-[12px]">Password</label>
+                <label htmlFor="password" className="text-[#3F3F3F] font-gilroyMedium md:text-[16px] text-[12px]">Password*</label>
                 <input
                 type="password" 
                 id="password"

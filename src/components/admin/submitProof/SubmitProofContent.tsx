@@ -6,25 +6,34 @@ import AddButton from "@/components/common/AddButton";
 import CancelButton from "@/components/common/CancelButton";
 import {RefObject, FormEvent, useState, MouseEvent, useRef} from "react";
 import {useRouter} from "next/navigation";
-import { usePost } from "@/utils/usePost";
 import Dialogue from "@/components/common/Dialogue";
 import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
 import DragAndDrop from "./DragAndDrop";
 import deleteIcon from "/public/assets/images/admin/submitProof/delete-icon.svg";
 import Image from 'next/image';
 import {validationMessage} from "@/utils/utilFunctions";
+import { postRequest } from "@/utils/utilFunctions";
+import { PROOF_ADD } from "@/utils/api-urls";
+import useRedirect from "@/utils/useRedirect";
 
 
 const SubmitProofContent = () => {
     const router = useRouter();
-    const {postData, data} = usePost("/posts");
 
+    const [customerId, setCustomerId] = useState<string>("");
+    const [businessName, setBusinessName] = useState<string>("");
+    const [businessContact, setBusinessContact] = useState<string>("");
+    const [businessAddress, setBusinessAddress] = useState<string>("");
+    const [proofQR, setProofQR] = useState<string>("");
     const [proofTitle, setProofTitle] = useState<string>("");
     const [proofType, setProofType] = useState<string>("");
     const [proofColor, setProofColor] = useState<string>("");
     const [proofSize, setProofSize] = useState<string>("");
     const [proofDesign, setProofDesign] = useState<string>("");
     const [submissionDate, setSubmissionDate] = useState<string>("");
+    const [status, setStatus] = useState<string>("");
+    const [data, setData] = useState(null);
+
 
     let dialogueRef: HTMLDialogElement | null;
     const setDialogueRef = (ref: RefObject<HTMLDialogElement>) => {
@@ -43,28 +52,42 @@ const SubmitProofContent = () => {
         router.back();
     };
 
+    useRedirect(data, () => showModal());
+
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const userData = {
+        const proofData = {
+            customerId: customerId,
+            businessName: businessName,
+            businessContact: businessContact,
+            businessAddress: businessAddress,
             proofTitle: proofTitle,
             proofType: proofType,
             proofColor: proofColor,
             proofSize: proofSize,
             proofDesign: proofDesign,
-            submissionDate: submissionDate
+            proofQR: proofQR,
+            submissionDate: submissionDate,
+            status: status,
+            images: uploadedFiles
         };
-        postData(userData);
-        showModal();
+        postRequest(PROOF_ADD, proofData, setData);
     };
-    console.log(data);
 
     const resetForm = () => {
+        setCustomerId("");
+        setBusinessName("");
+        setBusinessContact("");
+        setBusinessAddress("");
         setProofTitle("");
         setProofType("");
         setProofColor("");
         setProofSize("");
         setProofDesign("");
+        setProofQR("");
         setSubmissionDate("");
+        setStatus("");
+        setUploadedFiles([]);
     };
 
     const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
@@ -111,6 +134,14 @@ const SubmitProofContent = () => {
             onSubmit={submitForm}
         >
             <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4">
+                <LabelInput label="Customer ID*" inputType="text" inputId="customerId" stateValue={customerId} setState={setCustomerId} />
+                <LabelInput label="Business Name*" inputType="text" inputId="businessName" stateValue={businessName} setState={setBusinessName} />
+            </div>
+            <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
+                <LabelInput label="Business Contact*" inputType="text" inputId="businessContact" stateValue={businessContact} setState={setBusinessContact} />
+                <LabelInput label="Business Address*" inputType="text" inputId="businessAddress" stateValue={businessAddress} setState={setBusinessAddress} />
+            </div>
+            <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
                 <LabelInput label="Proof Title*" inputType="text" inputId="proofTitle" stateValue={proofTitle} setState={setProofTitle} />
                 <LabelInput label="Proof Type*" inputType="text" inputId="proofType" stateValue={proofType} setState={setProofType} />
             </div>
@@ -120,7 +151,11 @@ const SubmitProofContent = () => {
             </div>
             <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
                 <LabelInput label="Proof Design*" inputType="text" inputId="proofDesign" stateValue={proofDesign} setState={setProofDesign} />
+                <LabelInput label="Proof QR*" inputType="text" inputId="proofQR" stateValue={proofQR} setState={setProofQR} />
+            </div>
+            <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
                 <LabelInput label="Date Of Submission" inputType="date" inputId="submissionDate" stateValue={submissionDate} setState={setSubmissionDate} required={false} />
+                <LabelInput label="Status" inputType="text" inputId="status" stateValue={status} setState={setStatus} required={false} />
             </div>
             <div className="grid md:grid-cols-1 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
                 <DragAndDrop 
