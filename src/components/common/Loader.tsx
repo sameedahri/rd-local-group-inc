@@ -3,7 +3,10 @@
 
 const Loader = () => {
   return (
-    <p className="mt-5">Loading...</p>
+    <div className="flex justify-center items-end gap-x-2 mt-5">
+      <p className="text-center font-gilroyMedium text-[16px]">Fetching Data</p>
+      <div className="loader"></div>
+    </div>
   )
 }
 

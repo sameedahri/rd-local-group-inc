@@ -98,6 +98,36 @@
   background-color: #EBC0B4; /* Thumb color on hover */
 }
 
+/* Loader */
+.loader {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: block;
+  margin-left: 30px;
+  margin-bottom: 6px;
+  position: relative;
+  background: #F3EEED;
+  box-shadow: -24px 0 #FFF, 24px 0 #FFF;
+  box-sizing: border-box;
+  animation: shadowPulse 1s linear infinite;
+}
+
+@keyframes shadowPulse {
+  33% {
+    background: #F3EEED;
+    box-shadow: -24px 0 #AB877E, 24px 0 #F3EEED;
+  }
+  66% {
+    background: #AB877E;
+    box-shadow: -24px 0 #F3EEED, 24px 0 #F3EEED;
+  }
+  100% {
+    background: #F3EEED;
+    box-shadow: -24px 0 #F3EEED, 24px 0 #AB877E;
+  }
+}
+
 /* Carousel Styles */
 .react-multi-carousel-list > button {
   border-radius: 10px;
@@ -179,6 +209,10 @@ table.dataTable > thead > tr > th
 table.dataTable thead th {
   color: #262626;
   font-size: 18px;
+}
+
+.dt-empty {
+  @apply text-heading font-gilroySemibold text-[16px];
 }
 
 @media (max-width: 767px) {

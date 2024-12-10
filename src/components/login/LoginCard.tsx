@@ -2,29 +2,34 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import logo from "/public/assets/images/common/logo.png";
-import {useState, FormEvent} from "react";
-import { usePost } from "@/utils/usePost";
+import {useState, FormEvent, useEffect} from "react";
 import MaskedInput from "../common/MaskedInput";
+import { postRequest } from "@/utils/utilFunctions";
+import {jwtDecode} from "jwt-decode";
 
 
 interface LoginCardProps {
     urlToDashboard: string,
-    postLoginDataUrl: string
+    postLoginDataUrl: string,
+    isOwner: boolean
 }
 
-const LoginCard:React.FC<LoginCardProps> = ({urlToDashboard, postLoginDataUrl}) => {
-    const [phoneNumber, setPhoneNumber] = useState<string>("");
-
-    const {postData, data} = usePost(postLoginDataUrl);
-    console.log(data);
-
+const LoginCard:React.FC<LoginCardProps> = ({urlToDashboard, postLoginDataUrl, isOwner}) => {
     const router = useRouter();
+    const [phoneNumber, setPhoneNumber] = useState<string>("");
+    const [data, setData] = useState<{data: {accessToken: string}, message: string, success: boolean} | string | null>(null);
+
+    useEffect(() => {
+        if(typeof data === "object" && data !== null) {
+            // console.log(data.data.accessToken);
+            localStorage.setItem(`${isOwner ? 'ownerAuthToken' : 'advertiserAuthToken'}`, JSON.stringify(jwtDecode(data.data.accessToken)));
+            router.push(urlToDashboard);
+        }
+    }, [data, router, urlToDashboard, isOwner])
+
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        postData({
-            phoneNumber: phoneNumber
-        });
-        router.push(urlToDashboard);
+        postRequest(postLoginDataUrl, {phoneNumber: phoneNumber}, setData);
     };
 
     return(
