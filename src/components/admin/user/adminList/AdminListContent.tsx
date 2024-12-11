@@ -84,7 +84,7 @@ const AdminListContent = () => {
                 />
             </div>
             <SearchBar />
-            {isLoading ? <Loader /> : <AdminListTable data={data?.data} columns={columns} />}
+            {isLoading ? <Loader dotsOnly={false} size="w-[10px] h-[10px]" /> : <AdminListTable data={data?.data} columns={columns} />}
         </div>
     )
 }

@@ -100,11 +100,8 @@
 
 /* Loader */
 .loader {
-  width: 10px;
-  height: 10px;
   border-radius: 50%;
   display: block;
-  margin-left: 30px;
   margin-bottom: 6px;
   position: relative;
   background: #F3EEED;

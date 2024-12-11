@@ -50,7 +50,6 @@ const LoginCard:React.FC<LoginCardProps> = ({urlToDashboard, postLoginDataUrl, i
             >Login</button>
         </form>
     )
-
 }
 
 export default LoginCard

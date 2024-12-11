@@ -75,7 +75,7 @@ const AdvertisersContent = () => {
                 />
             </div>
             <SearchBar />
-            {isLoading ? <Loader /> : <RestaurantOwnersTable data={data?.data} columns={columns} />}
+            {isLoading ? <Loader dotsOnly={false} size="w-[10px] h-[10px]" /> : <RestaurantOwnersTable data={data?.data} columns={columns} />}
         </div>
     )
 }

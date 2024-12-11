@@ -1,18 +1,18 @@
 "use client";
 import {useRouter} from "next/navigation";
 import DashboardCard from "./DashboardCard";
-import {useState, useLayoutEffect} from "react";
+import {useState, useEffect} from "react";
 import PageHeading from "../common/PageHeading";
-import {useFetch} from "@/utils/useFetch";
 import AddButton from "../common/AddButton";
-
+import { getRequest } from "@/utils/utilFunctions";
+import Loader from "../common/Loader";
 
 interface DashboardContentProps {
     urlToAddExtraStaff: string,
     urlToCardDetails: string,
     getProofsDataUrl: string
 }
-interface CardData {
+interface DataProps {
     id: number,
     type: string,
     submissionDate: string,
@@ -21,13 +21,17 @@ interface CardData {
 
 const DashboardContent: React.FC<DashboardContentProps> = ({urlToAddExtraStaff, urlToCardDetails, getProofsDataUrl}) => {
     const router = useRouter();
+    const [data, setData] = useState<{data: DataProps[], limit: number, page: number, total: number} | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const {data} = useFetch(getProofsDataUrl);
-    console.log(data);
+    useEffect(() => {
+        getRequest(getProofsDataUrl, setData, setIsLoading);
+    }, [getProofsDataUrl])
+    console.log(data)
 
     // dummy data
-    const [cardsArr, setCardsArr] = useState<CardData[] | null>(null);
-    useLayoutEffect(() => {
+    const [cardsArr, setCardsArr] = useState<DataProps[] | null>(null);
+    useEffect(() => {
         setCardsArr([
             {id: 1, type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: true},
             {id: 2, type: "Proof Title", submissionDate: "12 Dec, 12:00am", isAccepted: false},
@@ -57,11 +61,15 @@ const DashboardContent: React.FC<DashboardContentProps> = ({urlToAddExtraStaff, 
                 onClickFunction={() => router.push(urlToAddExtraStaff)}
             />
         </div>
+        {isLoading ? <Loader mt="mt-8" /> : 
         <div className="grid sm:gap-6 gap-4 sm:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 mt-8">
+            {/* {data && data.data.map(({id, type, submissionDate, isAccepted}) => (
+                <DashboardCard key={id} urlToCardDetails={urlToCardDetails} cardId={id} type={type} submissionDate={submissionDate} isAccepted={isAccepted} />
+            ))} */}
             {cardsArr && cardsArr.map(({id, type, submissionDate, isAccepted}) => (
                 <DashboardCard key={id} urlToCardDetails={urlToCardDetails} cardId={id} type={type} submissionDate={submissionDate} isAccepted={isAccepted} />
             ))}
-        </div>
+        </div>}
     </div>
   )
 }
