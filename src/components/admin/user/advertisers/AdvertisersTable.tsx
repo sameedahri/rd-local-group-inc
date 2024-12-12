@@ -8,13 +8,13 @@ import {useRef, useEffect} from "react";
 import {useRouter} from "next/navigation";
 
 
-interface RestaurantOwnersTableProps {
+interface AdvertisersTableProps {
     // eslint-disable-next-line
     data: any[] | undefined,
     columns: {title: string, data: string}[]
 }
 
-const RestaurantOwnersTable: React.FC<RestaurantOwnersTableProps> = ({data, columns}) => {
+const AdvertisersTable: React.FC<AdvertisersTableProps> = ({data, columns}) => {
     const router = useRouter();
 
     const tableRef = useRef<HTMLTableElement>(null);
@@ -28,17 +28,9 @@ const RestaurantOwnersTable: React.FC<RestaurantOwnersTableProps> = ({data, colu
                     {targets: "_all", className: "all-columns"},
                     {targets: 0, visible: false},
                     {targets: 1, className: "first-column"},
-                    {targets: [1, 2, 3, 4], className: "prominent-column"},
-                    {targets: [5, 6, 7], className: "sec-column"},
-                    {targets: 8, className: "nested-column"}
-                    // {
-                    //     targets: 8,
-                    //     orderable: false,
-                    //     searchable: false,
-                    //     render: () => {
-                    //         return `<button class="proof-btn w-[100px] h-[45px] rounded-[22px] border border-[#EBC0B4] bg-[rgba(235,192,180,0.21)] text-[#AB877E] font-gilroyRegular text-[12px]">Upload Proof</button>`
-                    //     }
-                    // },
+                    {targets: [1, 2, 3, 4, 5], className: "prominent-column"},
+                    {targets: [6, 7, 8, 9, 10, 11], className: "sec-column"},
+                    {targets: [12, 13, 14], className: "nested-column"}
                 ],
                 scrollX: true,
                 destroy: true,
@@ -63,9 +55,9 @@ const RestaurantOwnersTable: React.FC<RestaurantOwnersTableProps> = ({data, colu
 
     return ( 
         <div className="dataTable-wrapper">
-            <table ref={tableRef} className="dataTable-classes" style={{minWidth: '1500px'}}></table>
+            <table ref={tableRef} className="dataTable-classes" style={{minWidth: '2000px'}}></table>
         </div>
     )
 }
 
-export default RestaurantOwnersTable
+export default AdvertisersTable

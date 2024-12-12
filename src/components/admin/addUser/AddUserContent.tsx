@@ -51,9 +51,10 @@ const AddUserContent = () => {
             firstName: firstName,
             lastName: lastName,
             email: email,
-            phone: countryCode + " " + phoneNumber,
-            password: password
+            password: password,
+            phone: countryCode + " " + phoneNumber
         };
+        console.log(userData)
         postRequest(ADMIN_CREATE, userData, setData);
     };
 

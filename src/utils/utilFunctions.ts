@@ -29,9 +29,7 @@ export const postRequest = (url: string, postData: any, setState?: Dispatch<SetS
 // eslint-disable-next-line
 export const getRequest = (url: any, setState?: Dispatch<SetStateAction<any>>, setLoading?: Dispatch<SetStateAction<boolean>>) => {
     if(setLoading) setLoading(true);
-
     const authToken = localStorage.getItem('adminAuthToken');
-    console.log(authToken)
     fetch(url, {
         method: 'GET',
         headers: {

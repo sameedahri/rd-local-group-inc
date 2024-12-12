@@ -83,6 +83,7 @@
 /* Srollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px; /* Width of the scrollbar */
+  height: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
@@ -195,6 +196,10 @@
   @apply w-[100%];
 }
 
+.dt-scroll-body {
+  @apply custom-scrollbar;
+}
+
 table.dataTable > thead > tr,
 table.dataTable > thead > tr > th
 {
@@ -271,11 +276,21 @@ th.no-sort-icon .dt-column-order {
 }
 
 .prominent-column {
-  @apply text-[#262626] font-gilroyMedium md:text-[18px] text-[16px];
+  @apply text-[#262626] font-gilroyMedium md:text-[16px] text-[14px];
 }
 
 .sec-column {
   @apply text-[#717171] font-gilroyMedium md:text-[16px] text-[14px];
+}
+
+.nested-column {
+  @apply text-[#717171] font-gilroyMedium text-[12px] min-w-[220px];
+}
+.nested-column-wrapper > p {
+  @apply flex gap-x-1;
+}
+.nested-column-wrapper > p > span:last-child {
+  @apply text-[#262626];
 }
 
 /* admin list datatable */
@@ -286,4 +301,7 @@ th.no-sort-icon .dt-column-order {
 /* restaurant owners datatable */
 .dt-column-order {
   display: none;
+}
+.agr-date {
+  text-align: left !important;
 }
