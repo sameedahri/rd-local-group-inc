@@ -14,6 +14,7 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({urlToLogin, isAdmin}) => {
     const logout = () => {
         if(isAdmin) {
             localStorage.removeItem('adminAuthToken');
+            localStorage.removeItem('adminUserInfo');
             router.push(ADMIN_LOGIN);
         } else {
             router.push(urlToLogin)

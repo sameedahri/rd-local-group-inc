@@ -16,7 +16,7 @@ const Header: React.FC<HeaderProps> = ({urlToLogin, isAdmin=false}) => {
 
     const [userInitial, setUserInitial] = useState<string>("");
     useEffect(() => {
-        const authToken = localStorage.getItem('adminAuthToken');
+        const authToken = localStorage.getItem('adminUserInfo');
         if(authToken) setUserInitial(JSON.parse(authToken).email[0].toUpperCase());
     }, [])
 

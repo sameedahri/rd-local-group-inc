@@ -18,8 +18,8 @@ const AdminLoginCard = () => {
 
     useEffect(() => {
         if(typeof data === "object" && data !== null) {
-            // localStorage.setItem('adminAuthToken', JSON.stringify(data.data.accessToken));
-            localStorage.setItem('adminAuthToken', JSON.stringify(jwtDecode(data.data.accessToken)));
+            localStorage.setItem('adminAuthToken', JSON.stringify(data.data.accessToken));
+            localStorage.setItem('adminUserInfo', JSON.stringify(jwtDecode(data.data.accessToken)));
             router.push(ADMIN_USER_ADMINLIST);
         }
     }, [data, router])

@@ -3,9 +3,11 @@ import { MutableRefObject, Dispatch, SetStateAction } from "react";
 
 // eslint-disable-next-line
 export const postRequest = (url: string, postData: any, setState?: Dispatch<SetStateAction<any>>) => {
+    const authToken = localStorage.getItem('adminAuthToken');
     fetch(url, {
         method: 'POST',
         headers: {
+            'Authorization': `Bearer ${authToken}`,
             'Content-type': 'application/json'
         },
         body: JSON.stringify(postData)
@@ -27,10 +29,13 @@ export const postRequest = (url: string, postData: any, setState?: Dispatch<SetS
 // eslint-disable-next-line
 export const getRequest = (url: any, setState?: Dispatch<SetStateAction<any>>, setLoading?: Dispatch<SetStateAction<boolean>>) => {
     if(setLoading) setLoading(true);
+
+    const authToken = localStorage.getItem('adminAuthToken');
+    console.log(authToken)
     fetch(url, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzM4MjI3MzEsImV4cCI6MTczMzkwOTEzMX0.06xUkLj_ri74QOZqf2ZPr_VJemnQM7w2-ypKnqha7DM'}`
+            'Authorization': `Bearer ${authToken}`
         }
     })
         .then(res => {
