@@ -292,6 +292,9 @@ th.no-sort-icon .dt-column-order {
 .nested-column-wrapper > p > span:last-child {
   @apply text-[#262626];
 }
+.nested-column-wrapper:not(:last-child) {
+  @apply border-b pb-1 mb-1;
+}
 
 /* admin list datatable */
 .checkbox-column {

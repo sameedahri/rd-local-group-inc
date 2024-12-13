@@ -46,10 +46,12 @@ const AddAdvertiserContent = () => {
     const [expDate, setExpDate] = useState<string>("");
     const [cvc, setCvc] = useState<string>("");
 
+    const [nameOnCheque, setNameOnCheque] = useState<string>("");
     const [chequeNumber, setChequeNumber] = useState<string>("");
     const [phoneNumberOnCheque, setPhoneNumberOnCheque] = useState<string>("");
     const [routeNumber, setRouteNumber] = useState<string>("");
     const [accNumber, setAccNumber] = useState<string>("");
+
     const [data, setData] = useState(null);
 
 
@@ -90,6 +92,7 @@ const AddAdvertiserContent = () => {
 
             adPrice: parseFloat(adPrice),
             isOneTimePayment: isOneTimePayment,
+            is2Payments: isOneTimePayment ? false : true,
             setupFee: isOneTimePayment ? 0.00 : parseFloat(setupFee),
             totalDueAmount: parseFloat(totalAmount),
 
@@ -100,12 +103,13 @@ const AddAdvertiserContent = () => {
             cardExpDate: expDate,
             cardCvc: cvc,
 
-            nameOnCheck: "",
+            nameOnCheck: nameOnCheque,
             checkNumber: chequeNumber,
             phoneNumberOnCheck: phoneNumberOnCheque,
             eCheckRouteNumber: routeNumber,
             eCheckAccountNumber: accNumber
         };
+        console.log(advertiserData)
         postRequest(ADVERTISER_ADD, advertiserData, setData);
     };
 
@@ -131,6 +135,7 @@ const AddAdvertiserContent = () => {
         setZipCode("");
         setExpDate("");
         setCvc("");
+        setNameOnCheque("");
         setChequeNumber("");
         setPhoneNumberOnCheque("");
         setRouteNumber("");
@@ -216,7 +221,7 @@ const AddAdvertiserContent = () => {
                     </div>
                     <div className="grid md:grid-cols-1 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
                         <div className="flex md:items-center gap-x-2">
-                            <Checkbox checkboxId="onePayment" onChange={checkboxOnchange} width="w-[22px] min-w-[22px]" height="h-[20px] min-h-[20px]" />
+                            <Checkbox checkboxId="onePayment" onChange={checkboxOnchange} width="w-[22px] min-w-[22px]" height="h-[20px] min-h-[20px]" required={false} />
                             <label htmlFor="onePayment" className="text-[#262626] font-gilroySemibold md:text-[16px] text-[14px]">A. One payment paid at signing of this agreement</label>
                         </div>
                         <div className="flex md:items-center gap-x-2">
@@ -250,7 +255,7 @@ const AddAdvertiserContent = () => {
                 <fieldset className="mt-12">
                     <FormSubHeading heading="Cheque Info" />
                     <div className="grid md:grid-cols-1 md:gap-x-4 gap-y-4">
-                        <LabelInput label="Name on Cheque*" inputType="text" inputId="nameOnCheque" stateValue={street} setState={setStreet} />
+                        <LabelInput label="Name on Cheque*" inputType="text" inputId="nameOnCheque" stateValue={nameOnCheque} setState={setNameOnCheque} />
                     </div>
                     <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
                         <LabelInput label="Cheque Number*" inputType="text" inputId="chequeNumber" stateValue={chequeNumber} setState={setChequeNumber} />

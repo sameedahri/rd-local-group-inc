@@ -41,6 +41,7 @@ const RestaurantOwnersTable: React.FC<RestaurantOwnersTableProps> = ({data, colu
                     // },
                 ],
                 scrollX: true,
+                scrollY: "500px",
                 destroy: true,
                 searching: false,
                 lengthChange: false
