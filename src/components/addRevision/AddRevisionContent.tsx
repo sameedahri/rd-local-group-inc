@@ -8,8 +8,8 @@ import {useState, RefObject, FormEvent} from "react";
 import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
 import Dialogue from "../common/Dialogue";
 import {useRouter} from "next/navigation";
-import { postRequest } from "@/utils/utilFunctions";
-import useRedirect from "@/utils/useRedirect";
+// import { postRequest } from "@/utils/utilFunctions";
+// import useRedirect from "@/utils/useRedirect";
 
 
 interface AddRevisionContentProps {
@@ -23,7 +23,7 @@ const AddRevisionContent:React.FC<AddRevisionContentProps> = ({urlToDashboard, p
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
     const [changes, setChanges] = useState<string>("");
-    const [data, setData] = useState(null);
+    // const [data, setData] = useState(null);
 
     let dialogueRef: HTMLDialogElement | null;
     const setDialogueRef = (ref: RefObject<HTMLDialogElement>) => {
@@ -42,7 +42,7 @@ const AddRevisionContent:React.FC<AddRevisionContentProps> = ({urlToDashboard, p
         router.back();
     };
 
-    useRedirect(data, () => showModal());
+    // useRedirect(data, () => showModal());
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -51,8 +51,11 @@ const AddRevisionContent:React.FC<AddRevisionContentProps> = ({urlToDashboard, p
             lastName: lastName,
             changes: changes
         };
-        postRequest(postRevisionUrl, revisionData, setData);
+        console.log(revisionData)
+        // postRequest(postRevisionUrl, revisionData, setData);
+        showModal();
     };
+    console.log(postRevisionUrl)
 
     const resetForm = () => {
         setFirstName("");

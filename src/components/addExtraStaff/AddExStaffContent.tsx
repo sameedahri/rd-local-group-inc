@@ -8,8 +8,8 @@ import Dialogue from "../common/Dialogue";
 import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
 import {RefObject, FormEvent, useState} from "react";
 import PhoneMask from "../common/PhoneMask";
-import { postRequest } from "@/utils/utilFunctions";
-import useRedirect from "@/utils/useRedirect";
+// import { postRequest } from "@/utils/utilFunctions";
+// import useRedirect from "@/utils/useRedirect";
 
 interface AddExStaffContentProps {
     urlToDashboard: string,
@@ -24,7 +24,7 @@ const AddExStaffContent:React.FC<AddExStaffContentProps> = ({urlToDashboard, pos
     const [email, setEmail] = useState<string>("");
     const [countryCode, setCountryCode] = useState<string>("+1");
     const [phoneNumber, setPhoneNumber] = useState<string>("");
-    const [data, setData] = useState(null);
+    // const [data, setData] = useState(null);
 
     let dialogueRef: HTMLDialogElement | null;
     const setDialogueRef = (ref: RefObject<HTMLDialogElement>) => {
@@ -43,7 +43,7 @@ const AddExStaffContent:React.FC<AddExStaffContentProps> = ({urlToDashboard, pos
         router.push(urlToDashboard);
     };
 
-    useRedirect(data, () => showModal());
+    // useRedirect(data, () => showModal());
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -53,8 +53,11 @@ const AddExStaffContent:React.FC<AddExStaffContentProps> = ({urlToDashboard, pos
             email: email,
             phoneNumber: countryCode + " " + phoneNumber
         };
-        postRequest(postStaffUrl, staffData, setData);
+        console.log(staffData)
+        // postRequest(postStaffUrl, staffData, setData);
+        showModal();
     };
+    console.log(postStaffUrl)
 
     const resetForm = () => {
         setFirstName("");
