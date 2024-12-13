@@ -6,6 +6,7 @@ import PageSubHeading from "@/components/common/PageSubHeading";
 
 
 const RestaurantProfileContent = () => {
+
   return (
     <div className="content-wrapper">
         <div className="md:mb-0 mb-[40px]">

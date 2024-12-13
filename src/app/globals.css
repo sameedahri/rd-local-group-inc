@@ -276,10 +276,12 @@ th.no-sort-icon .dt-column-order {
 }
 
 .prominent-column {
-  @apply text-[#262626] font-gilroyMedium md:text-[16px] text-[14px];
+  /* @apply text-[#262626] font-gilroyMedium md:text-[16px] text-[14px]; */
+  @apply text-[#262626] font-gilroyMedium md:text-[18px] text-[16px];
 }
 
 .sec-column {
+  /* @apply text-[#717171] font-gilroyMedium md:text-[16px] text-[14px]; */
   @apply text-[#717171] font-gilroyMedium md:text-[16px] text-[14px];
 }
 

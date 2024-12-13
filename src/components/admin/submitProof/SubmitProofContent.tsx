@@ -61,16 +61,17 @@ const SubmitProofContent = () => {
             businessName: businessName,
             businessContact: businessContact,
             businessAddress: businessAddress,
-            proofTitle: proofTitle,
+            title: proofTitle,
             proofType: proofType,
-            proofColor: proofColor,
-            proofSize: proofSize,
-            proofDesign: proofDesign,
+            color: proofColor,
+            size: proofSize,
+            design: proofDesign,
             proofQR: proofQR,
-            submissionDate: submissionDate,
+            dateOfSubmission: submissionDate,
             status: status,
             images: uploadedFiles
         };
+        console.log(proofData)
         postRequest(PROOF_ADD, proofData, setData);
     };
 

@@ -3,7 +3,7 @@
 
 interface ProofInfoProps {
     infoName: string,
-    infoValue: string
+    infoValue: string | number | undefined
 }
 
 const ProofInfo:React.FC<ProofInfoProps> = ({infoName, infoValue}) => {

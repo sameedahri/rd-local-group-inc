@@ -33,7 +33,6 @@ const AdvertisersTable: React.FC<AdvertisersTableProps> = ({data, columns}) => {
                     {targets: [12, 13, 14], className: "nested-column"}
                 ],
                 scrollX: true,
-                scrollY: "500px",
                 destroy: true,
                 searching: false,
                 lengthChange: false

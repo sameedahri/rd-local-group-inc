@@ -5,7 +5,6 @@ import downArrowIcon from "/public/assets/images/admin/restaurantProfile/down-ar
 import Image from "next/image";
 import User from "./User";
 import { useState } from "react";
-import { useFetch } from "@/utils/useFetch";
 
 
 const RestaurantInfo = () => {
@@ -13,8 +12,6 @@ const RestaurantInfo = () => {
     const toggleUsers = () => {
         setIsUsersOpen(!isUsersOpen);
     };
-    const {data: users} = useFetch('/posts');
-    console.log(users);
 
     const usersData = [
         {id: 1, name: "John Doe", email: "Jack@example.com"},

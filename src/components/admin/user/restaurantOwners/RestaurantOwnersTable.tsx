@@ -24,24 +24,38 @@ const RestaurantOwnersTable: React.FC<RestaurantOwnersTableProps> = ({data, colu
             const table = $(tableRef.current).DataTable({
                 data: data,
                 columns: columns,
+                // columnDefs: [
+                //     {targets: "_all", className: "all-columns"},
+                //     {targets: 0, visible: false},
+                //     {targets: 1, className: "first-column"},
+                //     {targets: [1, 2, 3, 4], className: "prominent-column"},
+                //     {targets: [5, 6, 7], className: "sec-column"},
+                //     {targets: 8, className: "nested-column"},
+                //     {
+                //         targets: 9,
+                //         orderable: false,
+                //         searchable: false,
+                //         render: () => {
+                //             return `<button class="proof-btn w-[100px] h-[45px] rounded-[22px] border border-[#EBC0B4] bg-[rgba(235,192,180,0.21)] text-[#AB877E] font-gilroyRegular text-[12px]">Upload Proof</button>`
+                //         }
+                //     },
+                // ],
                 columnDefs: [
                     {targets: "_all", className: "all-columns"},
                     {targets: 0, visible: false},
                     {targets: 1, className: "first-column"},
-                    {targets: [1, 2, 3, 4], className: "prominent-column"},
-                    {targets: [5, 6, 7], className: "sec-column"},
-                    {targets: 8, className: "nested-column"}
-                    // {
-                    //     targets: 8,
-                    //     orderable: false,
-                    //     searchable: false,
-                    //     render: () => {
-                    //         return `<button class="proof-btn w-[100px] h-[45px] rounded-[22px] border border-[#EBC0B4] bg-[rgba(235,192,180,0.21)] text-[#AB877E] font-gilroyRegular text-[12px]">Upload Proof</button>`
-                    //     }
-                    // },
+                    {targets: [1, 2], className: "prominent-column"},
+                    {targets: [3, 4, 5], className: "sec-column"},
+                    {
+                        targets: 6,
+                        orderable: false,
+                        searchable: false,
+                        render: () => {
+                            return '<button class="w-[100px] h-[45px] rounded-[22px] border border-[#EBC0B4] bg-[rgba(235,192,180,0.21)] text-[#AB877E] font-gilroyRegular text-[12px]">Upload Proof</button>'
+                        }
+                    },
                 ],
                 scrollX: true,
-                scrollY: "500px",
                 destroy: true,
                 searching: false,
                 lengthChange: false
@@ -64,7 +78,8 @@ const RestaurantOwnersTable: React.FC<RestaurantOwnersTableProps> = ({data, colu
 
     return ( 
         <div className="dataTable-wrapper">
-            <table ref={tableRef} className="dataTable-classes" style={{minWidth: '1500px'}}></table>
+            {/* minWidth: '1500px' */}
+            <table ref={tableRef} className="dataTable-classes" style={{minWidth: '800px'}}></table>
         </div>
     )
 }
