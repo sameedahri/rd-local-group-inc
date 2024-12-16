@@ -4,7 +4,7 @@ import PageSubHeading from "@/components/common/PageSubHeading";
 import ProofInfo from "./ProofInfo";
 import AcceptedButton from "@/components/dashboard/AcceptedButton";
 import CancelButton from "@/components/common/CancelButton";
-// import Image from "next/image";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 // import logo from "/public/assets/images/common/logo.png";
 import {ADMIN_RESTAURANTPROFILE} from "@/utils/pages-routes";
@@ -44,7 +44,7 @@ const ProofDetailContent = () => {
         getRequest(PROOF_GET+"/"+id, setData, setIsLoading);
     }, [id])
 
-    // console.log(data)
+    console.log(data)
 
     // const images = [
     //     {url: logo},
@@ -83,7 +83,7 @@ const ProofDetailContent = () => {
                     <div className="mb-[40px] mt-[18px]">
                         <p className="md:text-[22px] text-[20px] text-[#262626] font-gilroySemibold">Proof Images:</p>
                         <div className="flex flex-wrap gap-[10px] md:mt-[15px] mt-[5px]">
-                            {/* {data?.images.map((imgUrl, index) => (
+                            {data?.images.map((imgUrl, index) => (
                                 <div key={index} id={String(index)} className="relative">
                                     <Image
                                         src={imgUrl}
@@ -93,7 +93,7 @@ const ProofDetailContent = () => {
                                         className="md:w-[100px] w-[58px] md:h-[100px] h-[58px] object-cover rounded-[10px] border border-[#F3EEED]"
                                     />
                                 </div>
-                            ))} */}
+                            ))}
                         </div>
                     </div>
                     </>
