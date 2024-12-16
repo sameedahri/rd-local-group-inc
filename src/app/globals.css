@@ -250,7 +250,7 @@ table.dataTable > tbody > tr > td:last-child
 /* custom rows */
 
 /* hidden columns headings */
-table.dataTable thead th[data-dt-column="0"], 
+/* table.dataTable thead th[data-dt-column="0"], 
 table.dataTable thead th[data-dt-column="9"],
 table.dataTable thead th[data-dt-column="10"]
 {
@@ -282,7 +282,7 @@ table.dataTable > tbody > tr > td {
 }
 .nested-column-wrapper > p > span:last-child {
   @apply text-[#262626];
-}
+} */
 
 
 /* Hide sorting icons for columns with the 'no-sort-icon' class */
@@ -319,7 +319,7 @@ th.no-sort-icon .dt-column-order {
   @apply text-[#717171] font-gilroyMedium md:text-[16px] text-[14px];
 }
 
-/* .nested-column {
+.nested-column {
   @apply text-[#717171] font-gilroyMedium text-[12px] min-w-[220px];
 }
 .nested-column-wrapper > p {
@@ -327,7 +327,7 @@ th.no-sort-icon .dt-column-order {
 }
 .nested-column-wrapper > p > span:last-child {
   @apply text-[#262626];
-} */
+}
 
 /* admin list datatable */
 .checkbox-column {
