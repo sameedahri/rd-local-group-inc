@@ -2,7 +2,7 @@
 
 interface InfoPieceProps {
     infoName: string,
-    infoValue: string
+    infoValue: string | undefined
 }
 
 const InfoPiece:React.FC<InfoPieceProps> = ({infoName, infoValue}) => {

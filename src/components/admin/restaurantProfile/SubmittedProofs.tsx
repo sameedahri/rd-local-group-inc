@@ -1,42 +1,34 @@
 "use client";
 import PageHeading from "@/components/common/PageHeading";
 import ProofCard from "./ProofCard";
-// import { useFetch } from "@/utils/useFetch";
-import { getRequest } from "@/utils/utilFunctions";
-import { PROOFS_GET } from "@/utils/api-urls";
-import { useState, useEffect } from "react";
 
+type ProofsProps = {
+    id: number,
+    title: string,
+    businessAddress: string,
+    dateOfSubmission: string,
+    status: string
+}
 
 type DataProps = {
     id: number,
-    businessAddress: string,
-    businessContact: string,
-    businessName: string,
+    address: string,
+    agreementDate: string,
     color: string,
-    createdAt: string,
-    customerId: string,
-    dateOfSubmission: string,
-    design: string,
-    images: string[],
-    proofQR: string,
+    contactNumber: string,
+    restaurantName: string,
     size: string,
-    status: string,
-    title: string,
-    type: string
+    tabletopSpecs: string,
+    owners: [],
+    proofs: ProofsProps[]
 }
 
-const SubmittedProofs = () => {
-    // const {data: restaurants} = useFetch('/posts');
-    // console.log(restaurants);
+interface SubmittedProofsProps {
+    data: DataProps | null
+}
 
-    const [data, setData] = useState<DataProps[] | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
-  
-    useEffect(() => {
-      getRequest(PROOFS_GET, setData, setIsLoading);
-    }, [])
-  
-    console.log(data)
+const SubmittedProofs:React.FC<SubmittedProofsProps> = ({data}) => {
+    // console.log(data)
 
     // const restaurantsData = [
     //     {id: 1, title: "Proof Title", description: "Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur.", submissionDate: "12 Dec, 12:00am", isAccepted: true},
@@ -57,17 +49,7 @@ const SubmittedProofs = () => {
     <section className="lg:w-[62%] w-[100%] bg-white rounded-[16px] md:p-[30px] p-[20px]">
         <PageHeading heading="Submitted Proofs" h2={true} mb="md:mb-8 mb-4" />
         <div className="grid xl:gap-5 gap-3 xl:grid-cols-2 grid-cols-1 md:mt-8 mt-4">
-            {/* {restaurantsData && restaurantsData.map((restaurant) => (
-                <ProofCard 
-                    urlToProofDetails={`/admin/proof-detail/${restaurant.id}`}
-                    title={restaurant.title}
-                    description={restaurant.description}
-                    submissionDate={restaurant.submissionDate}
-                    isAccepted={restaurant.isAccepted}
-                    key={restaurant.id}
-                />
-            ))} */}
-            {isLoading ? <></> : data?.map((proof) => (
+            {data?.proofs?.map((proof) => (
                 <ProofCard 
                     urlToProofDetails={`/admin/proof-detail/${proof.id}`}
                     title={proof.title}
