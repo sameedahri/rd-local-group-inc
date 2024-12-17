@@ -7,8 +7,12 @@ import { getRequest } from "@/utils/utilFunctions";
 import { OWNER_GET } from "@/utils/api-urls";
 import { useState, useEffect } from "react";
 import Loader from "@/components/common/Loader";
+import { useParams } from "next/navigation";
 
 
+type OwnerProps = {
+  id: number, name: string, email: string, contactNumber: string, officeNumber: string, role: string
+}
 type ProofsProps = {
   id: number,
   title: string,
@@ -16,7 +20,6 @@ type ProofsProps = {
   dateOfSubmission: string,
   status: string
 }
-
 type DataProps = {
   id: number,
   address: string,
@@ -26,19 +29,19 @@ type DataProps = {
   restaurantName: string,
   size: string,
   tabletopSpecs: string,
-  owners: [],
+  owners: OwnerProps[],
   proofs: ProofsProps[]
 }
 
 const RestaurantProfileContent = () => {
+  const {id} = useParams();
+
   const [data, setData] = useState<DataProps | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getRequest(OWNER_GET+"/"+"2", setData, setIsLoading);
-  }, [])
-
-  console.log(data)
+    getRequest(OWNER_GET+"/"+id, setData, setIsLoading);
+  }, [id])
 
   return (
     <div className="content-wrapper">

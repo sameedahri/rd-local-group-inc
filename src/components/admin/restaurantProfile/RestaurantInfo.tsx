@@ -6,6 +6,10 @@ import Image from "next/image";
 import User from "./User";
 import { useState } from "react";
 
+
+type OwnerProps = {
+    id: number, name: string, email: string, contactNumber: string, officeNumber: string, role: string
+}  
 type ProofsProps = {
     id: number,
     title: string,
@@ -13,7 +17,6 @@ type ProofsProps = {
     dateOfSubmission: string,
     status: string
 }
-
 type DataProps = {
     id: number,
     address: string,
@@ -23,7 +26,7 @@ type DataProps = {
     restaurantName: string,
     size: string,
     tabletopSpecs: string,
-    owners: [],
+    owners: OwnerProps[],
     proofs: ProofsProps[]
 }
 

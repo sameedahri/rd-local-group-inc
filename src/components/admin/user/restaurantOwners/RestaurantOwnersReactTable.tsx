@@ -6,7 +6,7 @@ import downArrow from "/public/assets/images/admin/user/down-arrow.svg";
 import Image from "next/image";
 import eyeIcon from "/public/assets/images/admin/user/eye-icon.svg";
 import { useRouter } from "next/navigation";
-import {ADMIN_RESTAURANTPROFILE} from "@/utils/pages-routes";
+import {ADMIN_RESTAURANTPROFILE, ADMIN_SUBMIT_PROOF} from "@/utils/pages-routes";
 
 
 type OwnerProps = {
@@ -63,6 +63,9 @@ const RestaurantOwnersReactTable:React.FC<RestaurantOwnersReactTableProps> = ({d
         {name: "Proof", cell: () => (
             <button 
                 className="proof-btn w-[100px] h-[45px] rounded-[22px] border border-[#EBC0B4] bg-[rgba(235,192,180,0.21)] text-[#AB877E] font-gilroyRegular text-[12px]"
+                onClick={() => {
+                    router.push(ADMIN_SUBMIT_PROOF)
+                }}
             >Upload Proof</button>
         )},
         {name: "View", 

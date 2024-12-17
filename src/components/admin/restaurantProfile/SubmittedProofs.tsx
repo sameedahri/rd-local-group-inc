@@ -2,6 +2,10 @@
 import PageHeading from "@/components/common/PageHeading";
 import ProofCard from "./ProofCard";
 
+
+type OwnerProps = {
+    id: number, name: string, email: string, contactNumber: string, officeNumber: string, role: string
+}
 type ProofsProps = {
     id: number,
     title: string,
@@ -9,7 +13,6 @@ type ProofsProps = {
     dateOfSubmission: string,
     status: string
 }
-
 type DataProps = {
     id: number,
     address: string,
@@ -19,7 +22,7 @@ type DataProps = {
     restaurantName: string,
     size: string,
     tabletopSpecs: string,
-    owners: [],
+    owners: OwnerProps[],
     proofs: ProofsProps[]
 }
 
