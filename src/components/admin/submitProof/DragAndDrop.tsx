@@ -19,7 +19,8 @@ const DragAndDrop:React.FC<DragAndDropProps> = ({onDrop, label, inputId}) => {
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop: handleDrop,
         accept: {
-            'image/*': ['.jpeg', '.png', '.pdf'],
+            // 'image/*': ['.jpeg', '.png', '.pdf'],
+            'image/*': ['.jpeg', '.png'],
         },
     });
 

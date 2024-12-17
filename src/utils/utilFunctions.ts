@@ -2,15 +2,41 @@ import { MutableRefObject, Dispatch, SetStateAction } from "react";
 
 
 // eslint-disable-next-line
-export const postRequest = (url: string, postData: any, setState?: Dispatch<SetStateAction<any>>) => {
+export const postRequest = (url: string, postData: any, setState?: Dispatch<SetStateAction<any>>, isFormData: boolean = false) => {
+    const authToken = localStorage.getItem('adminAuthToken');
+    const _postData = isFormData ? postData : JSON.stringify(postData);
+    const _contentType = isFormData ? 'multi' : 'application/json';
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${authToken}`,
+            'Content-type': _contentType
+        },
+        body: _postData
+    })
+        .then(res => {
+            if (!res.ok) {
+                throw Error(`Error ${res.status} - ${res.statusText}`);
+            }
+            return res.json();
+        })
+        .then(data => {
+            if(setState) setState(data)
+        })
+        .catch(error => {
+            if(setState) setState(error.message)
+        })
+}
+
+// eslint-disable-next-line
+export const postFormData = (url: string, postData: any, setState?: Dispatch<SetStateAction<any>>) => {
     const authToken = localStorage.getItem('adminAuthToken');
     fetch(url, {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${authToken}`,
-            'Content-type': 'application/json'
         },
-        body: JSON.stringify(postData)
+        body: postData
     })
         .then(res => {
             if (!res.ok) {

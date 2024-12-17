@@ -12,7 +12,7 @@ import DragAndDrop from "./DragAndDrop";
 import deleteIcon from "/public/assets/images/admin/submitProof/delete-icon.svg";
 import Image from 'next/image';
 import {validationMessage} from "@/utils/utilFunctions";
-import { postRequest } from "@/utils/utilFunctions";
+import { postFormData } from "@/utils/utilFunctions";
 import { PROOF_ADD } from "@/utils/api-urls";
 import useRedirect from "@/utils/useRedirect";
 
@@ -32,6 +32,8 @@ const SubmitProofContent = () => {
     const [proofDesign, setProofDesign] = useState<string>("");
     const [submissionDate, setSubmissionDate] = useState<string>("");
     const [status, setStatus] = useState<string>("");
+    const [files, setFiles] = useState<File[]>([]);
+    // const [filesList, setFilesList] = useState<FileList | null>(null);
     const [data, setData] = useState(null);
 
 
@@ -56,24 +58,46 @@ const SubmitProofContent = () => {
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const proofData = {
-            customerId: customerId,
-            businessName: businessName,
-            businessContact: businessContact,
-            businessAddress: businessAddress,
-            title: proofTitle,
-            proofType: proofType,
-            color: proofColor,
-            size: proofSize,
-            design: proofDesign,
-            proofQR: proofQR,
-            dateOfSubmission: submissionDate,
-            status: status,
-            images: uploadedFiles
-        };
-        console.log(proofData)
-        postRequest(PROOF_ADD, proofData, setData);
+        // const proofData = {
+        //     customerId: customerId,
+        //     businessName: businessName,
+        //     businessContact: businessContact,
+        //     businessAddress: businessAddress,
+        //     title: proofTitle,
+        //     type: proofType,
+        //     color: proofColor,
+        //     size: proofSize,
+        //     design: proofDesign,
+        //     proofQR: proofQR,
+        //     dateOfSubmission: submissionDate,
+        //     status: status,
+        //     images: files
+        // };
+        // 
+        const formData = new FormData();
+        formData.append('customerId', customerId);
+        formData.append('businessName', businessName);
+        formData.append('businessContact', businessContact);
+        formData.append('businessAddress', businessAddress);
+        formData.append('title', proofTitle);
+        formData.append('type', proofType);
+        formData.append('color', proofColor);
+        formData.append('size', proofSize);
+        formData.append('design', proofDesign);
+        formData.append('proofQR', proofQR);
+        formData.append('dateOfSubmission', submissionDate);
+        formData.append('status', status);
+        // filesList && Array.from(filesList).forEach((file) => {
+        //     formData.append("images", file);
+        // });
+        files.forEach(file => {
+            formData.append('images', file);
+        })
+        // 
+        postFormData(PROOF_ADD, formData, setData);
     };
+
+    console.log(files)
 
     const resetForm = () => {
         setCustomerId("");
@@ -88,6 +112,7 @@ const SubmitProofContent = () => {
         setProofQR("");
         setSubmissionDate("");
         setStatus("");
+        setFiles([]);
         setUploadedFiles([]);
     };
 
@@ -104,6 +129,9 @@ const SubmitProofContent = () => {
 
         const MAX_FILE_SIZE = 1 * 1024 * 1024; // size in mbs
         const validFiles = files.filter(file => file.size <= MAX_FILE_SIZE);
+        // 
+        setFiles((prev) => [...prev, ...validFiles]);
+        // 
         const newFiles = validFiles.map((file) => URL.createObjectURL(file));
         setUploadedFiles((prev) => [...prev, ...newFiles]);
 
@@ -117,12 +145,12 @@ const SubmitProofContent = () => {
         setUploadedFiles(prevValue => prevValue.filter((_, i) => String(i) !== id));
     };
 
-    const imageNotShown = (e: MouseEvent<HTMLImageElement>) => {
-        const target = e.target as HTMLImageElement;
-        const embedElement = target?.nextSibling as HTMLEmbedElement;
-        target.classList.add('hidden');
-        embedElement.classList.remove('hidden');
-    };
+    // const imageNotShown = (e: MouseEvent<HTMLImageElement>) => {
+    //     const target = e.target as HTMLImageElement;
+    //     const embedElement = target?.nextSibling as HTMLEmbedElement;
+    //     target.classList.add('hidden');
+    //     embedElement.classList.remove('hidden');
+    // };
 
   return (
     <div className="content-wrapper">
@@ -177,15 +205,15 @@ const SubmitProofContent = () => {
                                 width={100}
                                 height={100}
                                 className="md:w-[100px] w-[58px] md:h-[100px] h-[58px] object-cover rounded-[10px] border border-[#F3EEED]"
-                                onError={imageNotShown}
+                                // onError={imageNotShown}
                             />
-                            <embed 
+                            {/* <embed 
                                 src={src} 
                                 type="application/pdf" 
                                 width={100} 
                                 height={100} 
                                 className="hidden"
-                            ></embed>
+                            ></embed> */}
                         </div>
                     ))}
                 </div>
