@@ -148,7 +148,7 @@ const RestaurantOwnersContent = () => {
     // ];
 
     return (
-        <div className="content-wrapper">
+        <div className="sidemenu-page-content-wrapper">
             <div className="flex justify-between items-center">
                 <div>
                     <PageHeading heading="Restaurant Owners List" mb="mb-0" fontSize="md:text-[28px] text-[20px]" />

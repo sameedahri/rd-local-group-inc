@@ -71,13 +71,14 @@
 .page {
   @apply flex flex-col items-center bg-primaryBg w-[100%] min-h-[calc(100vh-95px)] 2xl:px-32 lg:px-24 md:px-8 px-5 md:py-16 py-10 mt-[95px];
 }
-
 .sidemenu-page {
   @apply flex flex-col items-center bg-primaryBg w-[100%] min-h-[calc(100vh-95px)] lg:px-12 md:px-8 px-5 md:py-16 py-10 mt-[95px] lg:ml-[310px] overflow-x-hidden;
 }
-
 .content-wrapper {
   @apply w-[100%] max-w-[1600px];
+}
+.sidemenu-page-content-wrapper {
+  @apply w-[100%] max-w-[1900px];
 }
 
 /* Srollbar */
@@ -347,23 +348,27 @@ th.no-sort-icon .dt-column-order {
 .dataTable-wrapper {
   @apply bg-white mt-[20px] pb-[20px] rounded-[16px] overflow-auto;
 }
-
 .hZZlND {
   @apply custom-scrollbar;
 }
 
 /* columns width */
-.rdt_TableCol, .rdt_TableCell {
-  min-width: 200px !important;
+div.rdt_TableCol, 
+div.rdt_TableCell 
+{
+  min-width: 120px;
 }
-@media (max-width: 767px) {
-  .rdt_TableCol, .rdt_TableCell {
-    min-width: 100px !important;
-    width: 100px !important;
+/* @media (max-width: 767px) {
+  div.rdt_TableCol, 
+  div.rdt_TableCell  
+  {
+    min-width: 100px;
+    width: 100px;
   }
-}
-
-.rdt_TableCell > div {
+} */
+.rdt_TableCell > div, 
+.ddvZdT 
+{
     white-space: unset !important;
     overflow: unset !important;
     text-overflow: unset !important;
@@ -374,7 +379,6 @@ th.no-sort-icon .dt-column-order {
   color: #262626;
   font-size: 18px;
 }
-
 .rdt_TableHead {
   height: 110px;
 }
@@ -383,16 +387,37 @@ th.no-sort-icon .dt-column-order {
 .rdt_TableBody .rdt_TableRow {
   height: 100px;
 }
-
 .prominent-column {
   @apply text-[#262626] font-gilroyMedium md:text-[18px] text-[16px];
 }
-
 .sec-column {
   @apply text-[#717171] font-gilroyMedium md:text-[16px] text-[14px];
 }
+/* icon wrapper div in thead and tbody */
+.bGNKtt, .gOAnHZ {
+  margin-left: 20px;
+}
+/* icon wrapper button */
+.fvMyvk:hover, .fvMyvk:focus {
+  background: none !important;
+}
 
 /* Restaurant Owners Table */
+
+/* Restaurant Name to Tabletop Specs columns */
+#resaurantOwners div.rdt_TableCol[data-column-id="2"],
+#resaurantOwners div.rdt_TableCell[data-column-id="2"],
+#resaurantOwners div.rdt_TableCol[data-column-id="3"],
+#resaurantOwners div.rdt_TableCell[data-column-id="3"],
+#resaurantOwners div.rdt_TableCol[data-column-id="4"],
+#resaurantOwners div.rdt_TableCell[data-column-id="4"],
+#resaurantOwners div.rdt_TableCol[data-column-id="5"],
+#resaurantOwners div.rdt_TableCell[data-column-id="5"],
+#resaurantOwners div.rdt_TableCol[data-column-id="6"],
+#resaurantOwners div.rdt_TableCell[data-column-id="6"]
+{
+  min-width: 200px;
+}
 
 /* prominent columns */
 #resaurantOwners .rdt_TableBody div[data-column-id="1"],
@@ -401,16 +426,6 @@ th.no-sort-icon .dt-column-order {
 #resaurantOwners .rdt_TableBody div[data-column-id="4"]
 {
   @apply prominent-column;
-}
-
-/* icon wrapper div in thead and tbody */
-.bGNKtt, .gOAnHZ {
-  margin-left: 20px;
-}
-
-/* icon wrapper button */
-.fvMyvk:hover, .fvMyvk:focus {
-  background: none !important;
 }
 
 /* sec columns */
@@ -423,7 +438,7 @@ th.no-sort-icon .dt-column-order {
 }
 
 /* color, size, proof columns */
-#resaurantOwners div.rdt_TableCol[data-column-id="7"],
+/* #resaurantOwners div.rdt_TableCol[data-column-id="7"],
 #resaurantOwners div.rdt_TableCell[data-column-id="7"],
 #resaurantOwners div.rdt_TableCol[data-column-id="8"],
 #resaurantOwners div.rdt_TableCell[data-column-id="8"],
@@ -432,12 +447,40 @@ th.no-sort-icon .dt-column-order {
 #resaurantOwners div.rdt_TableCol[data-column-id="10"],
 #resaurantOwners div.rdt_TableCell[data-column-id="10"]
 {
-  min-width: 120px !important;
-  max-width: 120px !important;
+  min-width: 120px;
+  max-width: 120px;
+} */
+
+/* Advertisers Table */
+
+#advertisers div.rdt_TableCol[data-column-id="2"],
+#advertisers div.rdt_TableCell[data-column-id="2"],
+#advertisers div.rdt_TableCol[data-column-id="3"],
+#advertisers div.rdt_TableCell[data-column-id="3"],
+#advertisers div.rdt_TableCol[data-column-id="7"],
+#advertisers div.rdt_TableCell[data-column-id="7"]
+{
+  min-width: 200px;
 }
 
-/* last column */
-#resaurantOwners div.rdt_TableCol[data-column-id="10"],
-#resaurantOwners div.rdt_TableCell[data-column-id="10"] {
-  margin-right: 5px;
+/* prominent columns */
+#advertisers .rdt_TableBody div[data-column-id="1"],
+#advertisers .rdt_TableBody div[data-column-id="2"],
+#advertisers .rdt_TableBody div[data-column-id="3"]
+{
+  @apply prominent-column;
+}
+
+/* sec columns */
+#advertisers .rdt_TableBody div[data-column-id="4"],
+#advertisers .rdt_TableBody div[data-column-id="5"],
+#advertisers .rdt_TableBody div[data-column-id="6"],
+#advertisers .rdt_TableBody div[data-column-id="7"],
+#advertisers .rdt_TableBody div[data-column-id="8"],
+#advertisers .rdt_TableBody div[data-column-id="9"],
+#advertisers .rdt_TableBody div[data-column-id="10"],
+#advertisers .rdt_TableBody div[data-column-id="11"],
+#advertisers .rdt_TableBody div[data-column-id="12"]
+{
+  @apply sec-column;
 }

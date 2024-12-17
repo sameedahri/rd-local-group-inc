@@ -1,6 +1,5 @@
 "use client";
 import DataTable, {TableColumn} from "react-data-table-component";
-import { useState, useEffect } from "react";
 import upArrow from "/public/assets/images/admin/user/up-arrow.svg";
 import downArrow from "/public/assets/images/admin/user/down-arrow.svg";
 import Image from "next/image";
@@ -33,15 +32,10 @@ interface RestaurantOwnersReactTableProps {
 }
 
 const ExpandedComponent: React.FC<{ data: DataRow }> = ({data}) => {
-    const [owners, setOwners] = useState<OwnerProps[] | null>(null);
-    useEffect(() => {
-        setOwners(data?.owners)
-    }, [data])
-
     return (
      <div className="min-h-[100px] bg-[rgba(243,220,214,0.27)] px-[100px] py-[20px]">
-      {owners?.map(owner => (
-        <p key={owner.id}>{owner.name}</p>
+      {data?.owners?.map(owner => (
+        <p key={owner.id} className="text-[#676767] font-gilroyMedium text-[14px] mb-[8px]">{owner.name}</p>
       ))}
     </div>
     )
@@ -53,13 +47,15 @@ const RestaurantOwnersReactTable:React.FC<RestaurantOwnersReactTableProps> = ({d
 
     const columns: TableColumn<DataRow>[] = [
         {name: "Id", selector: row => row.id, omit: true},
-        {name: "Restaurant Name", selector: row => row.restaurantName},
-        {name: "Agreement Date", selector: row => row.agreementDate},
-        {name: "Address", selector: row => row.address},
-        {name: "Contact Number", selector: row => row.contactNumber},
-        {name: "Tabletop Specs", selector: row => row.tabletopSpecs},
-        {name: "Color", selector: row => row.color},
-        {name: "Size", selector: row => row.size},
+        {name: "Restaurant Name", selector: row => row.restaurantName, sortable: true},
+        {name: "Agreement Date", selector: row => row.agreementDate, sortable: true, cell: (row) => {
+            return row.agreementDate.substring(0, row.agreementDate.indexOf('T'));
+        }},
+        {name: "Address", selector: row => row.address, sortable: true},
+        {name: "Contact Number", selector: row => row.contactNumber, sortable: true},
+        {name: "Tabletop Specs", selector: row => row.tabletopSpecs, sortable: true},
+        {name: "Color", selector: row => row.color, sortable: true},
+        {name: "Size", selector: row => row.size, sortable: true},
         {name: "Proof", cell: () => (
             <button 
                 className="proof-btn w-[100px] h-[45px] rounded-[22px] border border-[#EBC0B4] bg-[rgba(235,192,180,0.21)] text-[#AB877E] font-gilroyRegular text-[12px]"
@@ -71,7 +67,7 @@ const RestaurantOwnersReactTable:React.FC<RestaurantOwnersReactTableProps> = ({d
         {name: "View", 
             cell: (row) => (
             <Image 
-                className="ms-[5px]" 
+                className="ms-[5px] cursor-pointer" 
                 src={eyeIcon} 
                 alt="View" 
                 width={24} 
@@ -83,22 +79,22 @@ const RestaurantOwnersReactTable:React.FC<RestaurantOwnersReactTableProps> = ({d
         )}
     ]
 
-    const customStyles = {
-        table: {
-          style: {
-            minWidth: "1500px"
-          }
-        }
-    };
+    // const customStyles = {
+    //     table: {
+    //       style: {
+    //         minWidth: "1500px"
+    //       }
+    //     }
+    // };
 
   return (
     <div className="dataTable-wrapper" id="resaurantOwners">
         <DataTable 
             columns={columns} 
             data={data ? data : []} 
-            customStyles={customStyles}
+            // customStyles={customStyles}
             expandableRows={true}
-            expandOnRowClicked={true}
+            // expandOnRowClicked={true}
             expandableRowsComponent={ExpandedComponent}
             expandableIcon={{
                 collapsed: <Image src={upArrow} alt="upwards arrow" width={30} height={30} />,
