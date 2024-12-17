@@ -33,7 +33,6 @@ const SubmitProofContent = () => {
     const [submissionDate, setSubmissionDate] = useState<string>("");
     const [status, setStatus] = useState<string>("");
     const [files, setFiles] = useState<File[]>([]);
-    // const [filesList, setFilesList] = useState<FileList | null>(null);
     const [data, setData] = useState(null);
 
 
@@ -58,22 +57,6 @@ const SubmitProofContent = () => {
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // const proofData = {
-        //     customerId: customerId,
-        //     businessName: businessName,
-        //     businessContact: businessContact,
-        //     businessAddress: businessAddress,
-        //     title: proofTitle,
-        //     type: proofType,
-        //     color: proofColor,
-        //     size: proofSize,
-        //     design: proofDesign,
-        //     proofQR: proofQR,
-        //     dateOfSubmission: submissionDate,
-        //     status: status,
-        //     images: files
-        // };
-        // 
         const formData = new FormData();
         formData.append('customerId', customerId);
         formData.append('businessName', businessName);
@@ -87,17 +70,11 @@ const SubmitProofContent = () => {
         formData.append('proofQR', proofQR);
         formData.append('dateOfSubmission', submissionDate);
         formData.append('status', status);
-        // filesList && Array.from(filesList).forEach((file) => {
-        //     formData.append("images", file);
-        // });
         files.forEach(file => {
             formData.append('images', file);
         })
-        // 
         postFormData(PROOF_ADD, formData, setData);
     };
-
-    console.log(files)
 
     const resetForm = () => {
         setCustomerId("");
@@ -129,9 +106,7 @@ const SubmitProofContent = () => {
 
         const MAX_FILE_SIZE = 1 * 1024 * 1024; // size in mbs
         const validFiles = files.filter(file => file.size <= MAX_FILE_SIZE);
-        // 
         setFiles((prev) => [...prev, ...validFiles]);
-        // 
         const newFiles = validFiles.map((file) => URL.createObjectURL(file));
         setUploadedFiles((prev) => [...prev, ...newFiles]);
 
@@ -143,6 +118,7 @@ const SubmitProofContent = () => {
         const target = e.target as HTMLImageElement;
         const id = target.parentElement?.parentElement?.id;
         setUploadedFiles(prevValue => prevValue.filter((_, i) => String(i) !== id));
+        setFiles(files.filter((_, index) => index !== Number(id)));
     };
 
     // const imageNotShown = (e: MouseEvent<HTMLImageElement>) => {
