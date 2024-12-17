@@ -7,7 +7,28 @@ import User from "./User";
 import { useState } from "react";
 
 
-const RestaurantInfo = () => {
+type OwnerProps = {
+    id: number, name: string, email: string, contactNumber: string, officeNumber: string, role: string
+}
+type DataProps = {
+    id: number;
+	restaurantName: string;
+	agreementDate: string;
+    address: string,
+    contactNumber: string,
+    tabletopSpecs: string,
+    color: string,
+    size: string
+    proof: string,
+    owners: OwnerProps[],
+    // proofs: any[]
+}
+
+interface RestaurantInfoProps {
+    data: DataProps | null
+}
+
+const RestaurantInfo:React.FC<RestaurantInfoProps> = ({data}) => {
     const [isUsersOpen, setIsUsersOpen] = useState<boolean>(false);
     const toggleUsers = () => {
         setIsUsersOpen(!isUsersOpen);
@@ -28,10 +49,10 @@ const RestaurantInfo = () => {
         <div className="md:p-[30px] p-[20px]">
             <div className="flex items-center md:gap-x-5 gap-x-4 border-b border-b-[#E0E0E0] md:pb-[30px] pb-[20px]">
                 <div className="md:w-[103px] w-[70px] md:h-[103px] h-[70px] rounded-full bg-[#D59483] flex justify-center items-center">
-                    <p className="text-white font-gilroyBold md:text-[32px] text-[25px]">TMR</p>
+                    <p className="text-white font-gilroyBold md:text-[32px] text-[25px]">{data?.restaurantName.split(" ").map(item => item[0])}</p>
                 </div>
                 <div>
-                    <h2 className="text-[#403F3F] font-gilroySemibold md:text-[22px] text-[17px]">The Mighty Restaurant</h2>
+                    <h2 className="text-[#403F3F] font-gilroySemibold md:text-[22px] text-[17px]">{data?.restaurantName}</h2>
                     <InfoPiece infoName="Owner:" infoValue="John Doe" />
                 </div>
             </div>

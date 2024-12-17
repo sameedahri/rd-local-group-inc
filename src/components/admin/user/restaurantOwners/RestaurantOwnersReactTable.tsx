@@ -1,6 +1,12 @@
 "use client";
 import DataTable, {TableColumn} from "react-data-table-component";
 import { useState, useEffect } from "react";
+import upArrow from "/public/assets/images/admin/user/up-arrow.svg";
+import downArrow from "/public/assets/images/admin/user/down-arrow.svg";
+import Image from "next/image";
+import eyeIcon from "/public/assets/images/admin/user/eye-icon.svg";
+import { useRouter } from "next/navigation";
+import {ADMIN_RESTAURANTPROFILE} from "@/utils/pages-routes";
 
 
 type OwnerProps = {
@@ -8,7 +14,7 @@ type OwnerProps = {
 }
 
 type DataRow = {
-	id: string;
+	id: number;
 	restaurantName: string;
 	agreementDate: string;
     address: string,
@@ -23,18 +29,17 @@ type DataRow = {
 
 interface RestaurantOwnersReactTableProps {
     // eslint-disable-next-line
-    data: any[] | undefined
+    data: DataRow[] | undefined
 }
 
 const ExpandedComponent: React.FC<{ data: DataRow }> = ({data}) => {
     const [owners, setOwners] = useState<OwnerProps[] | null>(null);
-
     useEffect(() => {
         setOwners(data?.owners)
     }, [data])
 
     return (
-     <div style={{ padding: "10px", backgroundColor: "#f9f9f9" }} className="bg-[rgba(243,220,214,0.27)]">
+     <div className="min-h-[100px] bg-[rgba(243,220,214,0.27)] px-[100px] py-[20px]">
       {owners?.map(owner => (
         <p key={owner.id}>{owner.name}</p>
       ))}
@@ -43,6 +48,7 @@ const ExpandedComponent: React.FC<{ data: DataRow }> = ({data}) => {
 };
 
 const RestaurantOwnersReactTable:React.FC<RestaurantOwnersReactTableProps> = ({data}) => {
+    const router = useRouter();
     console.log(data)
 
     const columns: TableColumn<DataRow>[] = [
@@ -54,22 +60,49 @@ const RestaurantOwnersReactTable:React.FC<RestaurantOwnersReactTableProps> = ({d
         {name: "Tabletop Specs", selector: row => row.tabletopSpecs},
         {name: "Color", selector: row => row.color},
         {name: "Size", selector: row => row.size},
-        {name: "Proof", selector: row => row.proof, cell: () => (
+        {name: "Proof", cell: () => (
             <button 
                 className="proof-btn w-[100px] h-[45px] rounded-[22px] border border-[#EBC0B4] bg-[rgba(235,192,180,0.21)] text-[#AB877E] font-gilroyRegular text-[12px]"
             >Upload Proof</button>
         )},
+        {name: "View", 
+            cell: (row) => (
+            <Image 
+                className="ms-[5px]" 
+                src={eyeIcon} 
+                alt="View" 
+                width={24} 
+                height={24} 
+                onClick={() => {
+                    router.push(ADMIN_RESTAURANTPROFILE+"/"+row.id)
+                }}
+            />
+        )}
     ]
 
+    const customStyles = {
+        table: {
+          style: {
+            minWidth: "1500px"
+          }
+        }
+    };
+
   return (
-    <div className="dataTable-wrapper">
+    <div className="dataTable-wrapper" id="resaurantOwners">
         <DataTable 
             columns={columns} 
             data={data ? data : []} 
+            customStyles={customStyles}
             expandableRows={true}
             expandOnRowClicked={true}
             expandableRowsComponent={ExpandedComponent}
+            expandableIcon={{
+                collapsed: <Image src={upArrow} alt="upwards arrow" width={30} height={30} />,
+                expanded:  <Image src={downArrow} alt="upwards arrow" width={30} height={30} />
+            }}
             pagination
+            responsive
         />
     </div>
   )

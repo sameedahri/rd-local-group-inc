@@ -36,7 +36,7 @@ const SubmittedProofs = () => {
       getRequest(PROOFS_GET, setData, setIsLoading);
     }, [])
   
-    console.log(data)
+    // console.log(data)
 
     // const restaurantsData = [
     //     {id: 1, title: "Proof Title", description: "Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur.", submissionDate: "12 Dec, 12:00am", isAccepted: true},

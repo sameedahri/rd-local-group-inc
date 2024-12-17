@@ -341,3 +341,103 @@ th.no-sort-icon .dt-column-order {
 .agr-date {
   text-align: left !important;
 }
+
+
+/* React Data Table */
+.dataTable-wrapper {
+  @apply bg-white mt-[20px] pb-[20px] rounded-[16px] overflow-auto;
+}
+
+.hZZlND {
+  @apply custom-scrollbar;
+}
+
+/* columns width */
+.rdt_TableCol, .rdt_TableCell {
+  min-width: 200px !important;
+}
+@media (max-width: 767px) {
+  .rdt_TableCol, .rdt_TableCell {
+    min-width: 100px !important;
+    width: 100px !important;
+  }
+}
+
+.rdt_TableCell > div {
+    white-space: unset !important;
+    overflow: unset !important;
+    text-overflow: unset !important;
+}
+
+/* thead */
+.rdt_TableHead .rdt_TableCol {
+  color: #262626;
+  font-size: 18px;
+}
+
+.rdt_TableHead {
+  height: 110px;
+}
+
+/* tbody */
+.rdt_TableBody .rdt_TableRow {
+  height: 100px;
+}
+
+.prominent-column {
+  @apply text-[#262626] font-gilroyMedium md:text-[18px] text-[16px];
+}
+
+.sec-column {
+  @apply text-[#717171] font-gilroyMedium md:text-[16px] text-[14px];
+}
+
+/* Restaurant Owners Table */
+
+/* prominent columns */
+#resaurantOwners .rdt_TableBody div[data-column-id="1"],
+#resaurantOwners .rdt_TableBody div[data-column-id="2"],
+#resaurantOwners .rdt_TableBody div[data-column-id="3"],
+#resaurantOwners .rdt_TableBody div[data-column-id="4"]
+{
+  @apply prominent-column;
+}
+
+/* icon wrapper div in thead and tbody */
+.bGNKtt, .gOAnHZ {
+  margin-left: 20px;
+}
+
+/* icon wrapper button */
+.fvMyvk:hover, .fvMyvk:focus {
+  background: none !important;
+}
+
+/* sec columns */
+#resaurantOwners .rdt_TableBody div[data-column-id="5"],
+#resaurantOwners .rdt_TableBody div[data-column-id="6"],
+#resaurantOwners .rdt_TableBody div[data-column-id="7"],
+#resaurantOwners .rdt_TableBody div[data-column-id="8"]
+{
+  @apply sec-column;
+}
+
+/* color, size, proof columns */
+#resaurantOwners div.rdt_TableCol[data-column-id="7"],
+#resaurantOwners div.rdt_TableCell[data-column-id="7"],
+#resaurantOwners div.rdt_TableCol[data-column-id="8"],
+#resaurantOwners div.rdt_TableCell[data-column-id="8"],
+#resaurantOwners div.rdt_TableCol[data-column-id="9"],
+#resaurantOwners div.rdt_TableCell[data-column-id="9"],
+#resaurantOwners div.rdt_TableCol[data-column-id="10"],
+#resaurantOwners div.rdt_TableCell[data-column-id="10"]
+{
+  min-width: 120px !important;
+  max-width: 120px !important;
+}
+
+/* last column */
+#resaurantOwners div.rdt_TableCol[data-column-id="10"],
+#resaurantOwners div.rdt_TableCell[data-column-id="10"] {
+  margin-right: 5px;
+}
