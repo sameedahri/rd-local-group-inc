@@ -348,7 +348,7 @@ th.no-sort-icon .dt-column-order {
 .dataTable-wrapper {
   @apply bg-white mt-[20px] pb-[20px] rounded-[16px] overflow-auto;
 }
-.hZZlND {
+.dataTable-wrapper > div:first-child {
   @apply custom-scrollbar;
 }
 
@@ -366,8 +366,8 @@ div.rdt_TableCell
     width: 100px;
   }
 } */
-.rdt_TableCell > div, 
-.ddvZdT 
+.rdt_TableCell div, 
+.rdt_TableCol div
 {
     white-space: unset !important;
     overflow: unset !important;
@@ -394,11 +394,17 @@ div.rdt_TableCell
   @apply text-[#717171] font-gilroyMedium md:text-[16px] text-[14px];
 }
 /* icon wrapper div in thead and tbody */
-.bGNKtt, .gOAnHZ {
+/* .bGNKtt, .gOAnHZ {
   margin-left: 20px;
-}
+} */
+ .rdt_TableRow > div:first-child,
+ .rdt_TableHeadRow > div:first-child
+ {
+  margin-left: 20px;
+ }
 /* icon wrapper button */
-.fvMyvk:hover, .fvMyvk:focus {
+.rdt_TableRow > div:first-child button:hover,  
+.rdt_TableRow > div:first-child button:focus {
   background: none !important;
 }
 

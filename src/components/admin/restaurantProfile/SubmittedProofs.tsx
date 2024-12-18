@@ -4,7 +4,12 @@ import ProofCard from "./ProofCard";
 
 
 type OwnerProps = {
-    id: number, name: string, email: string, contactNumber: string, officeNumber: string, role: string
+    id: number, 
+    name: string, 
+    email: string, 
+    contactNumber: string, 
+    officeNumber: string, 
+    role: string
 }
 type ProofsProps = {
     id: number,

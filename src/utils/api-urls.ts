@@ -25,6 +25,6 @@ export const ADVERTISERS_GET = API_BASE_URL + "/admin/advertiser";
 export const ADVERTISER_GET = API_BASE_URL + "/admin/advertiser"; // + id
 export const ADVERTISER_ADD = API_BASE_URL + "/admin/advertiser/add";
 
-export const PROOF_ADD = API_BASE_URL + "/admin/proof/submit";
+export const PROOF_ADD = API_BASE_URL + "/admin/proof"; // + businessId + "/submit"
 export const PROOF_GET = API_BASE_URL + "/admin/proof"; // + id
 export const PROOFS_GET = API_BASE_URL + "/admin/proof";

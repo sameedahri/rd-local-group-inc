@@ -6,12 +6,30 @@ import Image from "next/image";
 import eyeIcon from "/public/assets/images/admin/user/eye-icon.svg";
 import { useRouter } from "next/navigation";
 import {ADMIN_RESTAURANTPROFILE, ADMIN_SUBMIT_PROOF} from "@/utils/pages-routes";
+import TableExtraInfoHeading from "../../adminCommon/TableExtraInfoHeading";
+import TableExtraInfo from "../../adminCommon/TableExtraInfo";
 
 
 type OwnerProps = {
     id: number, name: string, email: string, contactNumber: string, officeNumber: string, role: string
 }
-
+type ProofsProps = {
+    id: number,
+    businessAddress: string,
+    businessContact: string,
+    businessName: string,
+    color: string,
+    createdAt: string,
+    customerId: string,
+    dateOfSubmission: string,
+    design: string,
+    images: string[],
+    proofQR: string,
+    size: string,
+    status: string,
+    title: string,
+    type: string
+}
 type DataRow = {
 	id: number;
 	restaurantName: string;
@@ -23,7 +41,7 @@ type DataRow = {
     size: string
     proof: string,
     owners: OwnerProps[],
-    // proofs: any[]
+    proofs: ProofsProps[]
 }
 
 interface RestaurantOwnersReactTableProps {
@@ -33,10 +51,40 @@ interface RestaurantOwnersReactTableProps {
 
 const ExpandedComponent: React.FC<{ data: DataRow }> = ({data}) => {
     return (
-     <div className="min-h-[100px] bg-[rgba(243,220,214,0.27)] px-[100px] py-[20px]">
-      {data?.owners?.map(owner => (
-        <p key={owner.id} className="text-[#676767] font-gilroyMedium text-[14px] mb-[8px]">{owner.name}</p>
-      ))}
+     <div className="flex gap-x-[50px] min-h-[100px] bg-[rgba(243,220,214,0.27)] px-[100px] py-[20px]">
+      {/* Owners */}
+      <div>
+        <TableExtraInfoHeading heading="Owners" />
+        {data?.owners?.map(owner => (
+          <div key={owner.id} className="flex flex-col gap-y-[5px] border-b pb-3 mb-3">
+            <TableExtraInfo infoTitle="Name" infoValue={owner.name} />
+            <TableExtraInfo infoTitle="Email Address" infoValue={owner.email} />
+            <TableExtraInfo infoTitle="Office Number" infoValue={owner.officeNumber} />
+            <TableExtraInfo infoTitle="Contact Number" infoValue={owner.contactNumber} />
+            <TableExtraInfo infoTitle="Role" infoValue={owner.role} />
+          </div>
+        ))}
+      </div>
+      {/* Proofs */}
+      <div>
+        <TableExtraInfoHeading heading="Proofs" />
+        {data?.proofs?.map(proof => (
+          <div key={proof.id} className="flex flex-col gap-y-[5px] border-b pb-3 mb-3">
+            <TableExtraInfo infoTitle="Customer ID" infoValue={proof.customerId} />
+            <TableExtraInfo infoTitle="Business Name" infoValue={proof.businessName} />
+            <TableExtraInfo infoTitle="Business Contact" infoValue={proof.businessContact} />
+            <TableExtraInfo infoTitle="Business Address" infoValue={proof.businessAddress} />
+            <TableExtraInfo infoTitle="Title" infoValue={proof.title} />
+            <TableExtraInfo infoTitle="Type" infoValue={proof.type} />
+            <TableExtraInfo infoTitle="Color" infoValue={proof.color} />
+            <TableExtraInfo infoTitle="Size" infoValue={proof.size} />
+            <TableExtraInfo infoTitle="Design" infoValue={proof.design} />
+            <TableExtraInfo infoTitle="QR" infoValue={proof.proofQR} />
+            <TableExtraInfo infoTitle="Date Of Submission" infoValue={proof.dateOfSubmission} />
+            <TableExtraInfo infoTitle="Status" infoValue={proof.status} />
+          </div>
+        ))}
+      </div>
     </div>
     )
 };
@@ -56,11 +104,11 @@ const RestaurantOwnersReactTable:React.FC<RestaurantOwnersReactTableProps> = ({d
         {name: "Tabletop Specs", selector: row => row.tabletopSpecs, sortable: true},
         {name: "Color", selector: row => row.color, sortable: true},
         {name: "Size", selector: row => row.size, sortable: true},
-        {name: "Proof", cell: () => (
+        {name: "Proof", cell: (row) => (
             <button 
                 className="proof-btn w-[100px] h-[45px] rounded-[22px] border border-[#EBC0B4] bg-[rgba(235,192,180,0.21)] text-[#AB877E] font-gilroyRegular text-[12px]"
                 onClick={() => {
-                    router.push(ADMIN_SUBMIT_PROOF)
+                    router.push(ADMIN_SUBMIT_PROOF+"/"+row.id)
                 }}
             >Upload Proof</button>
         )},

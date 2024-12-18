@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import DataTable, {TableColumn} from "react-data-table-component";
 import Image from "next/image";
 import upArrow from "/public/assets/images/admin/user/up-arrow.svg";
@@ -6,11 +7,52 @@ import downArrow from "/public/assets/images/admin/user/down-arrow.svg";
 import eyeIcon from "/public/assets/images/admin/user/eye-icon.svg";
 import { useRouter } from "next/navigation";
 import {ADMIN_RESTAURANTPROFILE, ADMIN_SUBMIT_PROOF} from "@/utils/pages-routes";
+import TableExtraInfo from "../../adminCommon/TableExtraInfo";
+import TableExtraInfoHeading from "../../adminCommon/TableExtraInfoHeading";
+
 
 type OwnerProps = {
-  id: number, name: string, email: string, contactNumber: string, officeNumber: string, role: string
+  id: number,
+  name: string, 
+  email: string, 
+  contactNumber: string,
+  officeNumber: string, 
+  role: string
 }
-
+type ProofsProps = {
+  id: number,
+  businessAddress: string,
+  businessContact: string,
+  businessName: string,
+  color: string,
+  createdAt: string,
+  customerId: string,
+  dateOfSubmission: string,
+  design: string,
+  images: string[],
+  proofQR: string,
+  size: string,
+  status: string,
+  title: string,
+  type: string
+}
+type CreditCardProps = {
+  id: number,
+  cardBillingStreet: string,
+  cardCvc: string,
+  cardExpDate: string,
+  cardNumber: string,
+  cardZipCode: string,
+  nameOnCard: string
+}
+type CheckProps = {
+  id: number,
+  checkNumber: string,
+  eCheckAccountNumber: string,
+  eCheckRouteNumber: string,
+  nameOnCheck: string,
+  phoneNumberOnCheck: string
+}
 type DataRow = {
   id: number;
   companyName: string;
@@ -26,7 +68,9 @@ type DataRow = {
   totalDueAmount: string,
   proof: string,
   owners: OwnerProps[],
-  // proofs: any[]
+  creditCards: CreditCardProps[],
+  checks: CheckProps[],
+  proofs: ProofsProps[],
 }
 
 interface AdvertisersReactTableProps {
@@ -36,10 +80,67 @@ interface AdvertisersReactTableProps {
 
 const ExpandedComponent: React.FC<{ data: DataRow }> = ({data}) => {
   return (
-   <div className="min-h-[100px] bg-[rgba(243,220,214,0.27)] px-[100px] py-[20px]">
-    {data?.owners?.map(owner => (
-      <p key={owner.id} className="text-[#676767] font-gilroyMedium text-[14px] mb-[8px]">{owner.name}</p>
-    ))}
+   <div className="flex gap-x-[50px] min-h-[100px] bg-[rgba(243,220,214,0.27)] px-[100px] py-[20px]">
+      {/* Owners */}
+      <div>
+        <TableExtraInfoHeading heading="Owners" />
+        {data?.owners?.map(owner => (
+          <div key={owner.id} className="flex flex-col gap-y-[5px] border-b pb-3 mb-3">
+            <TableExtraInfo infoTitle="Name" infoValue={owner.name} />
+            <TableExtraInfo infoTitle="Email Address" infoValue={owner.email} />
+            <TableExtraInfo infoTitle="Office Number" infoValue={owner.officeNumber} />
+            <TableExtraInfo infoTitle="Contact Number" infoValue={owner.contactNumber} />
+            <TableExtraInfo infoTitle="Role" infoValue={owner.role} />
+          </div>
+        ))}
+      </div>
+      {/* Credit Cards */}
+      <div>
+        <TableExtraInfoHeading heading="Credit Cards" />
+        {data?.creditCards?.map(card => (
+          <div key={card.id} className="flex flex-col gap-y-[5px] border-b pb-3 mb-3">
+            <TableExtraInfo infoTitle="Card Number" infoValue={card.cardNumber} />
+            <TableExtraInfo infoTitle="Name on Card" infoValue={card.nameOnCard} />
+            <TableExtraInfo infoTitle="Street" infoValue={card.cardBillingStreet} />
+            <TableExtraInfo infoTitle="Zip Code" infoValue={card.cardZipCode} />
+            <TableExtraInfo infoTitle="Exp Date" infoValue={card.cardExpDate} />
+            <TableExtraInfo infoTitle="CVC" infoValue={card.cardCvc} />
+          </div>
+        ))}
+      </div>
+      {/* Cheques */}
+      <div>
+        <TableExtraInfoHeading heading="Cheques" />
+        {data?.checks?.map(check => (
+          <div key={check.id} className="flex flex-col gap-y-[5px] border-b pb-3 mb-3">
+            <TableExtraInfo infoTitle="Name on Cheque" infoValue={check.nameOnCheck} />
+            <TableExtraInfo infoTitle="Cheque Number" infoValue={check.checkNumber} />
+            <TableExtraInfo infoTitle="Phone Number on Cheque" infoValue={check.phoneNumberOnCheck} />
+            <TableExtraInfo infoTitle="E-Cheque Info - Route Number" infoValue={check.eCheckRouteNumber} />
+            <TableExtraInfo infoTitle="Acct Number" infoValue={check.eCheckAccountNumber} />
+          </div>
+        ))}
+      </div>
+      {/* Proofs */}
+      <div>
+        <TableExtraInfoHeading heading="Proofs" />
+        {data?.proofs?.map(proof => (
+          <div key={proof.id} className="flex flex-col gap-y-[5px] border-b pb-3 mb-3">
+            <TableExtraInfo infoTitle="Customer ID" infoValue={proof.customerId} />
+            <TableExtraInfo infoTitle="Business Name" infoValue={proof.businessName} />
+            <TableExtraInfo infoTitle="Business Contact" infoValue={proof.businessContact} />
+            <TableExtraInfo infoTitle="Business Address" infoValue={proof.businessAddress} />
+            <TableExtraInfo infoTitle="Title" infoValue={proof.title} />
+            <TableExtraInfo infoTitle="Type" infoValue={proof.type} />
+            <TableExtraInfo infoTitle="Color" infoValue={proof.color} />
+            <TableExtraInfo infoTitle="Size" infoValue={proof.size} />
+            <TableExtraInfo infoTitle="Design" infoValue={proof.design} />
+            <TableExtraInfo infoTitle="QR" infoValue={proof.proofQR} />
+            <TableExtraInfo infoTitle="Date Of Submission" infoValue={proof.dateOfSubmission} />
+            <TableExtraInfo infoTitle="Status" infoValue={proof.status} />
+          </div>
+        ))}
+      </div>
   </div>
   )
 };
@@ -64,11 +165,11 @@ const AdvertisersReactTable:React.FC<AdvertisersReactTableProps> = ({data}) => {
       }},
       {name: "Setup Fee", selector: row => row.setupFee},
       {name: "Total Due Amount", selector: row => row.totalDueAmount},
-      {name: "Proof", cell: () => (
+      {name: "Proof", cell: (row) => (
           <button 
               className="proof-btn w-[100px] h-[45px] rounded-[22px] border border-[#EBC0B4] bg-[rgba(235,192,180,0.21)] text-[#AB877E] font-gilroyRegular text-[12px]"
               onClick={() => {
-                  router.push(ADMIN_SUBMIT_PROOF)
+                  router.push(ADMIN_SUBMIT_PROOF+"/"+row.id)
               }}
           >Upload Proof</button>
       )},

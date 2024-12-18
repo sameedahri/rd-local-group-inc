@@ -5,7 +5,7 @@ import LabelInput from "@/components/common/LabelInput";
 import AddButton from "@/components/common/AddButton";
 import CancelButton from "@/components/common/CancelButton";
 import {RefObject, FormEvent, useState, MouseEvent, useRef} from "react";
-import {useRouter} from "next/navigation";
+import {useRouter, useParams} from "next/navigation";
 import Dialogue from "@/components/common/Dialogue";
 import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
 import DragAndDrop from "./DragAndDrop";
@@ -18,6 +18,7 @@ import useRedirect from "@/utils/useRedirect";
 
 
 const SubmitProofContent = () => {
+    const {id} = useParams();
     const router = useRouter();
 
     const [customerId, setCustomerId] = useState<string>("");
@@ -58,6 +59,7 @@ const SubmitProofContent = () => {
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData();
+        // formData.append('businessId', String(id));
         formData.append('customerId', customerId);
         formData.append('businessName', businessName);
         formData.append('businessContact', businessContact);
@@ -73,7 +75,7 @@ const SubmitProofContent = () => {
         files.forEach(file => {
             formData.append('images', file);
         })
-        postFormData(PROOF_ADD, formData, setData);
+        postFormData(PROOF_ADD+`/${id}/submit`, formData, setData);
     };
 
     const resetForm = () => {
