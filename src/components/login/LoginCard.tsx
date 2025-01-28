@@ -2,10 +2,9 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import logo from "/public/assets/images/common/logo.png";
-import {useState, FormEvent} from "react";
+import {useState, useEffect, FormEvent} from "react";
 import MaskedInput from "../common/MaskedInput";
-// import { postRequest } from "@/utils/utilFunctions";
-// import {jwtDecode} from "jwt-decode";
+import { postRequest } from "@/utils/utilFunctions";
 
 
 interface LoginCardProps {
@@ -17,22 +16,20 @@ interface LoginCardProps {
 const LoginCard:React.FC<LoginCardProps> = ({urlToDashboard, postLoginDataUrl, isOwner}) => {
     const router = useRouter();
     const [phoneNumber, setPhoneNumber] = useState<string>("");
-    // const [data, setData] = useState<{data: {accessToken: string}, message: string, success: boolean} | string | null>(null);
+    const [data, setData] = useState<{data: {accessToken: string}, message: string, success: boolean} | string | null>(null);
 
-    // useEffect(() => {
-    //     if(typeof data === "object" && data !== null) {
-    //         // console.log(data.data.accessToken);
-    //         localStorage.setItem(`${isOwner ? 'ownerAuthToken' : 'advertiserAuthToken'}`, JSON.stringify(jwtDecode(data.data.accessToken)));
-    //         router.push(urlToDashboard);
-    //     }
-    // }, [data, router, urlToDashboard, isOwner])
+    useEffect(() => {
+        if(typeof data === "object" && data !== null) {
+            // localStorage.setItem(`${isOwner ? 'ownerAuthToken' : 'advertiserAuthToken'}`, JSON.stringify(jwtDecode(data.data.accessToken)));
+            localStorage.setItem('userAuthToken', data.data.accessToken);
+            router.push(urlToDashboard);
+        }
+    }, [data, router, urlToDashboard, isOwner])
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // postRequest(postLoginDataUrl, {phoneNumber: phoneNumber}, setData);
-        router.push(urlToDashboard)
+        postRequest(postLoginDataUrl, {phoneNumber: phoneNumber}, setData);
     };
-    console.log(postLoginDataUrl, phoneNumber, isOwner)
 
     return(
         <form onSubmit={submitForm} className="md:w-[451px] w-[360px] md:mx-0 mx-5 bg-white rounded-[12px] md:p-9 px-5 py-10">

@@ -1,9 +1,14 @@
 import { MutableRefObject, Dispatch, SetStateAction } from "react";
 
-
 // eslint-disable-next-line
-export const postRequest = (url: string, postData: any, setState?: Dispatch<SetStateAction<any>>, isFormData: boolean = false) => {
-    const authToken = localStorage.getItem('adminAuthToken');
+export const postRequest = (url: string, postData: any, setState?: Dispatch<SetStateAction<any>> | null, isFormData: boolean = false, isAdmin: boolean = true) => {
+    let authToken = null;
+    // isAdmin ? authToken = localStorage.getItem('adminAuthToken') : authToken = localStorage.getItem('userAuthToken');
+    if(isAdmin) {
+        authToken = localStorage.getItem('adminAuthToken')
+    } else {
+        authToken = localStorage.getItem('userAuthToken')
+    }
     const _postData = isFormData ? postData : JSON.stringify(postData);
     const _contentType = isFormData ? 'multi' : 'application/json';
     fetch(url, {
@@ -53,9 +58,15 @@ export const postFormData = (url: string, postData: any, setState?: Dispatch<Set
 }
 
 // eslint-disable-next-line
-export const getRequest = (url: any, setState?: Dispatch<SetStateAction<any>>, setLoading?: Dispatch<SetStateAction<boolean>>) => {
+export const getRequest = (url: any, setState?: Dispatch<SetStateAction<any>>, setLoading?: Dispatch<SetStateAction<boolean>>, isAdmin: boolean = true) => {
     if(setLoading) setLoading(true);
-    const authToken = localStorage.getItem('adminAuthToken');
+    let authToken = null;
+    // isAdmin ? authToken = localStorage.getItem('adminAuthToken') : authToken = localStorage.getItem('userAuthToken');
+    if(isAdmin) {
+        authToken = localStorage.getItem('adminAuthToken')
+    } else {
+        authToken = localStorage.getItem('userAuthToken')
+    }
     fetch(url, {
         method: 'GET',
         headers: {

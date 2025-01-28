@@ -9,22 +9,35 @@ import exclamationMarkIcon from "/public/assets/images/cardDetails/exclamation-m
 import Dialogue from "../common/Dialogue";
 import {useRouter} from "next/navigation";
 import RequiredMessage from "./RequiredMessage";
-import { useFetch } from "@/utils/useFetch";
 
-
+type DataProps = {
+    ad: string,
+    businessAddress: string,
+    businessContact: string,
+    businessName: string,
+    color: string,
+    createdAt: string,
+    customerId: string,
+    dateOfSubmission: string,
+    design: string,
+    id: string,
+    images: string[],
+    proofQR: string,
+    restaurant: string,
+    revisions: string[],
+    size: string,
+    status: string,
+    title: string,
+    type: string
+}
 interface ProofVerificationCardProps {
     urlToAddRevision: string,
-    urlToDashboard: string
+    urlToDashboard: string,
+    attachmentsData: DataProps | null
 }
 
-const ProofVerificationCard:React.FC<ProofVerificationCardProps> = ({urlToAddRevision, urlToDashboard}) => {
+const ProofVerificationCard:React.FC<ProofVerificationCardProps> = ({urlToAddRevision, urlToDashboard, attachmentsData}) => {
     const router = useRouter();
-
-    const {data: attachmentsData} = useFetch("/users");
-    console.log(attachmentsData);
-
-    const {data: proofData} = useFetch("/posts");
-    console.log(proofData);
 
     // Agree Dialogue
     let agreeDialogueRef: HTMLDialogElement | null;
@@ -76,7 +89,7 @@ const ProofVerificationCard:React.FC<ProofVerificationCardProps> = ({urlToAddRev
     };
     const closeSubmitModal = () => {
         submitDialogueRef?.close();
-        router.push(urlToAddRevision);
+        router.push(urlToAddRevision +"/"+ attachmentsData?.id);
     };
 
     // tailwind classes
@@ -93,7 +106,7 @@ const ProofVerificationCard:React.FC<ProofVerificationCardProps> = ({urlToAddRev
                         <Checkbox checkboxId="proofSize" onChange={checkboxOnchange} />
                         <label htmlFor="proofSize" className="select-none">
                             <span className={liSpan1}>Proof Size:</span>
-                            <span className={liSpan2}> 4x4H  6x6W</span>
+                            <span className={liSpan2}> {attachmentsData?.size}</span>
                         </label>
                         <RequiredMessage />
                     </li>
@@ -101,7 +114,7 @@ const ProofVerificationCard:React.FC<ProofVerificationCardProps> = ({urlToAddRev
                         <Checkbox checkboxId="proofColor" onChange={checkboxOnchange} />
                         <label htmlFor="proofColor" className="select-none">
                             <span className={liSpan1}>Proof Color:</span>
-                            <span className={liSpan2}> Black/Green/Blue</span>
+                            <span className={liSpan2}> {attachmentsData?.color}</span>
                         </label>
                         <RequiredMessage />
                     </li>
@@ -109,23 +122,23 @@ const ProofVerificationCard:React.FC<ProofVerificationCardProps> = ({urlToAddRev
                         <Checkbox checkboxId="proofDesign" onChange={checkboxOnchange} />
                         <label htmlFor="proofDesign" className="select-none">
                             <span className={liSpan1}>Proof Design:</span>
-                            <span className={liSpan2}> Dark & Asthetic</span>
+                            <span className={liSpan2}> {attachmentsData?.design}</span>
                         </label>
                         <RequiredMessage />
                     </li>
-                    <li>
+                    {/* <li>
                         <Checkbox checkboxId="proofPhotos" onChange={checkboxOnchange} />
                         <label htmlFor="proofPhotos" className="select-none">
                             <span className={liSpan1}>Photos to use in proof:</span>
-                            <span className={liSpan2}> Fresh foods/Nature</span>
+                            <span className={liSpan2}> {attachmentsData?.proofQR}</span>
                         </label>
                         <RequiredMessage />
-                    </li>
+                    </li> */}
                     <li>
                         <Checkbox checkboxId="businessAddress" onChange={checkboxOnchange} />
                         <label htmlFor="businessAddress" className="select-none">
                             <span className={liSpan1}>Business Address:</span>
-                            <span className={liSpan2}> Bottom Right Corner</span>
+                            <span className={liSpan2}> {attachmentsData?.businessAddress}</span>
                         </label>
                         <RequiredMessage />
                     </li>
@@ -133,7 +146,7 @@ const ProofVerificationCard:React.FC<ProofVerificationCardProps> = ({urlToAddRev
                         <Checkbox checkboxId="businessContact" onChange={checkboxOnchange} />
                         <label htmlFor="businessContact" className="select-none">
                             <span className={liSpan1}>Business Contact:</span>
-                            <span className={liSpan2}> Bottom Left Corner</span>
+                            <span className={liSpan2}> {attachmentsData?.businessContact}</span>
                         </label>
                         <RequiredMessage />
                     </li>
@@ -141,7 +154,7 @@ const ProofVerificationCard:React.FC<ProofVerificationCardProps> = ({urlToAddRev
                         <Checkbox checkboxId="proofQR" onChange={checkboxOnchange} />
                         <label htmlFor="proofQR" className="select-none">
                             <span className={liSpan1}>Proof QR:</span>
-                            <span className={liSpan2}> Center of Proof</span>
+                            <span className={liSpan2}> {attachmentsData?.proofQR}</span>
                         </label>
                         <RequiredMessage />
                     </li>

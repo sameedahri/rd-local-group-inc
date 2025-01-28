@@ -4,7 +4,9 @@ import Image from "next/image";
 import Dialogue from "../common/Dialogue";
 import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
 import {useRouter} from "next/navigation";
-
+import { postRequest } from "@/utils/utilFunctions";
+import { OWNER_REVISION_ADD } from "@/utils/api-urls"; 
+import {useParams} from "next/navigation";
 
 interface AgreeDialogueProps {
     urlToDashboard: string,
@@ -20,6 +22,7 @@ interface AgreeDialogueProps {
 }
 
 const AgreeDialogue: React.FC<AgreeDialogueProps> = ({urlToDashboard, setDialogueRef, closeDialogue, icon, iconAlt, title, message, cancelButtonText, agreeButtonText}) => {
+    const {id} = useParams();
     const router = useRouter();
     const dialogueRef = useRef<HTMLDialogElement>(null);
 
@@ -33,7 +36,16 @@ const AgreeDialogue: React.FC<AgreeDialogueProps> = ({urlToDashboard, setDialogu
         thanksDialogueRef = ref.current;
     };
     const showThanksModal = () => {
-        closeDialogue();
+        closeDialogue(); 
+        const revisionData = {
+            status: "accepted",
+            revision: {
+                firstName: "",
+                lastName: "",
+                changesRequested: ""
+            }
+        }
+        postRequest(`${OWNER_REVISION_ADD}/${id}/verify`, revisionData, null, false, false);
         thanksDialogueRef?.showModal();
     };
     const closeThanksModal = () => {

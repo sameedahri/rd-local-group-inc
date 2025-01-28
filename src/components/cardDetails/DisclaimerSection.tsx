@@ -4,10 +4,8 @@ import Image from "next/image";
 import ReadMoreButton from "./ReadMoreButton";
 import { useState } from "react";
 
-
 const DisclaimerSection = () => {
   const [isReadMoreOpen, setIsReadMoreOpen] = useState(false);
-
 
   // tailwind classes
   const disclaimerSectionClasses = isReadMoreOpen ? "md:max-h-none max-h-[500px]" : "md:max-h-none max-h-[206px]";

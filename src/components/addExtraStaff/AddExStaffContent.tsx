@@ -8,8 +8,8 @@ import Dialogue from "../common/Dialogue";
 import verifyIcon from "/public/assets/images/addExtraStaff/verify-icon.svg";
 import {RefObject, FormEvent, useState} from "react";
 import PhoneMask from "../common/PhoneMask";
-// import { postRequest } from "@/utils/utilFunctions";
-// import useRedirect from "@/utils/useRedirect";
+import { postRequest } from "@/utils/utilFunctions";
+import useRedirect from "@/utils/useRedirect";
 
 interface AddExStaffContentProps {
     urlToDashboard: string,
@@ -19,12 +19,14 @@ interface AddExStaffContentProps {
 const AddExStaffContent:React.FC<AddExStaffContentProps> = ({urlToDashboard, postStaffUrl}) => {
     const router = useRouter();
 
-    const [firstName, setFirstName] = useState<string>("");
-    const [lastName, setLastName] = useState<string>("");
+    const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
-    const [countryCode, setCountryCode] = useState<string>("+1");
-    const [phoneNumber, setPhoneNumber] = useState<string>("");
-    // const [data, setData] = useState(null);
+    const [contactNumberCountryCode, setContactNumberCountryCode] = useState<string>("+1");
+    const [contactNumber, setContactNumber] = useState<string>("");
+    const [officeNumberCountryCode, setOfficeNumberCountryCode] = useState<string>("+1");
+    const [officeNumber, setOfficeNumber] = useState<string>("");
+
+    const [data, setData] = useState(null);
 
     let dialogueRef: HTMLDialogElement | null;
     const setDialogueRef = (ref: RefObject<HTMLDialogElement>) => {
@@ -43,28 +45,26 @@ const AddExStaffContent:React.FC<AddExStaffContentProps> = ({urlToDashboard, pos
         router.push(urlToDashboard);
     };
 
-    // useRedirect(data, () => showModal());
+    useRedirect(data, () => showModal());
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const staffData = {
-            firstName: firstName,
-            lastName: lastName,
+            name: name,
             email: email,
-            phoneNumber: countryCode + " " + phoneNumber
+            contactNumber: contactNumberCountryCode + " " + contactNumber,
+            officeNumber: officeNumberCountryCode + " " + officeNumber
         };
-        console.log(staffData)
-        // postRequest(postStaffUrl, staffData, setData);
-        showModal();
+        postRequest(postStaffUrl, staffData, setData, false, false);
     };
-    console.log(postStaffUrl)
 
     const resetForm = () => {
-        setFirstName("");
-        setLastName("");
+        setName("");
         setEmail("");
-        setCountryCode("+1");
-        setPhoneNumber("");
+        setContactNumberCountryCode("+1");
+        setContactNumber("");
+        setOfficeNumberCountryCode("+1");
+        setOfficeNumber("");
     };
 
     return (
@@ -75,17 +75,23 @@ const AddExStaffContent:React.FC<AddExStaffContentProps> = ({urlToDashboard, pos
                 onSubmit={submitForm}
             >
                 <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4">
-                    <LabelInput label="First name*" inputType="text" inputId="firstName" stateValue={firstName} setState={setFirstName} />
-                    <LabelInput label="Last name*" inputType="text" inputId="lastName" stateValue={lastName} setState={setLastName} />
+                    <LabelInput label="Name*" inputType="text" inputId="name" stateValue={name} setState={setName} />
+                    <LabelInput label="Email*" inputType="email" inputId="email" stateValue={email} setState={setEmail} />
                 </div>
                 <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
-                    <LabelInput label="Email*" inputType="email" inputId="email" stateValue={email} setState={setEmail} />
                     <PhoneMask 
-                        label="Phone number" 
-                        inputId="phoneNumber" 
-                        setPhoneNumber={setPhoneNumber} 
-                        setCountryCode={setCountryCode} 
-                        countryCode={countryCode} 
+                        label="Contact number" 
+                        inputId="contactNumber" 
+                        setPhoneNumber={setContactNumber} 
+                        setCountryCode={setContactNumberCountryCode} 
+                        countryCode={contactNumberCountryCode} 
+                    />
+                    <PhoneMask 
+                        label="Office number" 
+                        inputId="officeNumber" 
+                        setPhoneNumber={setOfficeNumber} 
+                        setCountryCode={setOfficeNumberCountryCode} 
+                        countryCode={officeNumberCountryCode} 
                     />
                 </div>
                 <div className="flex md:gap-x-4 gap-x-2 mt-8">

@@ -1,6 +1,6 @@
 import CardDetailsContent from "@/components/cardDetails/CardDetailsContent";
 import {ADVERTISERS_ADDREVISION, ADVERTISERS_DASHBOARD} from "@/utils/pages-routes";
-
+import { ADVERTISER_PROOF_GET } from "@/utils/api-urls";
 
 const page = () => {
     return (
@@ -8,7 +8,7 @@ const page = () => {
             <CardDetailsContent 
                 urlToAddRevision={ADVERTISERS_ADDREVISION}
                 urlToDashboard={ADVERTISERS_DASHBOARD} 
-                getAttachmentsDataUrl="/posts"
+                getProofDetailUrl={ADVERTISER_PROOF_GET}
             />
         </main>
     )

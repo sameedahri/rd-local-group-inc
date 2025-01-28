@@ -2,10 +2,7 @@
 import ProofAttachemnt from "./ProofAttachemnt";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { getRequest } from "@/utils/utilFunctions";
-import { useState, useEffect } from "react";
 import Loader from "../common/Loader";
-
 
 const responsive = {
     largeScreen: {
@@ -25,28 +22,19 @@ const responsive = {
 };
 
 interface AttachmentsCarouselProps {
-    getAttachmentsDataUrl: string
+    attachmentsData: string[] | undefined,
+    isLoading: boolean
 }
 
-const AttachmentsCarousel:React.FC<AttachmentsCarouselProps> = ({getAttachmentsDataUrl}) => {
-    const [data, setData] = useState<string[] | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [dummyData, setDummyData] = useState<string[] | null>(null);
-    console.log(data);
-
-    useEffect(() => {
-        getRequest(getAttachmentsDataUrl, setData, setIsLoading);
-        setDummyData(["/imageurl", "/imageurl", "/imageurl", "/imageurl", "/imageurl", "/imageurl"])
-    }, [getAttachmentsDataUrl])
-
+const AttachmentsCarousel:React.FC<AttachmentsCarouselProps> = ({attachmentsData, isLoading}) => {
   return (
     <div className="w-[100%] xl:h-[215px] md:h-[130px] h-[194px]">
         {isLoading ? <Loader /> : 
             <Carousel 
                 responsive={responsive}
-                containerClass={dummyData && dummyData?.length < 5 ? "custom-container" : ""}
+                containerClass={attachmentsData && attachmentsData?.length < 5 ? "custom-container" : ""}
             >
-                {dummyData && dummyData?.map((attachmentUrl, index) => (
+                {attachmentsData && attachmentsData?.map((attachmentUrl, index) => (
                     <ProofAttachemnt key={index} attachmentUrl={attachmentUrl} />
                 ))}
             </Carousel>

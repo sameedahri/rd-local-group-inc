@@ -11,10 +11,10 @@ interface DashboardCardProps {
     cardId: number,
     type: string,
     submissionDate: string,
-    isAccepted: boolean
+    status: string
 }
 
-const DashboardCard: React.FC<DashboardCardProps> = ({urlToCardDetails, cardId, type, submissionDate, isAccepted}) => {
+const DashboardCard: React.FC<DashboardCardProps> = ({urlToCardDetails, cardId, type, submissionDate, status}) => {
     const router = useRouter();
 
     const redirectToCardDetails = () => {
@@ -37,7 +37,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({urlToCardDetails, cardId, 
             </div>
         </div>
         <div className="flex justify-between md:mt-10 mt-7">
-            <AcceptedButton isAccepted={isAccepted} />
+            <AcceptedButton isAccepted={status === "accepted" ? true : false} />
             <ViewButton onClickFunction={redirectToCardDetails} />
         </div>
     </div>

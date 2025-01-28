@@ -146,7 +146,7 @@ const RestaurantOwnersReactTable:React.FC<RestaurantOwnersReactTableProps> = ({d
             expandableRowsComponent={ExpandedComponent}
             expandableIcon={{
                 collapsed: <Image src={upArrow} alt="upwards arrow" width={30} height={30} />,
-                expanded:  <Image src={downArrow} alt="upwards arrow" width={30} height={30} />
+                expanded:  <Image src={downArrow} alt="downwards arrow" width={30} height={30} />
             }}
             pagination
             responsive

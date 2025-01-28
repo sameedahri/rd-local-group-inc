@@ -81,7 +81,22 @@
   @apply w-[100%] max-w-[1900px];
 }
 
-/* Srollbar */
+/* Main Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+::-webkit-scrollbar-thumb {
+  background: #b5b3b3; 
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+/* Custom Srollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px; /* Width of the scrollbar */
   height: 10px;
@@ -406,6 +421,31 @@ div.rdt_TableCell
 .rdt_TableRow > div:first-child button:hover,  
 .rdt_TableRow > div:first-child button:focus {
   background: none !important;
+}
+
+/* Admin List Table */
+#adminList div.rdt_TableCol[data-column-id="2"],
+#adminList div.rdt_TableCell[data-column-id="2"],
+#adminList div.rdt_TableCol[data-column-id="3"],
+#adminList div.rdt_TableCell[data-column-id="3"],
+#adminList div.rdt_TableCol[data-column-id="4"],
+#adminList div.rdt_TableCell[data-column-id="4"] 
+{
+  min-width: 200px;
+}
+
+/* prominent columns */
+#adminList .rdt_TableBody div[data-column-id="1"],
+#adminList .rdt_TableBody div[data-column-id="2"]
+{
+  @apply prominent-column;
+}
+
+/* sec columns */
+#adminList .rdt_TableBody div[data-column-id="3"],
+#adminList .rdt_TableBody div[data-column-id="4"]
+{
+  @apply sec-column;
 }
 
 /* Restaurant Owners Table */

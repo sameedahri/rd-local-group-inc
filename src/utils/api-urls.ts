@@ -1,16 +1,18 @@
 import {API_BASE_URL} from "@/utils/constants";
 
 // Restaurant Owners
-export const OWNER_LOGIN = API_BASE_URL + "/owner/login";
-export const OWNER_PROOFS_GET = API_BASE_URL + "/owner/proofs";
-export const OWNER_EXTRA_STAFF_ADD = API_BASE_URL + "/owner/staff/add";
-export const OWNER_REVISION_ADD = API_BASE_URL + "/owner/revision/add";
+export const OWNER_LOGIN = API_BASE_URL + "/auth/login";
+export const OWNER_PROOFS_GET = API_BASE_URL + "/user/proofs";
+export const OWNER_PROOF_GET = API_BASE_URL + "/user/proof"; // + id
+export const OWNER_REVISION_ADD = API_BASE_URL + "/user/proof"; // + id + /verify
+export const OWNER_EXTRA_STAFF_ADD = API_BASE_URL + "/user/add-staff";
 
 // Advertisers
-export const ADVERTISER_LOGIN = API_BASE_URL + "/advertiser/login";
-export const ADVERTISER_PROOFS_GET = API_BASE_URL + "/advertiser/proofs";
-export const ADVERTISER_EXTRA_STAFF_ADD = API_BASE_URL + "/advertiser/staff/add";
-export const ADVERTISER_REVISION_ADD = API_BASE_URL + "/advertiser/revision/add";
+export const ADVERTISER_LOGIN = API_BASE_URL + "/auth/login";
+export const ADVERTISER_PROOFS_GET = API_BASE_URL + "/user/proofs";
+export const ADVERTISER_PROOF_GET = API_BASE_URL + "/user/proof"; // + id
+export const ADVERTISER_REVISION_ADD = API_BASE_URL + "/user/proof"; // + id /verify
+export const ADVERTISER_EXTRA_STAFF_ADD = API_BASE_URL + "/user/add-staff";
 
 // Admin Dashboard
 export const ADMIN_LOGIN = API_BASE_URL + "/admin/login";
