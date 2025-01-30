@@ -5,7 +5,7 @@ import downArrow from "/public/assets/images/admin/user/down-arrow.svg";
 import Image from "next/image";
 import eyeIcon from "/public/assets/images/admin/user/eye-icon.svg";
 import { useRouter } from "next/navigation";
-import {ADMIN_RESTAURANTPROFILE, ADMIN_SUBMIT_PROOF} from "@/utils/pages-routes";
+import {ADMIN_RESTAURANT_PROFILE, ADMIN_SUBMIT_PROOF} from "@/utils/pages-routes";
 import TableExtraInfoHeading from "../../adminCommon/TableExtraInfoHeading";
 import TableExtraInfo from "../../adminCommon/TableExtraInfo";
 
@@ -91,7 +91,6 @@ const ExpandedComponent: React.FC<{ data: DataRow }> = ({data}) => {
 
 const RestaurantOwnersReactTable:React.FC<RestaurantOwnersReactTableProps> = ({data}) => {
     const router = useRouter();
-    console.log(data)
 
     const columns: TableColumn<DataRow>[] = [
         {name: "Id", selector: row => row.id, omit: true},
@@ -108,7 +107,7 @@ const RestaurantOwnersReactTable:React.FC<RestaurantOwnersReactTableProps> = ({d
             <button 
                 className="proof-btn w-[100px] h-[45px] rounded-[22px] border border-[#EBC0B4] bg-[rgba(235,192,180,0.21)] text-[#AB877E] font-gilroyRegular text-[12px]"
                 onClick={() => {
-                    router.push(ADMIN_SUBMIT_PROOF+"/"+row.id)
+                    router.push(ADMIN_SUBMIT_PROOF+"/"+row.contactNumber)
                 }}
             >Upload Proof</button>
         )},
@@ -121,7 +120,7 @@ const RestaurantOwnersReactTable:React.FC<RestaurantOwnersReactTableProps> = ({d
                 width={24} 
                 height={24} 
                 onClick={() => {
-                    router.push(ADMIN_RESTAURANTPROFILE+"/"+row.id)
+                    router.push(ADMIN_RESTAURANT_PROFILE+"/"+row.id)
                 }}
             />
         )}
@@ -149,6 +148,8 @@ const RestaurantOwnersReactTable:React.FC<RestaurantOwnersReactTableProps> = ({d
                 expanded:  <Image src={downArrow} alt="downwards arrow" width={30} height={30} />
             }}
             pagination
+            paginationPerPage={5}
+            paginationRowsPerPageOptions={[5, 10, 15, 20, 25, 30]}
             responsive
         />
     </div>

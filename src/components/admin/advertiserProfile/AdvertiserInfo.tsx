@@ -1,60 +1,78 @@
 "use client";
-import InfoPiece from "./InfoPiece";
+import InfoPiece from "../restaurantProfile/InfoPiece";
 import emailIcon from "/public/assets/images/admin/restaurantProfile/email-icon.svg";
 import downArrowIcon from "/public/assets/images/admin/restaurantProfile/down-arrow-icon.svg";
 import Image from "next/image";
-import User from "./User";
+import User from "../restaurantProfile/User";
 import { useState } from "react";
 
 
 type OwnerProps = {
-    id: number, 
-    name: string, 
-    email: string, 
-    contactNumber: string, 
-    officeNumber: string, 
-    role: string
-}  
-type ProofsProps = {
+    id: number, name: string, email: string, contactNumber: string, officeNumber: string, role: string
+  }
+  type ProofsProps = {
     id: number,
     title: string,
     businessAddress: string,
     dateOfSubmission: string,
     status: string
-}
-type DataProps = {
-    id: number,
-    address: string,
-    agreementDate: string,
-    color: string,
-    contactNumber: string,
-    restaurantName: string,
-    size: string,
-    tabletopSpecs: string,
-    owners: OwnerProps[],
-    proofs: ProofsProps[]
-}
+  }
+  type ChecksProps = {
+      checkNumber: string,
+      eCheckAccountNumber: string,
+      eCheckRouteNumber: string,
+      id: number,
+      nameOnCheck: string,
+      phoneNumberOnCheck: string
+  }
+  type CreditCardsProps = {
+      cardBillingStreet: string,
+      cardCvc: string,
+      cardExpDate: string,
+      cardNumber: string,
+      cardZipCode: string,
+      id: number,
+      nameOnCard: string,
+  }
+  type DataProps = {
+      adAgreementDetails: string,
+      adPrice: string,
+      address: string,
+      checks: ChecksProps[]
+      city: string,
+      companyName: string,
+      contactNumber: string,
+      creditCards: CreditCardsProps[]
+      id: number,
+      is2Payments: boolean,
+      isOneTimePayment: boolean,
+      owners: OwnerProps[],
+      proofs: ProofsProps[],
+      setupFee: string,
+      state: string,
+      totalDueAmount: string,
+      zip: string
+  }
 
 interface RestaurantInfoProps {
     data: DataProps | null
 }
 
-const RestaurantInfo:React.FC<RestaurantInfoProps> = ({data}) => {
+const AdvertiserInfo:React.FC<RestaurantInfoProps> = ({data}) => {
     const [isUsersOpen, setIsUsersOpen] = useState<boolean>(false);
     const toggleUsers = () => {
         setIsUsersOpen(!isUsersOpen);
     };
-    console.log(data)
 
   return (
     <section className="lg:w-[38%] w-[100%] lg:min-w-[415px] bg-white rounded-[16px]">
         <div className="md:p-[30px] p-[20px]">
             <div className="flex items-center md:gap-x-5 gap-x-4 border-b border-b-[#E0E0E0] md:pb-[30px] pb-[20px]">
                 <div className="md:w-[103px] w-[70px] md:h-[103px] h-[70px] rounded-full bg-[#D59483] flex justify-center items-center">
-                    <p className="text-white font-gilroyBold md:text-[32px] text-[25px]">{data?.restaurantName.split(' ').map(val => val[0])}</p>
+                    <p className="text-white font-gilroyBold md:text-[32px] text-[25px]">{data?.companyName.split(' ').map(val => val[0])}</p>
                 </div>
                 <div>
-                    <h2 className="text-[#403F3F] font-gilroySemibold md:text-[22px] text-[17px]">{data?.restaurantName}</h2>
+                    <h2 className="text-[#403F3F] font-gilroySemibold md:text-[22px] text-[17px]">{data?.companyName}</h2>
                     {/* <InfoPiece infoName="Owner:" infoValue="John Doe" /> */}
                 </div>
             </div>
@@ -94,4 +112,4 @@ const RestaurantInfo:React.FC<RestaurantInfoProps> = ({data}) => {
   )
 }
 
-export default RestaurantInfo
+export default AdvertiserInfo

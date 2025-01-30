@@ -19,4 +19,5 @@ export const ADMIN_ADDUSER = "/admin/add-user";
 export const ADMIN_ADVERTISER = "/admin/add-advertiser";
 export const ADMIN_ADDRESTAURANT = "/admin/add-restaurant";
 export const ADMIN_SUBMIT_PROOF = "/admin/submit-proof";
-export const ADMIN_RESTAURANTPROFILE = "/admin/restaurant-profile";
+export const ADMIN_RESTAURANT_PROFILE = "/admin/restaurant-profile";
+export const ADMIN_ADVERTISER_PROFILE = "/admin/advertiser-profile";
