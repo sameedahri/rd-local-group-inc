@@ -21,7 +21,6 @@ const AddUserContent = () => {
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
-    const [countryCode, setCountryCode] = useState<string>("+1");
     const [phoneNumber, setPhoneNumber] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [data, setData] = useState(null);
@@ -52,7 +51,7 @@ const AddUserContent = () => {
             lastName: lastName,
             email: email,
             password: password,
-            phone: countryCode + " " + phoneNumber
+            phone: phoneNumber
         };
         console.log(userData)
         postRequest(ADMIN_CREATE, userData, setData);
@@ -62,7 +61,6 @@ const AddUserContent = () => {
         setFirstName("");
         setLastName("");
         setEmail("");
-        setCountryCode("+1");
         setPhoneNumber("");
     };
 
@@ -97,8 +95,6 @@ const AddUserContent = () => {
                         label="Phone number" 
                         inputId="phoneNumber" 
                         setPhoneNumber={setPhoneNumber} 
-                        setCountryCode={setCountryCode} 
-                        countryCode={countryCode} 
                     />
                     <div></div>
                 </div>

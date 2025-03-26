@@ -28,12 +28,8 @@ const AddAdvertiserContent = () => {
 
     const [ownerName, setOwnerName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
-    // const [officeNumber, setOfficeNumber] = useState<string>("");
-    const [officeCountryCode, setOfficeCountryCode] = useState<string>("+1");
     const [officeNumber, setOfficeNumber] = useState<string>("");
-    const [ownerCountryCode, setOwnerCountryCode] = useState<string>("+1");
     const [ownerContactNumber, setOwnerContactNumber] = useState<string>("");
-    const [countryCode, setCountryCode] = useState<string>("+1");
     const [contactNumber, setContactNumber] = useState<string>("");
     const [adveriserAgreement, setAdveriserAgreement] = useState<string>("");
 
@@ -111,7 +107,6 @@ const AddAdvertiserContent = () => {
             eCheckRouteNumber: routeNumber,
             eCheckAccountNumber: accNumber
         };
-        console.log(advertiserData)
         postRequest(ADVERTISER_ADD, advertiserData, setData);
     };
 
@@ -123,11 +118,8 @@ const AddAdvertiserContent = () => {
         setZip("");
         setOwnerName("");
         setEmail("");
-        setOfficeCountryCode("+1");
         setOfficeNumber("");
-        setOwnerCountryCode("+1");
         setOwnerContactNumber("");
-        setCountryCode("+1");
         setContactNumber("");
         setAdveriserAgreement("");
         setAdPrice("");
@@ -190,21 +182,16 @@ const AddAdvertiserContent = () => {
                         <LabelInput label="Email Address" inputType="email" inputId="email" stateValue={email} setState={setEmail} required={false} />
                     </div>
                     <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
-                        {/* <LabelInput label="Office Number*" inputType="text" inputId="officeNumber" stateValue={officeNumber} setState={setOfficeNumber} /> */}
                         <PhoneMask 
                             label="Office Number*"
                             inputId="officeNumber"
-                            setCountryCode={setOfficeCountryCode}
                             setPhoneNumber={setOfficeNumber}
-                            countryCode={officeCountryCode}
                             required={true}
                         />
                         <PhoneMask 
                             label="Owner Contact Number" 
                             inputId="ownerContactNumber" 
                             setPhoneNumber={setOwnerContactNumber} 
-                            setCountryCode={setOwnerCountryCode} 
-                            countryCode={ownerCountryCode}
                             required={true}
                         />
                     </div>
@@ -213,8 +200,6 @@ const AddAdvertiserContent = () => {
                             label="Contact Number*" 
                             inputId="contactNumber" 
                             setPhoneNumber={setContactNumber} 
-                            setCountryCode={setCountryCode} 
-                            countryCode={countryCode}
                         />
                         <LabelInput label="Advertiser Agrees to Place Color Ad on" inputType="text" inputId="adveriserAgreement" stateValue={adveriserAgreement} setState={setAdveriserAgreement} required={false} bottomMessage="Display/Special Boards" />
                     </div>

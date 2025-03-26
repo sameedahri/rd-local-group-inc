@@ -24,8 +24,6 @@ const SubmitProofContent = () => {
 
     const [customerId, setCustomerId] = useState<string>("");
     const [businessName, setBusinessName] = useState<string>("");
-    // const [businessContact, setBusinessContact] = useState<string>("");
-    const [countryCode, setCountryCode] = useState<string>("+1");
     const [businessContact, setBusinessContact] = useState<string>("");
     const [businessAddress, setBusinessAddress] = useState<string>("");
     const [proofQR, setProofQR] = useState<string>("");
@@ -153,8 +151,6 @@ const SubmitProofContent = () => {
                     label="Business Contact*" 
                     inputId="businessContact" 
                     setPhoneNumber={setBusinessContact} 
-                    setCountryCode={setCountryCode} 
-                    countryCode={countryCode}
                 />
                 <LabelInput label="Business Address*" inputType="text" inputId="businessAddress" stateValue={businessAddress} setState={setBusinessAddress} />
             </div>

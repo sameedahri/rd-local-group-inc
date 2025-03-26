@@ -21,9 +21,7 @@ const AddExStaffContent:React.FC<AddExStaffContentProps> = ({urlToDashboard, pos
 
     const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
-    const [contactNumberCountryCode, setContactNumberCountryCode] = useState<string>("+1");
     const [contactNumber, setContactNumber] = useState<string>("");
-    const [officeNumberCountryCode, setOfficeNumberCountryCode] = useState<string>("+1");
     const [officeNumber, setOfficeNumber] = useState<string>("");
 
     const [data, setData] = useState(null);
@@ -52,8 +50,8 @@ const AddExStaffContent:React.FC<AddExStaffContentProps> = ({urlToDashboard, pos
         const staffData = {
             name: name,
             email: email,
-            contactNumber: contactNumberCountryCode + " " + contactNumber,
-            officeNumber: officeNumberCountryCode + " " + officeNumber
+            contactNumber: contactNumber,
+            officeNumber: officeNumber
         };
         postRequest(postStaffUrl, staffData, setData, false, false);
     };
@@ -61,9 +59,7 @@ const AddExStaffContent:React.FC<AddExStaffContentProps> = ({urlToDashboard, pos
     const resetForm = () => {
         setName("");
         setEmail("");
-        setContactNumberCountryCode("+1");
         setContactNumber("");
-        setOfficeNumberCountryCode("+1");
         setOfficeNumber("");
     };
 
@@ -83,15 +79,11 @@ const AddExStaffContent:React.FC<AddExStaffContentProps> = ({urlToDashboard, pos
                         label="Contact number" 
                         inputId="contactNumber" 
                         setPhoneNumber={setContactNumber} 
-                        setCountryCode={setContactNumberCountryCode} 
-                        countryCode={contactNumberCountryCode} 
                     />
                     <PhoneMask 
                         label="Office number" 
                         inputId="officeNumber" 
                         setPhoneNumber={setOfficeNumber} 
-                        setCountryCode={setOfficeNumberCountryCode} 
-                        countryCode={officeNumberCountryCode} 
                     />
                 </div>
                 <div className="flex md:gap-x-4 gap-x-2 mt-8">

@@ -21,16 +21,13 @@ const AddRestaurantContent = () => {
     const [restaurantName, setRestaurantName] = useState<string>("");
     const [agreementDate, setAgreementDate] = useState<string>("");
     const [restaurantAddress, setRestaurantAddress] = useState<string>("");
-    const [countryCode, setCountryCode] = useState<string>("+1");
     const [contactNumber, setContactNumber] = useState<string>("");
     const [tabletopsSpecs, setTabletopsSpecs] = useState<string>("");
     const [color, setColor] = useState<string>("");
     const [size, setSize] = useState<string>("");
     const [ownerName, setOwnerName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
-    const [ownerCountryCode, setOwnerCountryCode] = useState<string>("+1");
     const [ownerContactNumber, setOwnerContactNumber] = useState<string>("");
-    const [officeNumberCode, setOfficeNumberCode] = useState<string>("+1");
     const [officePhoneNumber, setOfficePhoneNumber] = useState<string>("");
     const [data, setData] = useState(null);
 
@@ -59,14 +56,14 @@ const AddRestaurantContent = () => {
             restaurantName: restaurantName,
             agreementDate: agreementDate,
             address: restaurantAddress,
-            contactNumber: countryCode + " " + contactNumber,
+            contactNumber: contactNumber,
             tabletopSpecs: tabletopsSpecs,
             color: color,
             size: size,
             name: ownerName,
             email: email,
-            ownerContactNumber: ownerCountryCode + " " + ownerContactNumber,
-            officeNumber: officeNumberCode + " " + officePhoneNumber
+            ownerContactNumber: ownerContactNumber,
+            officeNumber: officePhoneNumber
         };
         postRequest(OWNER_ADD, restaurantData, setData);
     };
@@ -75,16 +72,13 @@ const AddRestaurantContent = () => {
         setRestaurantName("");
         setAgreementDate("");
         setRestaurantAddress("");
-        setCountryCode("+1");
         setContactNumber("");
         setTabletopsSpecs("");
         setColor("");
         setSize("");
         setOwnerName("");
         setEmail("");
-        setOwnerCountryCode("+1");
         setOwnerContactNumber("");
-        setOwnerCountryCode("+1");
         setOfficePhoneNumber("");
     };
 
@@ -107,8 +101,6 @@ const AddRestaurantContent = () => {
                             label="Contact Number*" 
                             inputId="contactNumber" 
                             setPhoneNumber={setContactNumber} 
-                            setCountryCode={setCountryCode} 
-                            countryCode={countryCode}
                             required={true}
                         />
                     </div>
@@ -129,8 +121,6 @@ const AddRestaurantContent = () => {
                             label="Owner Contact Number*" 
                             inputId="ownerContactNumber" 
                             setPhoneNumber={setOwnerContactNumber} 
-                            setCountryCode={setOwnerCountryCode} 
-                            countryCode={ownerCountryCode}
                             required={true}
                         />
                     </div>
@@ -139,8 +129,6 @@ const AddRestaurantContent = () => {
                             label="Office Phone Number*" 
                             inputId="officePhoneNumber" 
                             setPhoneNumber={setOfficePhoneNumber} 
-                            setCountryCode={setOfficeNumberCode} 
-                            countryCode={officeNumberCode}
                             required={true}
                         />
                         <div></div>
