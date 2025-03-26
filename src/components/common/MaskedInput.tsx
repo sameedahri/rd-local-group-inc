@@ -10,7 +10,7 @@ interface MaskedInputProps {
     required?: boolean
 }
 
-const MaskedInput:React.FC<MaskedInputProps> = ({setState, placeholderText, mask='+_ ____ ____ __', required=true}) => {
+const MaskedInput:React.FC<MaskedInputProps> = ({setState, placeholderText, mask='__________', required=true}) => {
     const options = {
         mask: mask,
         replacement: { _: /\d/ }

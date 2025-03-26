@@ -1,5 +1,5 @@
 "use client";
-import { Dispatch, SetStateAction, FormEvent } from "react";
+import { Dispatch, SetStateAction } from "react";
 import MaskedInput from "./MaskedInput";
 
 
@@ -12,12 +12,12 @@ interface PhoneMaskProps {
     required?: boolean
 }
 
-const PhoneMask: React.FC<PhoneMaskProps> = ({label, inputId, setPhoneNumber, setCountryCode, countryCode, required=false }) => {
+const PhoneMask: React.FC<PhoneMaskProps> = ({label, inputId, setPhoneNumber, required=false }) => {
   return (
     <div className="grid gap-y-1">
         <label htmlFor={inputId} className="text-label font-gilroySemibold text-[16px]">{label}</label>
         <div className="flex gap-x-2">
-            <select 
+            {/* <select 
                 className="w-[20%] min-w-[80px] max-w-[120px] md:h-[52px] border border-[#DADADA] focus:outline-inputOutline rounded-[7px] p-3 md:placeholder:text-[14px] placeholder:text-[12px]"
                 value={countryCode}
                 onChange={(e: FormEvent<HTMLSelectElement>) => {
@@ -30,8 +30,8 @@ const PhoneMask: React.FC<PhoneMaskProps> = ({label, inputId, setPhoneNumber, se
                 <option value="+1">+1</option>
                 <option value="+2">+2</option>
                 <option value="+3">+3</option>
-            </select>
-            <MaskedInput setState={setPhoneNumber} placeholderText="Phone number" mask="____ ____ __" required={required} />
+            </select> */}
+            <MaskedInput setState={setPhoneNumber} placeholderText="Phone number" mask="__________" required={required} />
         </div>
     </div>
   )

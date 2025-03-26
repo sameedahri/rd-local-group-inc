@@ -40,7 +40,7 @@ const LoginCard:React.FC<LoginCardProps> = ({urlToDashboard, postLoginDataUrl, i
             <p className="mt-3 text-[#3F3F3F] font-gilroyMedium text-center md:text-[16px] text-[14px]">Glad to see you, Login to your account below</p>
             <div className="mt-12 flex flex-col gap-2">
                 <label htmlFor="phoneNumber" className="text-[#3F3F3F] font-gilroyMedium md:text-[14px] text-[12px]">Enter your Phone number*</label>
-                <MaskedInput setState={setPhoneNumber} placeholderText="+1 1234 5678 90" />
+                <MaskedInput setState={setPhoneNumber} placeholderText="1234567890" />
             </div>
             <button 
                 className="w-[100%] md:h-[52px] h-[43px] bg-loginBg rounded-[5px] 
