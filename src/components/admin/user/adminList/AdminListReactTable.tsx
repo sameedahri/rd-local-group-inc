@@ -28,8 +28,6 @@ const AdminListReactTable:React.FC<AdminListReactTableProps>  = ({data}) => {
                 columns={columns}
                 data={data ? data : []}
                 pagination
-                paginationPerPage={5}
-                paginationRowsPerPageOptions={[5, 10, 15, 20, 25, 30]}
                 responsive
              />
         </div>

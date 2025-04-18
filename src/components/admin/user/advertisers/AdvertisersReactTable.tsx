@@ -6,7 +6,7 @@ import upArrow from "/public/assets/images/admin/user/up-arrow.svg";
 import downArrow from "/public/assets/images/admin/user/down-arrow.svg";
 import eyeIcon from "/public/assets/images/admin/user/eye-icon.svg";
 import { useRouter } from "next/navigation";
-import {ADMIN_ADVERTISER_PROFILE, ADMIN_SUBMIT_PROOF} from "@/utils/pages-routes";
+import {ADMIN_RESTAURANTPROFILE, ADMIN_SUBMIT_PROOF} from "@/utils/pages-routes";
 import TableExtraInfo from "../../adminCommon/TableExtraInfo";
 import TableExtraInfoHeading from "../../adminCommon/TableExtraInfoHeading";
 
@@ -67,7 +67,6 @@ type DataRow = {
   setupFee: string,
   totalDueAmount: string,
   proof: string,
-  contactNumber: string,
   owners: OwnerProps[],
   creditCards: CreditCardProps[],
   checks: CheckProps[],
@@ -170,7 +169,7 @@ const AdvertisersReactTable:React.FC<AdvertisersReactTableProps> = ({data}) => {
           <button 
               className="proof-btn w-[100px] h-[45px] rounded-[22px] border border-[#EBC0B4] bg-[rgba(235,192,180,0.21)] text-[#AB877E] font-gilroyRegular text-[12px]"
               onClick={() => {
-                  router.push(ADMIN_SUBMIT_PROOF+"/"+row.contactNumber)
+                  router.push(ADMIN_SUBMIT_PROOF+"/"+row.id)
               }}
           >Upload Proof</button>
       )},
@@ -183,7 +182,7 @@ const AdvertisersReactTable:React.FC<AdvertisersReactTableProps> = ({data}) => {
               width={24} 
               height={24} 
               onClick={() => {
-                  router.push(ADMIN_ADVERTISER_PROFILE+"/"+row.id)
+                  router.push(ADMIN_RESTAURANTPROFILE+"/"+row.id)
               }}
           />
       )}
@@ -211,8 +210,6 @@ const AdvertisersReactTable:React.FC<AdvertisersReactTableProps> = ({data}) => {
                 expanded:  <Image src={downArrow} alt="downwards arrow" width={30} height={30} />
             }}
             pagination
-            paginationPerPage={5}
-            paginationRowsPerPageOptions={[5, 10, 15, 20, 25, 30]}
             responsive
         />
     </div>
