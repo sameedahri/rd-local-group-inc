@@ -21,10 +21,10 @@ export const ADMINS_GET = API_BASE_URL + "/admin";
 export const ADMIN_CREATE = API_BASE_URL + "/admin/create";
 export const ADMIN_UPDATE = API_BASE_URL + "/admin/update";
 export const OWNERS_GET = API_BASE_URL + "/admin/owners";
-export const OWNER_GET = API_BASE_URL + "/admin/owners"; // + id
+export const OWNER_GET = API_BASE_URL + "/admin/owners"; // + contactNumber
 export const OWNER_ADD = API_BASE_URL + "/admin/owners/add";
 export const ADVERTISERS_GET = API_BASE_URL + "/admin/advertiser";
-export const ADVERTISER_GET = API_BASE_URL + "/admin/advertiser"; // + id
+export const ADVERTISER_GET = API_BASE_URL + "/admin/advertiser"; // + officeNumber
 export const ADVERTISER_ADD = API_BASE_URL + "/admin/advertiser/add";
 
 export const PROOF_ADD = API_BASE_URL + "/admin/proof"; // + businessId + "/submit"

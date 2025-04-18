@@ -28,6 +28,8 @@ const AddAdvertiserContent = () => {
 
     const [ownerName, setOwnerName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
+    // const [officeNumber, setOfficeNumber] = useState<string>("");
+    const [officeCountryCode, setOfficeCountryCode] = useState<string>("+1");
     const [officeNumber, setOfficeNumber] = useState<string>("");
     const [ownerCountryCode, setOwnerCountryCode] = useState<string>("+1");
     const [ownerContactNumber, setOwnerContactNumber] = useState<string>("");
@@ -121,6 +123,7 @@ const AddAdvertiserContent = () => {
         setZip("");
         setOwnerName("");
         setEmail("");
+        setOfficeCountryCode("+1");
         setOfficeNumber("");
         setOwnerCountryCode("+1");
         setOwnerContactNumber("");
@@ -163,8 +166,8 @@ const AddAdvertiserContent = () => {
         <div className="content-wrapper">
             <PageHeading heading="Add Advertiser" />
             <form 
-                    className="bg-white rounded-[16px] md:p-10 px-7 py-10"
-                    onSubmit={submitForm}
+                className="bg-white rounded-[16px] md:p-10 px-7 py-10"
+                onSubmit={submitForm}
             >
                 <fieldset>
                     <FormSubHeading heading="Company Details" />
@@ -183,11 +186,19 @@ const AddAdvertiserContent = () => {
                 <fieldset className="mt-12">
                     <FormSubHeading heading="Owner Details" />
                     <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4">
-                        <LabelInput label="Owner name*" inputType="text" inputId="ownerName" stateValue={ownerName} setState={setOwnerName} />
+                        <LabelInput label="Owner Name*" inputType="text" inputId="ownerName" stateValue={ownerName} setState={setOwnerName} />
                         <LabelInput label="Email Address" inputType="email" inputId="email" stateValue={email} setState={setEmail} required={false} />
                     </div>
                     <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
-                        <LabelInput label="Office Number*" inputType="text" inputId="officeNumber" stateValue={officeNumber} setState={setOfficeNumber} />
+                        {/* <LabelInput label="Office Number*" inputType="text" inputId="officeNumber" stateValue={officeNumber} setState={setOfficeNumber} /> */}
+                        <PhoneMask 
+                            label="Office Number*"
+                            inputId="officeNumber"
+                            setCountryCode={setOfficeCountryCode}
+                            setPhoneNumber={setOfficeNumber}
+                            countryCode={officeCountryCode}
+                            required={true}
+                        />
                         <PhoneMask 
                             label="Owner Contact Number" 
                             inputId="ownerContactNumber" 
@@ -248,7 +259,8 @@ const AddAdvertiserContent = () => {
                     </div>
                     <div className="grid md:grid-cols-3 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
                         <LabelInput label="Zip Code*" inputType="text" inputId="zipCode" stateValue={zipCode} setState={setZipCode} />
-                        <LabelInput label="Exp Date*" inputType="text" inputId="expDate" stateValue={expDate} setState={setExpDate} />
+                        {/* <LabelInput label="Exp Date*" inputType="text" inputId="expDate" stateValue={expDate} setState={setExpDate} /> */}
+                        <LabelInput label="Exp Date*" inputType="date" inputId="expDate" stateValue={expDate} setState={setExpDate} />
                         <LabelInput label="CVC*" inputType="text" inputId="cvc" stateValue={cvc} setState={setCvc} />
                     </div>
                 </fieldset>
