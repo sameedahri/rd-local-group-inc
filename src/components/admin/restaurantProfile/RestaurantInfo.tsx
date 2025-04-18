@@ -44,7 +44,16 @@ const RestaurantInfo:React.FC<RestaurantInfoProps> = ({data}) => {
     const toggleUsers = () => {
         setIsUsersOpen(!isUsersOpen);
     };
-    console.log(data)
+
+    // const usersData = [
+    //     {id: 1, name: "John Doe", email: "Jack@example.com"},
+    //     {id: 2, name: "Aiden", email: "aiden@example.com"},
+    //     {id: 3, name: "John Doe", email: "Jack@example.com"},
+    //     {id: 4, name: "John Doe", email: "Jack@example.com"},
+    //     {id: 5, name: "Aiden", email: "aiden@example.com"},
+    //     {id: 6, name: "John Doe", email: "Jack@example.com"},
+    //     {id: 7, name: "Aiden", email: "aiden@example.com"},
+    // ];
 
   return (
     <section className="lg:w-[38%] w-[100%] lg:min-w-[415px] bg-white rounded-[16px]">
@@ -55,7 +64,7 @@ const RestaurantInfo:React.FC<RestaurantInfoProps> = ({data}) => {
                 </div>
                 <div>
                     <h2 className="text-[#403F3F] font-gilroySemibold md:text-[22px] text-[17px]">{data?.restaurantName}</h2>
-                    {/* <InfoPiece infoName="Owner:" infoValue="John Doe" /> */}
+                    <InfoPiece infoName="Owner:" infoValue="John Doe" />
                 </div>
             </div>
             <div className="flex flex-col gap-y-[10px] pt-[30px]">

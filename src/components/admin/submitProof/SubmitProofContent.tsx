@@ -15,7 +15,6 @@ import {validationMessage} from "@/utils/utilFunctions";
 import { postFormData } from "@/utils/utilFunctions";
 import { PROOF_ADD } from "@/utils/api-urls";
 import useRedirect from "@/utils/useRedirect";
-import PhoneMask from "@/components/common/PhoneMask";
 
 
 const SubmitProofContent = () => {
@@ -24,8 +23,6 @@ const SubmitProofContent = () => {
 
     const [customerId, setCustomerId] = useState<string>("");
     const [businessName, setBusinessName] = useState<string>("");
-    // const [businessContact, setBusinessContact] = useState<string>("");
-    const [countryCode, setCountryCode] = useState<string>("+1");
     const [businessContact, setBusinessContact] = useState<string>("");
     const [businessAddress, setBusinessAddress] = useState<string>("");
     const [proofQR, setProofQR] = useState<string>("");
@@ -148,14 +145,7 @@ const SubmitProofContent = () => {
                 <LabelInput label="Business Name*" inputType="text" inputId="businessName" stateValue={businessName} setState={setBusinessName} />
             </div>
             <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
-                {/* <LabelInput label="Business Contact*" inputType="text" inputId="businessContact" stateValue={businessContact} setState={setBusinessContact} /> */}
-                <PhoneMask 
-                    label="Business Contact*" 
-                    inputId="businessContact" 
-                    setPhoneNumber={setBusinessContact} 
-                    setCountryCode={setCountryCode} 
-                    countryCode={countryCode}
-                />
+                <LabelInput label="Business Contact*" inputType="text" inputId="businessContact" stateValue={businessContact} setState={setBusinessContact} />
                 <LabelInput label="Business Address*" inputType="text" inputId="businessAddress" stateValue={businessAddress} setState={setBusinessAddress} />
             </div>
             <div className="grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:mt-8 mt-4">
@@ -212,14 +202,14 @@ const SubmitProofContent = () => {
             </div>
         </form>
         <Dialogue 
-            setDialogueRef={setDialogueRef} 
-            closeDialogue={closeModal} 
-            icon={verifyIcon}
-            iconAlt="Verify"
-            title="Thank you!"
-            message="Proof submited successfully"
-            buttonText="Close"
-        />
+                setDialogueRef={setDialogueRef} 
+                closeDialogue={closeModal} 
+                icon={verifyIcon}
+                iconAlt="Verify"
+                title="Thank you!"
+                message="Proof submited successfully"
+                buttonText="Close"
+            />
     </div>
   )
 }
