@@ -43,7 +43,7 @@ const CardDetailsContent:React.FC<CardDetailsContentProps> = ({urlToAddRevision,
     
     useEffect(() => {
         getRequest(getProofDetailUrl+"/"+id, setData, setIsLoading, false);
-    }, [getProofDetailUrl])
+    }, [getProofDetailUrl, id])
 
     return (
       <div className="content-wrapper">

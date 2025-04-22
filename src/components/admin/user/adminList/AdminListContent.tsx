@@ -33,6 +33,14 @@ const AdminListContent = () => {
         getRequest(ADMINS_GET, setData, setIsLoading);
     }, [])
 
+    // Search functionality
+    const [filterText, setFilterText] = useState("");
+    const filteredItems = data?.data.filter(item => {
+        const {id, password, ...newItem} = item;
+        console.log(id, password);
+        return Object.values(newItem).join(" ").toLowerCase().search(filterText.toLowerCase()) > -1;
+    });
+
     return (
         <div className="content-wrapper">
             <div className="flex justify-between items-center">
@@ -46,8 +54,8 @@ const AdminListContent = () => {
                     onClickFunction={() => router.push(ADMIN_ADDUSER)}
                 />
             </div>
-            <SearchBar />
-            {isLoading ? <Loader dotsOnly={false} size="w-[10px] h-[10px]" /> : <AdminListReactTable data={data?.data} />}
+            <SearchBar setFilterText={setFilterText} />
+            {isLoading ? <Loader dotsOnly={false} size="w-[10px] h-[10px]" /> : <AdminListReactTable data={filteredItems} />}
         </div>
     )
 }

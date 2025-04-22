@@ -22,6 +22,12 @@ const AdvertisersContent = () => {
         getRequest(ADVERTISERS_GET, setData, setIsLoading);
     }, [])
 
+    // Search functionality
+    const [filterText, setFilterText] = useState("");
+    const filteredItems = data?.data.filter(item => {
+        return Object.values(item).join(" ").toLowerCase().search(filterText.toLowerCase()) > -1;
+    });
+
     return (
         <div className="sidemenu-page-content-wrapper">
             <div className="flex justify-between items-center">
@@ -37,8 +43,8 @@ const AdvertisersContent = () => {
                     onClickFunction={() => router.push(ADMIN_ADVERTISER)}
                 />
             </div>
-            <SearchBar />
-            {isLoading ? <Loader dotsOnly={false} size="w-[10px] h-[10px]" /> : <AdvertisersReactTable data={data?.data} />}
+            <SearchBar setFilterText={setFilterText} />
+            {isLoading ? <Loader dotsOnly={false} size="w-[10px] h-[10px]" /> : <AdvertisersReactTable data={filteredItems} />}
         </div>
     )
 }
