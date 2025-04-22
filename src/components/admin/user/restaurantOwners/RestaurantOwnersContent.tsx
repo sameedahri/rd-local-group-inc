@@ -24,9 +24,15 @@ const RestaurantOwnersContent = () => {
 
     // Search functionality
     const [filterText, setFilterText] = useState("");
-    const filteredItems = data?.data.filter(item => {
-        return Object.values(item).join(" ").toLowerCase().search(filterText.toLowerCase()) > -1;
-    });
+    const [filteredItems, setFilteredItems] = useState<[] | undefined>();
+    useEffect(() => {
+        if(data) {
+            // @ts-expect-error data type mismatch
+            setFilteredItems(data?.data.filter(item => {
+                return Object.values(item).join(" ").toLowerCase().search(filterText.toLowerCase()) > -1;
+            }));
+        }
+    }, [data, filterText])
 
     return (
         <div className="sidemenu-page-content-wrapper">

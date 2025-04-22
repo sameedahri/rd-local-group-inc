@@ -1,10 +1,12 @@
 // Restaurant Owners
+export const RESTAURANTOWNERS_LOGIN = "/restaurant-owners/login";
 export const RESTAURANTOWNERS_DASHBOARD = "/restaurant-owners/dashboard";
 export const RESTAURANTOWNERS_ADDEXTRASTAFF = "/restaurant-owners/add-extra-staff";
 export const RESTAURANTOWNERS_ADDREVISION = "/restaurant-owners/add-revision";
 export const RESTAURANTOWNERS_CARDDETAILS = "/restaurant-owners/card-details";
 
 // Advertisers
+export const ADVERTISERS_LOGIN = "/advertisers/login";
 export const ADVERTISERS_DASHBOARD = "/advertisers/dashboard";
 export const ADVERTISERS_ADDEXTRASTAFF = "/advertisers/add-extra-staff";
 export const ADVERTISERS_ADDREVISION = "/advertisers/add-revision";

@@ -9,7 +9,7 @@ export const metadata:Metadata = {
 const layout = ({children}: {children: React.ReactNode}) => {
     return (
         <>
-            <Header urlToLogin="/advertisers/login" />
+            <Header urlToLogin="/advertisers/login" isRestaurantOwner={false} />
             {children}
         </>
     )

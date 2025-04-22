@@ -35,11 +35,16 @@ const AdminListContent = () => {
 
     // Search functionality
     const [filterText, setFilterText] = useState("");
-    const filteredItems = data?.data.filter(item => {
-        const {id, password, ...newItem} = item;
-        console.log(id, password);
-        return Object.values(newItem).join(" ").toLowerCase().search(filterText.toLowerCase()) > -1;
-    });
+    const [filteredItems, setFilteredItems] = useState<DataProps[] | undefined>();
+    useEffect(() => {
+        if(data) {
+            setFilteredItems(data?.data.filter(item => {
+                const {id, password, ...newItem} = item;
+                console.log(id, password);
+                return Object.values(newItem).join(" ").toLowerCase().search(filterText.toLowerCase()) > -1;
+            }));
+        }
+    }, [data, filterText])
 
     return (
         <div className="content-wrapper">
