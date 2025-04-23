@@ -1,7 +1,7 @@
 'use client';
 import * as Dialog from '@radix-ui/react-dialog';
 import Image from 'next/image';
-import closeIcon from '/public/assets/images/common/close-icon.svg';
+import {X} from "lucide-react";
 
 interface RadixUIDialogProps {
     imgUrl: string
@@ -32,7 +32,7 @@ export default function RadixUIDialog({imgUrl}: RadixUIDialogProps) {
                 className="w-full h-full object-cover rounded-[10px] border border-inputOutline"
             />
             <Dialog.Close className="absolute top-2 right-2">
-                <Image src={closeIcon.src} alt="Hide Proof" width={18} height={18} className="lg:w-[18px] w-[12px] lg:h-[18px] h-[12px]" />
+                <X className="cursor-pointer text-red-500 hover:text-red-700 lg:w-[18px] w-[12px] lg:h-[18px] h-[12px]" />
             </Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>

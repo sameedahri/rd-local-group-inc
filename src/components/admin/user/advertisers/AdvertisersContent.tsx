@@ -10,7 +10,8 @@ import { ADVERTISERS_GET } from "@/utils/api-urls";
 import { getRequest } from "@/utils/utilFunctions";
 import { useEffect, useState } from "react";
 import Loader from "@/components/common/Loader";
-
+import { deleteRequest } from "@/utils/utilFunctions";
+import { OWNER_DELETE } from "@/utils/api-urls";
 
 const AdvertisersContent = () => {
     const router = useRouter();
@@ -18,9 +19,15 @@ const AdvertisersContent = () => {
     const [data, setData] = useState<{data: [], limit: number, page: number, total: number} | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
+    // Delete functionality
+    const [message, setMessage] = useState<string>("");
+    const handleDelete = (id: number) => {
+        deleteRequest(OWNER_DELETE+"/"+id.toString(), setMessage);
+    };
+
     useEffect(() => {
         getRequest(ADVERTISERS_GET, setData, setIsLoading);
-    }, [])
+    }, [message])
 
     // Search functionality
     const [filterText, setFilterText] = useState("");
@@ -50,7 +57,7 @@ const AdvertisersContent = () => {
                 />
             </div>
             <SearchBar setFilterText={setFilterText} />
-            {isLoading ? <Loader dotsOnly={false} size="w-[10px] h-[10px]" /> : <AdvertisersReactTable data={filteredItems} />}
+            {isLoading ? <Loader dotsOnly={false} size="w-[10px] h-[10px]" /> : <AdvertisersReactTable data={filteredItems} handleDelete={handleDelete} />}
         </div>
     )
 }

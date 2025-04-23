@@ -8,45 +8,46 @@ import { useRouter } from "next/navigation";
 import {ADMIN_RESTAURANTPROFILE, ADMIN_SUBMIT_PROOF} from "@/utils/pages-routes";
 import TableExtraInfoHeading from "../../adminCommon/TableExtraInfoHeading";
 import TableExtraInfo from "../../adminCommon/TableExtraInfo";
-
+import { Trash2 } from "lucide-react";
 
 type OwnerProps = {
     id: number, name: string, email: string, contactNumber: string, officeNumber: string, role: string
 }
 type ProofsProps = {
-    id: number,
-    businessAddress: string,
-    businessContact: string,
-    businessName: string,
-    color: string,
-    createdAt: string,
-    customerId: string,
-    dateOfSubmission: string,
-    design: string,
-    images: string[],
-    proofQR: string,
-    size: string,
-    status: string,
-    title: string,
-    type: string
+  id: number,
+  businessAddress: string,
+  businessContact: string,
+  businessName: string,
+  color: string,
+  createdAt: string,
+  customerId: string,
+  dateOfSubmission: string,
+  design: string,
+  images: string[],
+  proofQR: string,
+  size: string,
+  status: string,
+  title: string,
+  type: string
 }
 type DataRow = {
 	id: number;
 	restaurantName: string;
 	agreementDate: string;
-    address: string,
-    contactNumber: string,
-    tabletopSpecs: string,
-    color: string,
-    size: string
-    proof: string,
-    owners: OwnerProps[],
-    proofs: ProofsProps[]
+  address: string,
+  contactNumber: string,
+  tabletopSpecs: string,
+  color: string,
+  size: string
+  proof: string,
+  owners: OwnerProps[],
+  proofs: ProofsProps[]
 }
 
 interface RestaurantOwnersReactTableProps {
     // eslint-disable-next-line
-    data: DataRow[] | undefined
+    data: DataRow[] | undefined,
+    handleDelete: (id: number) => void
 }
 
 const ExpandedComponent: React.FC<{ data: DataRow }> = ({data}) => {
@@ -89,9 +90,8 @@ const ExpandedComponent: React.FC<{ data: DataRow }> = ({data}) => {
     )
 };
 
-const RestaurantOwnersReactTable:React.FC<RestaurantOwnersReactTableProps> = ({data}) => {
+const RestaurantOwnersReactTable:React.FC<RestaurantOwnersReactTableProps> = ({data, handleDelete}) => {
     const router = useRouter();
-    console.log(data)
 
     const columns: TableColumn<DataRow>[] = [
         {name: "Id", selector: row => row.id, omit: true},
@@ -124,6 +124,13 @@ const RestaurantOwnersReactTable:React.FC<RestaurantOwnersReactTableProps> = ({d
                     router.push(ADMIN_RESTAURANTPROFILE+"/"+row.id)
                 }}
             />
+        )},
+        {name: "Delete", cell: row => (
+          <Trash2 
+              size={20}
+              className="cursor-pointer text-red-400 ms-4" 
+              onClick={() => handleDelete(row.id)} 
+          />
         )}
     ]
 
@@ -149,6 +156,8 @@ const RestaurantOwnersReactTable:React.FC<RestaurantOwnersReactTableProps> = ({d
                 expanded:  <Image src={downArrow} alt="downwards arrow" width={30} height={30} />
             }}
             pagination
+            paginationPerPage={5}
+            paginationRowsPerPageOptions={[5, 10, 20, 30, 100]}
             responsive
         />
     </div>

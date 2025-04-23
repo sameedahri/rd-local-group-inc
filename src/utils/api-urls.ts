@@ -16,16 +16,18 @@ export const ADVERTISER_EXTRA_STAFF_ADD = API_BASE_URL + "/user/add-staff";
 
 // Admin Dashboard
 export const ADMIN_LOGIN = API_BASE_URL + "/admin/login";
-
 export const ADMINS_GET = API_BASE_URL + "/admin";
 export const ADMIN_CREATE = API_BASE_URL + "/admin/create";
 export const ADMIN_UPDATE = API_BASE_URL + "/admin/update";
+export const ADMIN_DELETE = API_BASE_URL + "/admin"; // + id
 export const OWNERS_GET = API_BASE_URL + "/admin/owners";
 export const OWNER_GET = API_BASE_URL + "/admin/owners"; // + id
 export const OWNER_ADD = API_BASE_URL + "/admin/owners/add";
+export const OWNER_DELETE = API_BASE_URL + "/admin/owners"; // + id
 export const ADVERTISERS_GET = API_BASE_URL + "/admin/advertiser";
 export const ADVERTISER_GET = API_BASE_URL + "/admin/advertiser"; // + id
 export const ADVERTISER_ADD = API_BASE_URL + "/admin/advertiser/add";
+export const ADVERTISER_DELETE = API_BASE_URL + "/admin/advertiser"; // + id
 
 export const PROOF_ADD = API_BASE_URL + "/admin/proof"; // + businessId + "/submit"
 export const PROOF_GET = API_BASE_URL + "/admin/proof"; // + id

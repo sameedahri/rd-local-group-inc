@@ -93,7 +93,7 @@ const ProofVerificationCard:React.FC<ProofVerificationCardProps> = ({urlToAddRev
     };
 
     // tailwind classes
-    const liSpan1 = "text-[#3C3C3C] font-gilroySemibold md:text-[18px] text-[11px]"; 
+    const liSpan1 = "text-[#3C3C3C] font-gilroySemibold md:text-[18px] text-[11px]";
     const liSpan2 = "text-[#636363] font-gilroyMedium md:text-[16px] text-[10px]";
   return (
     <>

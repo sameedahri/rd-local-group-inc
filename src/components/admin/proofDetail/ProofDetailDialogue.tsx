@@ -7,7 +7,7 @@ interface ProofDetailDialogueProps {
     imgUrl: string
 }
 
-const ProofDetailDialogue: React.FC<ProofDetailDialogueProps> = ({setDialogueRef, closeDialogue, imgUrl}) => {
+const ProofDetailDialogue: React.FC<ProofDetailDialogueProps> = ({setDialogueRef, imgUrl}) => {
     const dialogueRef = useRef<HTMLDialogElement>(null);
 
     useEffect(() => {

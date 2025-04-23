@@ -12,7 +12,7 @@ function useIsAuthenticated(isAdmin: boolean, isOwner: boolean) {
             const userAuthToken = localStorage.getItem('userAuthToken');
             if(userAuthToken === null) router.push(isOwner ? RESTAURANTOWNERS_LOGIN : ADVERTISERS_LOGIN); 
         }
-    }, [router, isAdmin])
+    }, [router, isAdmin, isOwner])
 }
 
 export default useIsAuthenticated

@@ -11,6 +11,8 @@ import { ADMINS_GET } from "@/utils/api-urls";
 import { useState, useEffect } from "react";
 import Loader from "@/components/common/Loader";
 import AdminListReactTable from "./AdminListReactTable";
+import { deleteRequest } from "@/utils/utilFunctions";
+import { ADMIN_DELETE } from "@/utils/api-urls";
 
 interface DataProps {
     id: number,
@@ -29,9 +31,15 @@ const AdminListContent = () => {
    const [data, setData] = useState<{data: DataProps[], limit: number, page: number, total: number} | null>(null);
    const [isLoading, setIsLoading] = useState(true);
 
+    // Delete functionality
+    const [message, setMessage] = useState<string>("");
+    const handleDelete = (id: number) => {
+        deleteRequest(ADMIN_DELETE+"/"+id.toString(), setMessage);
+    };
+
     useEffect(() => {
         getRequest(ADMINS_GET, setData, setIsLoading);
-    }, [])
+    }, [message])
 
     // Search functionality
     const [filterText, setFilterText] = useState("");
@@ -60,7 +68,7 @@ const AdminListContent = () => {
                 />
             </div>
             <SearchBar setFilterText={setFilterText} />
-            {isLoading ? <Loader dotsOnly={false} size="w-[10px] h-[10px]" /> : <AdminListReactTable data={filteredItems} />}
+            {isLoading ? <Loader dotsOnly={false} size="w-[10px] h-[10px]" /> : <AdminListReactTable data={filteredItems} handleDelete={handleDelete} />}
         </div>
     )
 }

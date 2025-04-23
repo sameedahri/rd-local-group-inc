@@ -10,7 +10,8 @@ import {getRequest} from "@/utils/utilFunctions";
 import {OWNERS_GET} from "@/utils/api-urls";
 import Loader from "@/components/common/Loader";
 import RestaurantOwnersReactTable from "./RestaurantOwnersReactTable";
-
+import { deleteRequest } from "@/utils/utilFunctions";
+import { OWNER_DELETE } from "@/utils/api-urls";
 
 const RestaurantOwnersContent = () => {
     const router = useRouter();
@@ -18,9 +19,15 @@ const RestaurantOwnersContent = () => {
     const [data, setData] = useState<{data: [], limit: number, page: number, total: number} | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
+    // Delete functionality
+    const [message, setMessage] = useState<string>("");
+    const handleDelete = (id: number) => {
+        deleteRequest(OWNER_DELETE+"/"+id.toString(), setMessage);
+    };
+
     useEffect(() => {
         getRequest(OWNERS_GET, setData, setIsLoading);
-    }, [])
+    }, [message])
 
     // Search functionality
     const [filterText, setFilterText] = useState("");
@@ -50,7 +57,7 @@ const RestaurantOwnersContent = () => {
                 />
             </div>
             <SearchBar setFilterText={setFilterText} />
-            {isLoading ? <Loader dotsOnly={false} size="w-[10px] h-[10px]" /> : <RestaurantOwnersReactTable data={filteredItems} />}
+            {isLoading ? <Loader dotsOnly={false} size="w-[10px] h-[10px]" /> : <RestaurantOwnersReactTable data={filteredItems} handleDelete={handleDelete} />}
         </div>
     )
 }

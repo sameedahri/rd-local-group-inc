@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import {ADMIN_RESTAURANTPROFILE, ADMIN_SUBMIT_PROOF} from "@/utils/pages-routes";
 import TableExtraInfo from "../../adminCommon/TableExtraInfo";
 import TableExtraInfoHeading from "../../adminCommon/TableExtraInfoHeading";
-
+import { Trash2 } from "lucide-react";
 
 type OwnerProps = {
   id: number,
@@ -75,7 +75,8 @@ type DataRow = {
 
 interface AdvertisersReactTableProps {
   // eslint-disable-next-line
-  data: DataRow[] | undefined
+  data: DataRow[] | undefined,
+  handleDelete: (id: number) => void
 }
 
 const ExpandedComponent: React.FC<{ data: DataRow }> = ({data}) => {
@@ -145,7 +146,7 @@ const ExpandedComponent: React.FC<{ data: DataRow }> = ({data}) => {
   )
 };
 
-const AdvertisersReactTable:React.FC<AdvertisersReactTableProps> = ({data}) => {
+const AdvertisersReactTable:React.FC<AdvertisersReactTableProps> = ({data, handleDelete}) => {
   const router = useRouter();
 
   const columns: TableColumn<DataRow>[] = [
@@ -185,6 +186,13 @@ const AdvertisersReactTable:React.FC<AdvertisersReactTableProps> = ({data}) => {
                   router.push(ADMIN_RESTAURANTPROFILE+"/"+row.id)
               }}
           />
+      )},
+      {name: "Delete", cell: row => (
+        <Trash2 
+            size={20}
+            className="cursor-pointer text-red-400 ms-4" 
+            onClick={() => handleDelete(row.id)} 
+        />
       )}
   ]
 
@@ -210,6 +218,8 @@ const AdvertisersReactTable:React.FC<AdvertisersReactTableProps> = ({data}) => {
                 expanded:  <Image src={downArrow} alt="downwards arrow" width={30} height={30} />
             }}
             pagination
+            paginationPerPage={5}
+            paginationRowsPerPageOptions={[5, 10, 20, 30, 100]}
             responsive
         />
     </div>
