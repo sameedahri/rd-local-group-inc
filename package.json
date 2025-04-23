@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.11",
     "@react-input/mask": "^2.0.3",
     "datatables.net": "^2.1.8",
     "datatables.net-dt": "^2.1.8",
