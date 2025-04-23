@@ -15,7 +15,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({urlToLogin, isAdmin=false, isRestaurantOwner=true}) => {
-    useIsAuthenticated(true);
+    useIsAuthenticated(isAdmin, isRestaurantOwner);
     const router = useRouter();
 
     const [userInitial, setUserInitial] = useState<string>("");

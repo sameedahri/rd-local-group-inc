@@ -3,6 +3,7 @@ import {RESTAURANTOWNERS_ADDEXTRASTAFF, RESTAURANTOWNERS_CARDDETAILS} from "@/ut
 import { OWNER_PROOFS_GET } from "@/utils/api-urls";
 
 const page = () => {
+
   return (
     <main className="page">
         <DashboardContent 
